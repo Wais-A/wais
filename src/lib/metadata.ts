@@ -5,9 +5,8 @@
  * of the application, enhancing SEO and social sharing capabilities.
  */
 
-import { Metadata } from "next";
 import { siteConfig } from "@/config/site";
-import person from "@/config/person";
+import type { Metadata } from "next";
 
 // Set base URL from config or default to localhost in development
 const BASE_URL =

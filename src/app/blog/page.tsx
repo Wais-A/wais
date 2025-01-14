@@ -1,3 +1,5 @@
+import { content } from "@/config/content";
+
 /**
  * Blog Page Component
  *
@@ -6,8 +8,6 @@
  * The layout is designed to be responsive and visually appealing using Tailwind CSS.
  */
 import { generateMetadata } from "@/lib/metadata";
-import { content } from "@/config/content";
-import { person } from "@/config/person";
 
 export const metadata = generateMetadata(
   "Blog - Wais Almakaleh",
@@ -43,7 +43,7 @@ export default function Blog() {
               {/* Brief preview of the post */}
             </p>
             <a
-              href="#"
+              href="/blog/post"
               className="inline-block mt-4 text-primary hover:underline"
             >
               Read more → {/* Link to the full blog post */}

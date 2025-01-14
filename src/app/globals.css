@@ -1,6 +1,6 @@
 /**
  * Global Stylesheet
- * 
+ *
  * This file contains global CSS styles and Tailwind CSS configurations
  * that apply to the entire application. It includes base styles, theming,
  * and utility classes.
@@ -81,7 +81,7 @@ body {
   :root.dark {
     @apply transition-none;
   }
-  
+
   /* Prevent icon animations during theme changes */
   :root svg,
   :root.dark svg,

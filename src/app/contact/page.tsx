@@ -7,7 +7,6 @@
  */
 
 import { content } from "@/config/content";
-import { person } from "@/config/person";
 import { generateMetadata } from "@/lib/metadata";
 
 export const metadata = generateMetadata(

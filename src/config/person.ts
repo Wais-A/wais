@@ -2,7 +2,37 @@
 // Central configuration file for all personal information
 // This serves as a single source of truth for personal details
 
-export const person = {
+interface WorkExperience {
+  company: string;
+  timeframe: string;
+  role: string;
+  achievements: string[];
+}
+
+interface Education {
+  institution: string;
+  description: string;
+  timeframe: string;
+}
+
+interface Person {
+  first: string;
+  last: string;
+  name: string;
+  role: string;
+  location: string;
+  avatar: string;
+  languages: string[];
+  email: string;
+  github: string;
+  linkedin: string;
+  bluesky: string;
+  work: WorkExperience[];
+  education: Education[];
+  bio: string;
+}
+
+export const person: Person = {
   // Basic Information
   first: "Wais",
   last: "LastName",
@@ -43,4 +73,4 @@ export const person = {
   bio: "I create performant and accessible web applications using React, Next.js, and TypeScript.",
 };
 
-export type Person = typeof person;
+export default person;

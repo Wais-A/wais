@@ -19,11 +19,11 @@ export const siteConfig = {
   },
 
   navigation: [
-    { name: "Home", path: "/" },       // Home page link
-    { name: "Blog", path: "/blog" },   // Blog page link
+    { name: "Home", path: "/" }, // Home page link
+    { name: "Blog", path: "/blog" }, // Blog page link
     { name: "Contact", path: "/contact" }, // Contact page link
   ],
-  
+
   projects: [
     {
       title: "Project One",

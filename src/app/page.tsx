@@ -6,8 +6,8 @@
  * The layout is responsive and styled using Tailwind CSS classes.
  */
 
-import { person } from "@/config/person";
 import { content } from "@/config/content";
+import { person } from "@/config/person";
 
 /**
  * The `Home` component serves as the main page of the application.

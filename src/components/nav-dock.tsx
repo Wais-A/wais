@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
-import { NAV_DATA } from "@/lib/navigation";
-import { Dock, DockIcon } from "@/components/ui/dock";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Dock, DockIcon } from "@/components/ui/dock";
+import { NAV_DATA } from "@/lib/navigation";
+import Link from "next/link";
 
 export function NavDock() {
   return (
@@ -18,12 +18,11 @@ export function NavDock() {
           </Link>
         </DockIcon>
       ))}
-      
+
       <div className="mx-2 h-8 w-px bg-gray-200 dark:bg-gray-800" />
-      
+
       {NAV_DATA.social.map((item) => (
         <DockIcon key={item.name}>
-          
           <a
             href={item.url}
             target="_blank"
@@ -36,7 +35,7 @@ export function NavDock() {
       ))}
 
       <div className="mx-2 h-8 w-px bg-gray-200 dark:bg-gray-800" />
-      
+
       <DockIcon>
         <ThemeToggle />
       </DockIcon>
