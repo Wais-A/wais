@@ -7,6 +7,7 @@
 
 import { Metadata } from "next";
 import { siteConfig } from "@/config/site";
+import person from "@/config/person";
 
 // Set base URL from config or default to localhost in development
 const BASE_URL =

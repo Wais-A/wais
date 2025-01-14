@@ -1,13 +1,13 @@
 /**
  * Contact Page Component
- * 
+ *
  * This component renders the contact form, allowing users to get in touch.
  * It includes form fields defined in the content configuration and handles
  * user submissions with appropriate styling and accessibility considerations.
  */
 
 import { content } from "@/config/content";
-import { person } from "@/config/personal";
+import { person } from "@/config/person";
 import { generateMetadata } from "@/lib/metadata";
 
 export const metadata = generateMetadata(

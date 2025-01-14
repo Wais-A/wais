@@ -1,6 +1,6 @@
 // content.ts
 // Content configuration utilizing centralized personal information
-import { person } from "./personal";
+import { person } from "./person";
 
 export const content = {
   home: {

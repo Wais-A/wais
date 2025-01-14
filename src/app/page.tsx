@@ -6,7 +6,7 @@
  * The layout is responsive and styled using Tailwind CSS classes.
  */
 
-import { person } from "@/config/personal";
+import { person } from "@/config/person";
 import { content } from "@/config/content";
 
 /**

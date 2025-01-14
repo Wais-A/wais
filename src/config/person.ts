@@ -13,7 +13,7 @@ export const person = {
   languages: ["English", "Other"],
 
   // Contact Information
-  email: "95wais@gmail.com",
+  email: "mailto:95wais@gmail.com",
 
   // Social Links - Each property provides direct access to the link
   github: "https://github.com/wais-a",

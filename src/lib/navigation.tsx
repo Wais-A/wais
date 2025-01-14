@@ -1,4 +1,5 @@
 import { CalendarIcon, HomeIcon, MailIcon } from "lucide-react";
+import {person} from "@/config/person";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
@@ -60,17 +61,17 @@ export const NAV_DATA = {
   social: [
     {
       name: "GitHub",
-      url: "https://github.com/yourusername",
+      url: person.github,
       icon: Icons.github,
     },
     {
       name: "Email",
-      url: "mailto:your@email.com",
+      url: person.bluesky,
       icon: Icons.blueSky,
     },
     {
       name: "LinkedIn",
-      url: "https://www.linkedin.com/in/yourusername",
+      url: person.linkedin,
       icon: Icons.linkedin,
     },
   ],

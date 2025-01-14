@@ -1,13 +1,13 @@
 /**
  * Blog Page Component
- * 
+ *
  * This component displays the blog section of the portfolio.
  * It includes a list of blog posts with previews and links to read more.
  * The layout is designed to be responsive and visually appealing using Tailwind CSS.
  */
 import { generateMetadata } from "@/lib/metadata";
 import { content } from "@/config/content";
-import { person } from "@/config/personal";
+import { person } from "@/config/person";
 
 export const metadata = generateMetadata(
   "Blog - Wais Almakaleh",
