@@ -1,10 +1,9 @@
 // components/project-card.tsx
-import { type SiteConfig } from "@/config/portfolio";
+import { type siteConfig, Project } from "@/config/site";
 import Image from "next/image";
-import Link from "next/link";
 
 type ProjectCardProps = {
-  project: SiteConfig["projects"][number];
+  project: Project;
 };
 
 export function ProjectCard({ project }: ProjectCardProps) {

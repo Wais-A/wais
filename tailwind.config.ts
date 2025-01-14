@@ -9,8 +9,19 @@ const {
   default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
 
+/**
+ * Tailwind CSS configuration object.
+ *
+ * - **darkMode**: Enables dark mode using a CSS selector.
+ * - **content**: Specifies the file paths to scan for class usage.
+ * - **theme**:
+ *   - **extend**:
+ *     - **colors**: Defines custom color palettes using CSS variables.
+ *     - **borderRadius**: Customizes border radii using CSS variables.
+ * - **plugins**: Includes Tailwind plugins for animations and custom utilities.
+ */
 export default {
-  darkMode: "selector",
+  darkMode: 'selector',
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",

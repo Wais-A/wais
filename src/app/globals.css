@@ -1,12 +1,22 @@
+/**
+ * Global Stylesheet
+ * 
+ * This file contains global CSS styles and Tailwind CSS configurations
+ * that apply to the entire application. It includes base styles, theming,
+ * and utility classes.
+ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Global body styles */
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer base {
+  /* CSS Variables for Light Theme */
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -32,8 +42,10 @@ body {
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+    --radius: 0.5rem; /* Border radius variable */
   }
+
+  /* CSS Variables for Dark Theme */
   .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
@@ -63,9 +75,12 @@ body {
 }
 
 @layer base {
+  /* Apply border color to all elements */
   * {
     @apply border-border;
   }
+
+  /* Apply background and text color to body */
   body {
     @apply bg-background text-foreground;
   }

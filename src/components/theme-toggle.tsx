@@ -1,33 +1,41 @@
-// components/theme-toggle.tsx
+// ThemeToggle component for switching between light and dark modes
 'use client'
 
 import { useEffect, useState } from "react"
 
 export function ThemeToggle() {
-  const [mounted, setMounted] = useState(false)
   
-  // Handle dark mode
+  // State to check if component is mounted
+  const [mounted, setMounted] = useState(false);
+  
+  /**
+   * Toggles the 'dark' class on the document's root element
+   * to switch between light and dark themes.
+   */
   const toggleDarkMode = () => {
     if (document.documentElement.classList.contains('dark')) {
-      document.documentElement.classList.remove('dark')
+      document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light')
     } else {
-      document.documentElement.classList.add('dark')
+      document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark')
     }
   }
 
-  // Handle initial theme on mount
+  /**
+   * Handles the initial theme setting on component mount.
+   * Sets the theme based on user's preference stored in localStorage
+   * or system's color scheme preference.
+   */
   useEffect(() => {
-    setMounted(true)
-    // Check localStorage and system preferences
+    setMounted(true);
     const isDark = localStorage.theme === 'dark' || 
-      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
     
-    document.documentElement.classList.toggle('dark', isDark)
-  }, [])
-
-  if (!mounted) return null
+    document.documentElement.classList.toggle('dark', isDark);
+  }, []);
+  
+  if (!mounted) return null; // Prevents hydration mismatch
 
   return (
     <button

@@ -1,5 +1,6 @@
-// src/config/index.ts
-export * from './personal';
-export * from './site';
-export * from './theme';
-export * from './content';
+// Central export file for all configuration modules
+
+export * from './personal'; // Export personal configurations
+export * from './site';     // Export site configurations
+export * from './theme';    // Export theme configurations
+export * from './content';  // Export content configurations
