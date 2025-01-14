@@ -75,13 +75,36 @@ body {
 }
 
 @layer base {
-  /* Apply border color to all elements */
+  :root {
+    @apply transition-none;
+  }
+  :root.dark {
+    @apply transition-none;
+  }
+  
+  /* Prevent icon animations during theme changes */
+  :root svg,
+  :root.dark svg,
+  :root [data-theme-icon],
+  :root.dark [data-theme-icon] {
+    @apply transform-none transition-none !important;
+  }
+
   * {
     @apply border-border;
   }
 
-  /* Apply background and text color to body */
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.changing-theme * {
+  transition: none !important;
+}
+
+/* Ensure theme icons maintain their size */
+[data-theme-icon] {
+  transform: none !important;
+  transition: none !important;
 }
