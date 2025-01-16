@@ -1,6 +1,20 @@
+/**
+ * Icons Module
+ *
+ * A centralized collection of icon components used throughout the application.
+ * Icons are imported from external icon libraries and re-exported with consistent naming.
+ * This pattern allows for easy icon management and switching of icon providers.
+ */
+
 import { person } from "@/config/person";
 import type { IconProps } from "@/types";
 import { HomeIcon, MailIcon } from "lucide-react";
+
+/**
+ * Collection of icon components used in the application
+ * Each icon is a React component that accepts IconProps
+ * Theme icons are handled directly in theme-toggle.tsx
+ */
 
 export const Icons = {
   home: HomeIcon,
