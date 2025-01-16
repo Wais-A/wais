@@ -1,11 +1,20 @@
 // components/project-card.tsx
-import type { Project } from "@/config/site";
+import type { Project } from "@/types";
+
 import Image from "next/image";
 
-type ProjectCardProps = {
+interface ProjectCardProps {
   project: Project;
-};
+}
 
+/**
+ * ProjectCard Component
+ *
+ * Displays a single project with its image, title, description and technology tags
+ *
+ * @param {ProjectCardProps} props - Component properties containing project data
+ * @returns {JSX.Element} A card displaying project information
+ */
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <div className="rounded-lg overflow-hidden shadow-lg">

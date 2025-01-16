@@ -1,15 +1,7 @@
-// Definitions and configuration for site settings
-
-export type Project = {
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-  // Additional fields can be added as needed
-};
+import type { SiteConfig } from "@/types";
 
 // Site configuration including metadata, navigation links, and projects
-export const siteConfig = {
+export const siteConfig: SiteConfig = {
   meta: {
     title: "Wais's Portfolio", // Website title
     description:
@@ -37,6 +29,5 @@ export const siteConfig = {
       image: "/images/project-two.png",
       tags: ["Next.js", "Tailwind CSS"],
     },
-    // Add more projects as needed
   ],
 };
