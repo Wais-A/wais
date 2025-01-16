@@ -6,8 +6,8 @@ import type { Person } from "@/types";
 export const person: Person = {
   // Basic Information
   first: "Wais",
-  last: "LastName",
-  name: "Wais LastName",
+  last: "Almakaleh",
+  name: "Wais Almakaleh",
   role: "Full-stack Developer",
   location: "America/New_York",
   avatar: "/images/avatar.jpg",
