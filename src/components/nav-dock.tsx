@@ -1,44 +1,67 @@
 "use client";
 
 import { ThemeToggle } from "@/components/theme-toggle";
+import { buttonVariants } from "@/components/ui/button";
 import { Dock, DockIcon } from "@/components/ui/dock";
-import { NAV_DATA } from "@/lib/navigation";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { navigation } from "@/config/navigation";
+import { cn } from "@/lib/utils";
+
 import Link from "next/link";
 
 export function NavDock() {
   return (
-    <Dock className="fixed bottom-8 left-1/2 -translate-x-1/2">
-      {NAV_DATA.navbar.map((item) => (
-        <DockIcon key={item.label}>
-          <Link
-            href={item.href}
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-white/50 dark:bg-black/50 hover:bg-white/80 dark:hover:bg-black/80 transition-all group-hover:scale-110"
-          >
-            <item.icon className="h-5 w-5" />
-          </Link>
+    <TooltipProvider>
+      <Dock direction="middle">
+        {navigation.navbar.map((item) => (
+          <DockIcon key={item.label}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href={item.href}
+                  aria-label={item.label}
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "icon" }),
+                    "size-12 rounded-full"
+                  )}
+                >
+                  <item.icon className="size-4" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>{item.label}</TooltipContent>
+            </Tooltip>
+          </DockIcon>
+        ))}
+        <div className="mx-2 h-8 w-px bg-gray-200 dark:bg-gray-800" />
+        {navigation.social.map((item) => (
+          <DockIcon key={item.label}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href={item.url}
+                  aria-label={item.label}
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "icon" }),
+                    "size-12 rounded-full"
+                  )}
+                >
+                  <item.icon className="size-4" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>{item.label}</TooltipContent>
+            </Tooltip>
+          </DockIcon>
+        ))}
+        <div className="mx-2 h-8 w-px bg-gray-200 dark:bg-gray-800" />
+        <DockIcon>
+          <ThemeToggle />
         </DockIcon>
-      ))}
-
-      <div className="mx-2 h-8 w-px bg-gray-200 dark:bg-gray-800" />
-
-      {NAV_DATA.social.map((item) => (
-        <DockIcon key={item.name}>
-          <a
-            href={item.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-white/50 dark:bg-black/50 hover:bg-white/80 dark:hover:bg-black/80 transition-all group-hover:scale-110"
-          >
-            <item.icon className="h-5 w-5" />
-          </a>
-        </DockIcon>
-      ))}
-
-      <div className="mx-2 h-8 w-px bg-gray-200 dark:bg-gray-800" />
-
-      <DockIcon>
-        <ThemeToggle />
-      </DockIcon>
-    </Dock>
+      </Dock>
+    </TooltipProvider>
   );
 }

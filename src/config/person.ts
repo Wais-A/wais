@@ -3,8 +3,6 @@ import type { Person } from "@/types";
 // Central configuration file for all personal information
 // This serves as a single source of truth for personal details
 
-
-
 export const person: Person = {
   // Basic Information
   first: "Wais",

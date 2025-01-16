@@ -1,3 +1,4 @@
+import { Icons } from "@/components/icons";
 import type { SiteConfig } from "@/types";
 
 // Site configuration including metadata, navigation links, and projects
@@ -11,9 +12,9 @@ export const siteConfig: SiteConfig = {
   },
 
   navigation: [
-    { name: "Home", path: "/" }, // Home page link
-    { name: "Blog", path: "/blog" }, // Blog page link
-    { name: "Contact", path: "/contact" }, // Contact page link
+    { href: "/", label: "Home", icon: Icons.home },
+    { href: "/blog", label: "Blog", icon: Icons.blog },
+    { href: "/contact", label: "Contact", icon: Icons.email },
   ],
 
   projects: [

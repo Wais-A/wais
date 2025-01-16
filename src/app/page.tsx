@@ -1,3 +1,4 @@
+import { ProjectCard } from "@/components/project-card";
 /**
  * Home Page Component
  *
@@ -8,7 +9,6 @@
  */
 import { content } from "@/config/content";
 import { person } from "@/config/person";
-import { ProjectCard } from "@/components/project-card";
 import type { HomeContent } from "@/types";
 
 export default function Home() {

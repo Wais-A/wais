@@ -1,7 +1,7 @@
+import type { Content } from "@/types/content";
 // content.ts
 // Content configuration utilizing centralized personal information
 import { person } from "./person";
-import type { Content } from "@/types/content";
 
 /**
  * Application content configuration

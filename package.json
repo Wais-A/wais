@@ -6,13 +6,15 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-     "format": "biome format --write ./src",
+    "format": "biome format --write ./src",
     "lint": "biome lint --write ./src",
     "check": "biome check --write ./src",
     "types": "tsc --noEmit",
     "verify": "npm run types && npm run check"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.1.1",
+    "@radix-ui/react-tooltip": "^1.1.6",
     "@tabler/icons-react": "^3.28.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

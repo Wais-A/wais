@@ -1,12 +1,10 @@
 import { person } from "@/config/person";
-import { CalendarIcon, HomeIcon, MailIcon } from "lucide-react";
-
-export type IconProps = React.HTMLAttributes<SVGElement>;
+import type { IconProps } from "@/types";
+import { HomeIcon, MailIcon } from "lucide-react";
 
 export const Icons = {
   home: HomeIcon,
   email: MailIcon,
-  calendar: CalendarIcon,
   github: (props: IconProps) => (
     <svg
       viewBox="0 0 438.549 438.549"
