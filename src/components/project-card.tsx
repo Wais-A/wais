@@ -3,7 +3,7 @@ import type { Project } from "@/types";
 
 import Image from "next/image";
 
-interface ProjectCardProps {
+export interface ProjectCardProps {
   project: Project;
 }
 

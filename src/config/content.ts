@@ -4,12 +4,38 @@ import type { Content } from "@/types/content";
 import { person } from "./person";
 
 /**
- * Application content configuration
- * Contains all static content for the website including:
- * - Home page content
- * - Blog settings
- * - Contact form configuration
- * - Social media links
+ * Content Configuration Module
+ *
+ * @packageDocumentation Centralizes all static content configuration for the website,
+ * leveraging personal information from the person config. This ensures consistent
+ * content management and easy updates across the application.
+ *
+ * @see person.ts for personal information configuration
+ */
+
+/**
+ * Main content configuration object
+ *
+ * @type {Content}
+ * @property {object} home - Homepage content configuration
+ *    @property {string} title - Main professional title
+ *    @property {string} subtitle - Brief tagline
+ *    @property {string} description - Detailed professional summary
+ *    @property {Array<Project>} projects - Featured projects showcase
+ *
+ * @property {object} blog - Blog section configuration
+ *    @property {string} title - Blog section title
+ *    @property {string} description - Blog section description
+ *    @property {number} postsPerPage - Pagination control for blog posts
+ *
+ * @property {object} contact - Contact section configuration
+ *    @property {string} title - Contact section header
+ *    @property {string} description - Contact section description
+ *    @property {string} email - Contact email (pulled from person config)
+ *    @property {object} form - Contact form configuration
+ *
+ * @property {Array<Social>} social - Social media links configuration
+ *    Each entry contains platform name and URL (URLs pulled from person config)
  */
 export const content: Content = {
   home: {

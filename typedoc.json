@@ -1,0 +1,18 @@
+{
+  "entryPoints": [
+    "src/components/**/*.tsx",
+    "src/config/**/*.ts",
+    "src/lib/**/*.ts",
+    "src/types/**/*.ts"
+  ],
+  "out": "docs",
+  "plugin": ["typedoc-plugin-markdown"],
+  "exclude": ["**/node_modules/**", "src/components/ui/**"],
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeExternals": true,
+  "includeVersion": true,
+  "categorizeByGroup": true,
+  "categoryOrder": ["Components", "Config", "Types", "Utilities", "*"],
+  "readme": "none"
+}
