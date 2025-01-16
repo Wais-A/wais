@@ -29,14 +29,10 @@ export default function RootLayout({
         <div className="min-h-screen w-full dark:bg-black bg-white dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2] relative">
           {/* Radial gradient overlay */}
           <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
-          {/* Content Container with bottom padding for NavDock */}
-          <div className="relative z-10 max-w-6xl mx-auto px-4 pb-[90px]">
-            {" "}
-            {/* 58px dock height + 32px (bottom-8) */}
+          {/* Content Container */}
+          <div className="relative z-10 max-w-6xl mx-auto px-4">
             {children}
-            <div className="relative z-50">
-              <NavDock />
-            </div>
+            <NavDock />
           </div>
         </div>
       </body>
