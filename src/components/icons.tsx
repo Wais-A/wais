@@ -6,7 +6,6 @@
  * This pattern allows for easy icon management and switching of icon providers.
  */
 
-import { person } from "@/config/person";
 import type { IconProps } from "@/types";
 import { HomeIcon, MailIcon } from "lucide-react";
 
@@ -66,29 +65,4 @@ export const Icons = {
       <path d="m123.121 33.6637c65.12 48.8889 135.16 148.0173 160.879 201.2093 25.719-53.192 95.759-152.3204 160.879-201.2093 46.987-35.27553 123.121-62.5701 123.121 24.2827 0 17.3452-9.945 145.7126-15.778 166.5546-20.275 72.453-94.155 90.933-159.875 79.748 114.875 19.551 144.097 84.311 80.986 149.071-119.86 122.992-172.272-30.859-185.702-70.281-2.462-7.227-3.614-10.608-3.631-7.733-.017-2.875-1.169.506-3.631 7.733-13.43 39.422-65.842 193.273-185.7023 70.281-63.1111-64.76-33.8889-129.52 80.9863-149.071-65.72 11.185-139.5995-7.295-159.8752-79.748-5.83255-20.842-15.7778-149.2094-15.7778-166.5546 0-86.8528 76.1345-59.55823 123.121-24.2827z" />
     </svg>
   ),
-};
-
-export const NAV_DATA = {
-  navbar: [
-    { href: "/", icon: Icons.home, label: "Home" },
-    { href: "/blog", icon: Icons.blog, label: "Blog" },
-    { href: "/contact", icon: Icons.email, label: "Contact" },
-  ],
-  social: [
-    {
-      name: "GitHub",
-      url: person.github,
-      icon: Icons.github,
-    },
-    {
-      name: "BlueSky",
-      url: person.bluesky,
-      icon: Icons.blueSky,
-    },
-    {
-      name: "LinkedIn",
-      url: person.linkedin,
-      icon: Icons.linkedin,
-    },
-  ],
 };

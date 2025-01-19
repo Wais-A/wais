@@ -1,46 +1,55 @@
-import { ProjectCard } from "@/components/project-card";
-/**
- * Home Page Component
- *
- * Renders the main landing page of the portfolio website featuring:
- * - Personal introduction
- * - Featured projects grid
- * - Theme-aware styling
- */
 import { content } from "@/config/content";
 import { person } from "@/config/person";
-import type { HomeContent } from "@/types";
+import { generateMetadata } from "@/lib/metadata";
+import { viewport } from "@/lib/metadata";
+
+export const metadata = generateMetadata(
+  "Wais Almakaleh",
+  "Personal portfolio and blog"
+);
+export { viewport };
 
 export default function Home() {
-  const homeContent: HomeContent = content.home; // Explicitly type the content
-
   return (
-    <div className="min-h-screen w-full dark:bg-black bg-white dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2] relative">
-      {/* Gradient overlay */}
-      <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
+    <div className="max-w-6xl mx-auto">
+      {/* Hero Section */}
+      <section className="">
+        <h1 className="text-4xl font-bold">
+          {person.name}
+          <span className="block text-2xl font-normal mt-2 text-neutral-600 dark:text-neutral-400">
+            {content.home.title}
+          </span>
+        </h1>
+        <p className="mt-6 text-lg max-w-2xl">{content.home.description}</p>
+      </section>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4">
-        {/* Hero Section */}
-        <section className="py-20">
-          <h1 className="text-4xl font-bold">
-            {person.name}
-            <span className="block text-2xl font-normal mt-2 text-neutral-600 dark:text-neutral-400">
-              {homeContent.title}
-            </span>
-          </h1>
-          <p className="mt-6 text-lg max-w-2xl">{homeContent.description}</p>
-        </section>
-
-        {/* Projects Grid */}
-        <section className="py-12">
-          <h2 className="text-2xl font-bold mb-8">Featured Projects</h2>
-          <div className="grid gap-6 md:grid-cols-2">
-            {homeContent.projects.map((project) => (
-              <ProjectCard key={project.title} project={project} />
-            ))}
-          </div>
-        </section>
-      </div>
+      {/* Featured Projects Section */}
+      <section className="">
+        <h2 className="text-2xl font-bold mb-8">Featured Projects</h2>
+        <div className="grid gap-6 md:grid-cols-2">
+          {content.home.projects.map((project) => (
+            <div
+              key={project.title}
+              className="border rounded-lg p-6 bg-white/50 dark:bg-black/50 backdrop-blur-sm"
+            >
+              <h3 className="font-semibold text-xl">{project.title}</h3>
+              <p className="mt-2 text-neutral-600 dark:text-neutral-400">
+                {project.description}
+              </p>
+              <div className="flex gap-2 mt-4">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 bg-neutral-100 dark:bg-neutral-800 rounded-full text-sm"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

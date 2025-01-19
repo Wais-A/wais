@@ -5,6 +5,8 @@
  * including navigation, social links, and project information.
  */
 
+import type { Project } from "./content";
+
 /**
  * Icon Component Props Type
  *
@@ -23,7 +25,7 @@ export type IconProps = React.HTMLAttributes<SVGElement>;
  * @property label - Display text for the navigation item
  */
 export interface NavItem {
-  href: string;
+  url: string;
   icon: React.ComponentType<IconProps>;
   label: string;
 }
@@ -57,23 +59,6 @@ export interface Navigation {
 }
 
 /**
- * Project Information Type
- *
- * Defines structure for project showcase items
- *
- * @property title - Project name
- * @property description - Brief project description
- * @property image - URL to project preview image
- * @property tags - Array of technology/skill tags
- */
-export type Project = {
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-};
-
-/**
  * Site Configuration Interface
  *
  * Main configuration type for the entire site
@@ -83,7 +68,6 @@ export type Project = {
  *    @property description - Site description for SEO
  *    @property baseURL - Base URL for absolute path generation
  *    @property ogImage - Default Open Graph image for social sharing
- * @property navigation - Main navigation configuration
  * @property projects - Array of featured projects
  */
 export interface SiteConfig {
@@ -93,6 +77,5 @@ export interface SiteConfig {
     baseURL: string;
     ogImage: string;
   };
-  navigation: NavItem[];
   projects: Project[];
 }

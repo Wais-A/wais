@@ -31,9 +31,9 @@ import type { Navigation } from "@/types";
  */
 export const navigation: Navigation = {
   navbar: [
-    { href: "/", icon: Icons.home, label: "Home" },
-    { href: "/blog", icon: Icons.blog, label: "Blog" },
-    { href: "/contact", icon: Icons.email, label: "Contact" },
+    { url: "/", icon: Icons.home, label: "Home" },
+    { url: "/blog", icon: Icons.blog, label: "Blog" },
+    { url: "/contact", icon: Icons.email, label: "Contact" },
   ],
   social: [
     {

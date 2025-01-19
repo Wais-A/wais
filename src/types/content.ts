@@ -27,13 +27,7 @@ export type HomeContent = {
   title: string;
   subtitle: string;
   description: string;
-  projects: {
-    title: string;
-    description: string;
-    tags: string[];
-    link: string;
-    image: string;
-  }[];
+  projects: Project[];
 };
 
 /**
@@ -66,13 +60,22 @@ export type ContactContent = {
 };
 
 /**
- * Represents a social media link
- * @property platform - Name of the social media platform
- * @property url - Full URL to the social media profile
+ * Project Information Type
+ *
+ * Defines structure for project showcase items
+ *
+ * @property title - Project name
+ * @property description - Brief project description
+ * @property image - URL to project preview image
+ * @property tags - Array of technology/skill tags
+ * @property link - Optional URL to project (e.g. GitHub, live demo)
  */
-export type SocialLink = {
-  platform: string;
-  url: string;
+export type Project = {
+  title: string;
+  description: string;
+  image: string;
+  tags: string[];
+  link?: string;
 };
 
 /**
@@ -86,5 +89,8 @@ export type Content = {
   home: HomeContent;
   blog: BlogContent;
   contact: ContactContent;
-  social: SocialLink[];
+  social: Array<{
+    platform: string;
+    url: string;
+  }>;
 };

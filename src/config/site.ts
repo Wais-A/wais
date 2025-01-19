@@ -1,4 +1,3 @@
-import { Icons } from "@/components/icons";
 import type { SiteConfig } from "@/types";
 
 // Site configuration including metadata, navigation links, and projects
@@ -10,12 +9,6 @@ export const siteConfig: SiteConfig = {
     baseURL: "your-domain.com", // Base URL of the site
     ogImage: "/images/og-image.png", // Open Graph image for social sharing
   },
-
-  navigation: [
-    { href: "/", label: "Home", icon: Icons.home },
-    { href: "/blog", label: "Blog", icon: Icons.blog },
-    { href: "/contact", label: "Contact", icon: Icons.email },
-  ],
 
   projects: [
     {

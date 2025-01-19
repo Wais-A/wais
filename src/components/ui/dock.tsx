@@ -1,17 +1,15 @@
-// @ts-nocheck
-
 "use client";
 
-import { type VariantProps, cva } from "class-variance-authority";
+import { cva, type VariantProps } from "class-variance-authority";
 import {
-  type MotionProps,
-  type MotionValue,
   motion,
+  MotionProps,
+  MotionValue,
   useMotionValue,
   useSpring,
   useTransform,
 } from "motion/react";
-import React, { type PropsWithChildren, useRef } from "react";
+import React, { PropsWithChildren, useRef } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -29,7 +27,7 @@ const DEFAULT_MAGNIFICATION = 60;
 const DEFAULT_DISTANCE = 140;
 
 const dockVariants = cva(
-  "supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 mx-auto mt-8 flex h-[58px] w-max items-center justify-center gap-2 rounded-2xl border p-2 backdrop-blur-md"
+  "supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 mx-auto mt-8 flex h-[58px] w-max items-center justify-center gap-2 rounded-2xl border p-2 backdrop-blur-md",
 );
 
 const Dock = React.forwardRef<HTMLDivElement, DockProps>(
@@ -43,20 +41,23 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
       direction = "middle",
       ...props
     },
-    ref
+    ref,
   ) => {
-    const mouseX = useMotionValue(Number.POSITIVE_INFINITY);
+    const mouseX = useMotionValue(Infinity);
 
     const renderChildren = () => {
       return React.Children.map(children, (child) => {
         if (React.isValidElement(child) && child.type === DockIcon) {
-          return React.cloneElement(child, {
-            ...child.props,
-            mouseX: mouseX,
-            size: iconSize,
-            magnification: iconMagnification,
-            distance: iconDistance,
-          });
+          return React.cloneElement(
+            child as React.ReactElement<DockIconProps>,
+            {
+              ...(child.props as Partial<DockIconProps>),
+              mouseX,
+              size: iconSize,
+              magnification: iconMagnification,
+              distance: iconDistance,
+            }
+          );
         }
         return child;
       });
@@ -66,7 +67,7 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
       <motion.div
         ref={ref}
         onMouseMove={(e) => mouseX.set(e.pageX)}
-        onMouseLeave={() => mouseX.set(Number.POSITIVE_INFINITY)}
+        onMouseLeave={() => mouseX.set(Infinity)}
         {...props}
         className={cn(dockVariants({ className }), {
           "items-start": direction === "top",
@@ -77,7 +78,7 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
         {renderChildren()}
       </motion.div>
     );
-  }
+  },
 );
 
 Dock.displayName = "Dock";
@@ -104,18 +105,7 @@ const DockIcon = ({
 }: DockIconProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const padding = Math.max(6, size * 0.2);
-  const defaultMouseX = useMotionValue(Number.POSITIVE_INFINITY);
-
-  // Add a custom transition config for theme changes
-  const transition = {
-    type: "spring",
-    mass: 0.1,
-    stiffness: 150,
-    damping: 12,
-    skipTransition: (key: string) =>
-      key === "transform" &&
-      document.documentElement.classList.contains("changing-theme"),
-  };
+  const defaultMouseX = useMotionValue(Infinity);
 
   const distanceCalc = useTransform(mouseX ?? defaultMouseX, (val: number) => {
     const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
@@ -125,10 +115,14 @@ const DockIcon = ({
   const sizeTransform = useTransform(
     distanceCalc,
     [-distance, 0, distance],
-    [size, magnification, size]
+    [size, magnification, size],
   );
 
-  const scaleSize = useSpring(sizeTransform, transition);
+  const scaleSize = useSpring(sizeTransform, {
+    mass: 0.1,
+    stiffness: 150,
+    damping: 12,
+  });
 
   return (
     <motion.div
@@ -136,13 +130,11 @@ const DockIcon = ({
       style={{ width: scaleSize, height: scaleSize, padding }}
       className={cn(
         "flex aspect-square cursor-pointer items-center justify-center rounded-full",
-        className
+        className,
       )}
       {...props}
     >
-      <div className="w-full h-full flex items-center justify-center">
-        {children}
-      </div>
+      {children}
     </motion.div>
   );
 };

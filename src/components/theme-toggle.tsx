@@ -58,7 +58,7 @@ export function ThemeToggle() {
             aria-label="Toggle theme"
             className={cn(
               buttonVariants({ variant: "ghost", size: "icon" }),
-              "size-12 rounded-full"
+              "rounded-full"
             )}
           >
             <svg
@@ -67,10 +67,9 @@ export function ThemeToggle() {
               aria-label="Theme icon" // Add aria-label
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth={1.5}
+              strokeWidth={1.8}
               stroke="currentColor"
-              className="w-6 h-6 hidden dark:block transition-none"
-              data-theme-icon
+              className=" hidden dark:block transition-none"
             >
               <path
                 strokeLinecap="round"
@@ -84,10 +83,9 @@ export function ThemeToggle() {
               aria-label="Theme icon" // Add aria-label
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth={1.5}
+              strokeWidth={1.8}
               stroke="currentColor"
-              className="w-6 h-6 block dark:hidden transition-none"
-              data-theme-icon
+              className="block dark:hidden transition-none "
             >
               <path
                 strokeLinecap="round"

@@ -11,7 +11,7 @@
     "check": "biome check --write ./src",
     "types": "tsc --noEmit",
     "verify": "npm run types && npm run check",
-     "docs": "typedoc"
+    "docs": "typedoc"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.1",
@@ -23,7 +23,7 @@
     "lru-cache": "^11.0.2",
     "lucide-react": "^0.471.1",
     "mini-svg-data-uri": "^1.4.4",
-    "motion": "^11.17.0",
+    "motion": "^11.18.1",
     "next": "15.1.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

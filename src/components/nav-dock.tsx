@@ -10,11 +10,9 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { navigation } from "@/config/navigation";
+import { useDockConfig, useScrollVisibility } from "@/config/responsive";
 import { cn } from "@/lib/utils";
-
 import Link from "next/link";
-
-import { useEffect, useState } from "react";
 
 /**
  * NavDock Component
@@ -27,84 +25,24 @@ import { useEffect, useState } from "react";
  * - Includes tooltips for accessibility
  */
 export function NavDock() {
-  // Track visibility state of the dock
-  const [isVisible, setIsVisible] = useState(true);
-
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
-    let frameId: number | null = null;
-
-    const handleScroll = () => {
-      // Cancel any pending frame
-      if (frameId) {
-        cancelAnimationFrame(frameId);
-      }
-
-      frameId = requestAnimationFrame(() => {
-        const currentScrollY = window.scrollY;
-        const direction = currentScrollY > lastScrollY ? "down" : "up";
-
-        // Add a small buffer (1px) for bottom detection to account for rounding
-        const isAtBottom =
-          currentScrollY + window.innerHeight >=
-          document.documentElement.scrollHeight - 1;
-
-        // Only update state if visibility needs to change
-        const shouldBeVisible =
-          direction === "up" || // Show when scrolling up
-          currentScrollY < 10 || // Show when near top
-          isAtBottom; // Show when at bottom
-
-        setIsVisible(shouldBeVisible);
-        lastScrollY = currentScrollY;
-        frameId = null;
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      // Clean up any pending animation frame
-      if (frameId) cancelAnimationFrame(frameId);
-    };
-  }, []);
+  const isVisible = useScrollVisibility();
+  const dockConfig = useDockConfig();
 
   return (
     <TooltipProvider>
       <Dock
-        direction="middle"
         className={cn(
           "fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center py-4 shadow-md transition-transform duration-300",
           // Apply translation based on visibility
           isVisible ? "translate-y-0" : "translate-y-full"
         )}
+        direction="middle"
+        iconDistance={dockConfig.iconDistance}
+        iconMagnification={dockConfig.iconMagnification}
+        iconSize={dockConfig.iconSize}
       >
         {/* Navigation Links Section */}
         {navigation.navbar.map((item) => (
-          <DockIcon key={item.label}>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  href={item.href}
-                  aria-label={item.label}
-                  className={cn(
-                    buttonVariants({ variant: "ghost", size: "icon" }),
-                    "size-12 rounded-full"
-                  )}
-                >
-                  <item.icon className="size-4" />
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent>{item.label}</TooltipContent>
-            </Tooltip>
-          </DockIcon>
-        ))}
-
-        {/* Vertical Divider */}
-        <div className="mx-2 h-8 w-px bg-gray-200 dark:bg-gray-800" />
-
-        {/* Social Links Section */}
-        {navigation.social.map((item) => (
           <DockIcon key={item.label}>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -113,20 +51,44 @@ export function NavDock() {
                   aria-label={item.label}
                   className={cn(
                     buttonVariants({ variant: "ghost", size: "icon" }),
-                    "size-12 rounded-full"
+                    "rounded-full",
+                    "flex items-center justify-center"
                   )}
                 >
-                  <item.icon className="size-4" />
+                  <item.icon />
                 </Link>
               </TooltipTrigger>
               <TooltipContent>{item.label}</TooltipContent>
             </Tooltip>
           </DockIcon>
         ))}
-
         {/* Vertical Divider */}
         <div className="mx-2 h-8 w-px bg-gray-200 dark:bg-gray-800" />
-
+        {/* Social Links Section */}
+        {navigation.social.map((item) => (
+          <DockIcon key={item.label}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={item.label}
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "icon" }),
+                    "rounded-full",
+                    "flex items-center justify-center"
+                  )}
+                >
+                  <item.icon />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>{item.label}</TooltipContent>
+            </Tooltip>
+          </DockIcon>
+        ))}
+        {/* Vertical Divider */}
+        <div className="mx-2 h-8 w-px bg-gray-200 dark:bg-gray-800" />
         {/* Theme Toggle Button */}
         <DockIcon>
           <ThemeToggle />
