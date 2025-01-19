@@ -61,18 +61,17 @@ export function useScrollVisibility(): boolean {
       frameId = requestAnimationFrame(() => {
         const currentScrollY = window.scrollY;
         const direction = currentScrollY > lastScrollY ? "down" : "up";
-        
+
         // More precise bottom detection
         const isAtBottom =
           Math.abs(
-            (window.innerHeight + window.scrollY) - 
-            document.documentElement.scrollHeight
+            window.innerHeight +
+              window.scrollY -
+              document.documentElement.scrollHeight
           ) < 10;
 
         const shouldBeVisible =
-          direction === "up" ||
-          currentScrollY < 10 ||
-          isAtBottom;
+          direction === "up" || currentScrollY < 10 || isAtBottom;
 
         setIsVisible(shouldBeVisible);
         lastScrollY = currentScrollY;
