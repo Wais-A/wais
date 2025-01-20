@@ -33,7 +33,10 @@ export function NavDock() {
       <Dock
         className={cn(
           "fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center py-4 shadow-md transition-transform duration-300",
-          isVisible ? "translate-y-0" : "translate-y-[150%]" // Increased translation distance
+          "webkit-overflow-touch webkit-tap-transparent",
+          isVisible
+            ? "translate-y-0"
+            : "translate-y-[150%] max-sm:translate-y-full" // Separate mobile and desktop values
         )}
         direction="middle"
         iconDistance={dockConfig.iconDistance}

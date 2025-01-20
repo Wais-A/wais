@@ -1,29 +1,39 @@
-// next.config.mjs
 import createMDX from "@next/mdx";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Configure `pageExtensions` to include markdown and MDX files
-  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-  // Optionally, add any other Next.js config below
+  // Enable MDX file extensions
+  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
+
+  // Configure allowed image domains and patterns
   images: {
     remotePatterns: [
+      // Allow Picsum Photos
       {
         protocol: "https",
         hostname: "picsum.photos",
+        port: "",
+        pathname: "/**", // Allow all paths under picsum.photos
+      },
+      // Allow Unsplash Images
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        port: "",
+        pathname: "/**", // Allow all paths under images.unsplash.com
       },
     ],
   },
 };
 
+// Configure MDX options
 const withMDX = createMDX({
-  // Add markdown plugins here, as desired
+  // Define options for MDX processing
   options: {
-    remarkPlugins: [],
-    rehypePlugins: [],
+    remarkPlugins: [], // Add remark plugins here if needed
+    rehypePlugins: [], // Add rehype plugins here if needed
   },
-  extension: /\.mdx?$/
 });
 
-// Merge MDX config with Next.js config
+// Export the combined configuration
 export default withMDX(nextConfig);

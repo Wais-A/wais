@@ -59,6 +59,8 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+
+  /* Add safe area insets for mobile */
 }
 
 * {
@@ -76,6 +78,13 @@ body {
     display: none;
   }
 
+  .webkit-overflow-touch {
+    -webkit-overflow-scrolling: touch;
+  }
+  .webkit-tap-transparent {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -84,4 +93,10 @@ body {
 
 .changing-theme * {
   transition: none !important;
+}
+
+@supports (padding: max(0px)) {
+  .pb-safe {
+    padding-bottom: max(env(safe-area-inset-bottom), 1rem);
+  }
 }

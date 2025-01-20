@@ -25,11 +25,6 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  minimumScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-  // Adding height to help with iOS keyboard behavior
-  height: "device-height",
 };
 
 /**

@@ -9,13 +9,12 @@ const defaultConfig: DockConfig = {
   iconSize: 40,
 };
 
-// Get dock configuration based on screen width
 export function getDockConfig(screenWidth: number): DockConfig {
   if (screenWidth <= BREAKPOINTS.sm) {
     return {
-      iconDistance: 80, // Smaller distance for tighter spacing
-      iconMagnification: 40, // Slightly less magnification
-      iconSize: 32, // Smaller base size
+      iconDistance: 65,
+      iconMagnification: 35,
+      iconSize: 30,
     };
   }
 
@@ -27,6 +26,7 @@ export function getDockConfig(screenWidth: number): DockConfig {
     };
   }
 
+  // Restore original desktop values
   return defaultConfig;
 }
 
@@ -38,37 +38,33 @@ export function useScrollVisibility() {
     let lastScroll = 0;
 
     function handleScroll() {
-      const currentScroll = window.scrollY;
+      const scrollingElement = document.scrollingElement;
+      const currentScroll = scrollingElement ? scrollingElement.scrollTop : 0;
 
-      // Show at top of page
       if (currentScroll < 50) {
         setIsVisible(true);
         return;
       }
 
-      // Show at bottom of page
       if (
         window.innerHeight + currentScroll >=
-        document.documentElement.scrollHeight - 50
+        (scrollingElement ? scrollingElement.scrollHeight : 0) - 50
       ) {
         setIsVisible(true);
         return;
       }
 
-      // Hide when scrolling down, show when scrolling up
       if (currentScroll > lastScroll) {
-        setIsVisible(false); // Scrolling down
+        setIsVisible(false);
       } else {
-        setIsVisible(true); // Scrolling up
+        setIsVisible(true);
       }
 
       lastScroll = currentScroll;
     }
 
-    // Add scroll listener
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // Cleanup
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -113,4 +109,3 @@ function createDebouncedResizeHandler(updateDockConfig: () => void) {
     }, 200);
   };
 }
-
