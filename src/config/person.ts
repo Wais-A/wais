@@ -20,6 +20,38 @@ export const person: Person = {
   linkedin: "https://www.linkedin.com/in/wais-almakaleh",
   bluesky: "https://bsky.app/profile/wais-a.bsky.social",
 
+  // Projects
+  projects: [
+    {
+      title: "Team Development Projects",
+      description:
+        "Collaborated on multiple full-stack web applications using modern technologies and agile methodologies.",
+      tags: ["React", "Node.js", "JavaScript", "TypeScript"],
+      link: "https://github.com/wais-a",
+      image: "/images/project1.png",
+    },
+    {
+      title: "IT Support Systems",
+      description:
+        "Managed and resolved technical support tickets for staff and students at LCCC.",
+      tags: ["Technical Support", "Problem Solving", "Customer Service"],
+      image: "/images/project2.png",
+    },
+    {
+      title: "Database Management",
+      description: "Experience with SQL, NoSQL, and Firebase implementations.",
+      image: "/images/database-project.png",
+      tags: ["SQL", "NoSQL", "Firebase"],
+    },
+    {
+      title: "Frontend Development",
+      description:
+        "Created responsive and accessible user interfaces using modern frameworks.",
+      image: "/images/frontend-project.png",
+      tags: ["React", "Redux", "Angular", "CSS3"],
+    },
+  ],
+
   // Professional Experience
   work: [
     {

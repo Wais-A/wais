@@ -10,7 +10,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { navigation } from "@/config/navigation";
-import { useDockConfig, useScrollVisibility } from "@/config/responsive";
+import { useDockConfig, useScrollVisibility } from "@/lib/responsive";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 

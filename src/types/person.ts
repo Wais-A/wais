@@ -2,6 +2,8 @@
  * Types and interfaces for managing person-related data
  */
 
+import type { Project } from "./content";
+
 /**
  * Represents a single work experience entry
  * @property company - Name of the employer
@@ -44,6 +46,7 @@ export interface Education {
  * @property work - Array of work experiences
  * @property education - Array of educational background
  * @property bio - Brief professional biography
+ * @property projects - Array of featured projects
  */
 export interface Person {
   first: string;
@@ -60,4 +63,5 @@ export interface Person {
   work: WorkExperience[];
   education: Education[];
   bio: string;
+  projects: Project[];
 }

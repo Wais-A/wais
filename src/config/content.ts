@@ -9,23 +9,7 @@ export const content: Content = {
     subtitle: "Full-stack Development & IT Support",
     description:
       "Building modern web applications with JavaScript, React, and Node.js while pursuing Computer Science at LCCC.",
-    projects: [
-      {
-        title: "Team Development Projects",
-        description:
-          "Collaborated on multiple full-stack web applications using modern technologies and agile methodologies.",
-        tags: ["React", "Node.js", "JavaScript", "TypeScript"],
-        link: "https://github.com/wais-a",
-        image: "/images/project1.png",
-      },
-      {
-        title: "IT Support Systems",
-        description:
-          "Managed and resolved technical support tickets for staff and students at LCCC.",
-        tags: ["Technical Support", "Problem Solving", "Customer Service"],
-        image: "/images/project2.png",
-      },
-    ],
+    projects: person.projects.slice(0, 2),
   },
 
   blog: {
