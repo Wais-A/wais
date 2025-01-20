@@ -1,27 +1,43 @@
+// src/config/site.ts
+
 import type { SiteConfig } from "@/types";
 
-// Site configuration including metadata, navigation links, and projects
 export const siteConfig: SiteConfig = {
   meta: {
-    title: "Wais's Portfolio", // Website title
+    title: "Wais Almakaleh - Software Engineer",
     description:
-      "Full-stack developer passionate about building modern web applications", // Site description
-    baseURL: "your-domain.com", // Base URL of the site
-    ogImage: "/images/og-image.png", // Open Graph image for social sharing
+      "Full-stack developer and IT professional specializing in modern web development with React, Node.js, and JavaScript. Currently pursuing Computer Science at LCCC.",
+    baseURL: "wais-almakaleh.com", // Replace with your actual domain
+    ogImage: "/images/og-image.png",
   },
 
   projects: [
     {
-      title: "Project One",
-      description: "Description of project one.",
-      image: "/images/project-one.png",
-      tags: ["React", "TypeScript"], // Technologies used
+      title: "Full-Stack Development",
+      description:
+        "Built and deployed responsive web applications working in teams of up to 10 members.",
+      image: "/images/dev-project.png",
+      tags: ["React", "Node.js", "JavaScript", "TypeScript"],
     },
     {
-      title: "Project Two",
-      description: "Description of project two.",
-      image: "/images/project-two.png",
-      tags: ["Next.js", "Tailwind CSS"],
+      title: "IT Support Systems",
+      description:
+        "Managed technical support and troubleshooting for campus-wide IT infrastructure.",
+      image: "/images/support-project.png",
+      tags: ["Technical Support", "Problem Solving", "System Administration"],
+    },
+    {
+      title: "Database Management",
+      description: "Experience with SQL, NoSQL, and Firebase implementations.",
+      image: "/images/database-project.png",
+      tags: ["SQL", "NoSQL", "Firebase"],
+    },
+    {
+      title: "Frontend Development",
+      description:
+        "Created responsive and accessible user interfaces using modern frameworks.",
+      image: "/images/frontend-project.png",
+      tags: ["React", "Redux", "Angular", "CSS3"],
     },
   ],
 };

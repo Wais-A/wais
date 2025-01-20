@@ -33,7 +33,7 @@ export const navigation: Navigation = {
   navbar: [
     { url: "/", icon: Icons.home, label: "Home" },
     { url: "/blog", icon: Icons.blog, label: "Blog" },
-    { url: "/contact", icon: Icons.email, label: "Contact" },
+    { url: "/about", icon: Icons.about, label: "About" },
   ],
   social: [
     {

@@ -31,65 +31,51 @@ export function getDockConfig(screenWidth: number): DockConfig {
 }
 
 // Create a debounced function for handling resize events
-export function createDebouncedResizeHandler(
-  callback: (width: number) => void,
-  delay = 100
-) {
-  let timeoutId: NodeJS.Timeout;
-
-  return () => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => {
-      callback(window.innerWidth);
-    }, delay);
-  };
-}
-
-// Hook to handle scroll visibility
-export function useScrollVisibility(): boolean {
+export function useScrollVisibility() {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
-    let frameId: number | null = null;
+    let lastScroll = 0;
 
-    const handleScroll = () => {
-      if (frameId) {
-        cancelAnimationFrame(frameId);
+    function handleScroll() {
+      const currentScroll = window.scrollY;
+
+      // Show at top of page
+      if (currentScroll < 50) {
+        setIsVisible(true);
+        return;
       }
 
-      frameId = requestAnimationFrame(() => {
-        const currentScrollY = window.scrollY;
-        const direction = currentScrollY > lastScrollY ? "down" : "up";
+      // Show at bottom of page
+      if (
+        window.innerHeight + currentScroll >=
+        document.documentElement.scrollHeight - 50
+      ) {
+        setIsVisible(true);
+        return;
+      }
 
-        // More precise bottom detection
-        const isAtBottom =
-          Math.abs(
-            window.innerHeight +
-              window.scrollY -
-              document.documentElement.scrollHeight
-          ) < 10;
+      // Hide when scrolling down, show when scrolling up
+      if (currentScroll > lastScroll) {
+        setIsVisible(false); // Scrolling down
+      } else {
+        setIsVisible(true); // Scrolling up
+      }
 
-        const shouldBeVisible =
-          direction === "up" || currentScrollY < 10 || isAtBottom;
+      lastScroll = currentScroll;
+    }
 
-        setIsVisible(shouldBeVisible);
-        lastScrollY = currentScrollY;
-        frameId = null;
-      });
-    };
+    // Add scroll listener
+    window.addEventListener("scroll", handleScroll);
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Initial check
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (frameId) cancelAnimationFrame(frameId);
-    };
+    // Cleanup
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return isVisible;
 }
+
+// Keep your other existing functions...
 
 // Hook to handle responsive dock configuration
 export function useDockConfig(): DockConfig {
@@ -115,3 +101,16 @@ export function useDockConfig(): DockConfig {
 
   return dockConfig;
 }
+function createDebouncedResizeHandler(updateDockConfig: () => void) {
+  let timeoutId: number | undefined;
+
+  return () => {
+    if (timeoutId !== undefined) {
+      clearTimeout(timeoutId);
+    }
+    timeoutId = window.setTimeout(() => {
+      updateDockConfig();
+    }, 200);
+  };
+}
+

@@ -1,37 +1,48 @@
 import { content } from "@/config/content";
-import { generateMetadata } from "@/lib/metadata";
-import { viewport } from "@/lib/metadata";
+import { generateMetadata, viewport } from "@/lib/metadata";
+import Link from "next/link";
 
+export { viewport };
 export const metadata = generateMetadata(
   "Blog - Wais Almakaleh",
-  "Read our latest blog posts about technology and development."
+  "Read my latest posts about software development and technology."
 );
-export { viewport };
 
 export default function Blog() {
+  // In a production app, you might want to use a build step or API
+  // to generate this list of posts dynamically
+  const posts = [
+    {
+      slug: "first-post",
+      ...require("@/content/blog/first-post.mdx").metadata,
+    },
+    // Add more posts here
+  ];
+
   return (
     <div className="max-w-4xl mx-auto">
       <h1 className="text-4xl font-bold mb-6">{content.blog.title}</h1>
-      <p className="text-lg mb-12 text-neutral-600 dark:text-neutral-400">
-        {content.blog.description}
-      </p>
-
       <div className="grid gap-8">
-        <article className="p-6 bg-white/50 dark:bg-black/50 backdrop-blur-sm rounded-lg border">
-          <time className="text-sm text-neutral-600 dark:text-neutral-400">
-            January 13, 2025
-          </time>
-          <h2 className="text-2xl font-semibold mt-2">Sample Blog Post</h2>
-          <p className="mt-3 text-neutral-600 dark:text-neutral-400">
-            Preview text of the blog post goes here...
-          </p>
-          <a
-            href="/blog/post"
-            className="inline-block mt-4 text-primary hover:underline"
+        {posts.map((post) => (
+          <article
+            key={post.slug}
+            className="p-6  backdrop-blur-sm rounded-lg border"
           >
-            Read more →
-          </a>
-        </article>
+            <Link href={`/blog/${post.slug}`}>
+              <time className="text-sm text-neutral-600 dark:text-neutral-400">
+                {new Date(post.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+              <h2 className="text-2xl font-semibold mt-2">{post.title}</h2>
+              <p className="mt-3 text-neutral-600 dark:text-neutral-400">
+                {post.description}
+              </p>
+            </Link>
+          </article>
+        ))}
       </div>
     </div>
   );

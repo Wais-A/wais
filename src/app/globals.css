@@ -59,39 +59,26 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+}
 
-  /* Base styles */
-  html {
-    height: 100dvh;
-    overflow-x: hidden;
-    overscroll-behavior-y: none;
+* {
+  @apply border-border;
+}
+
+html,
+body {
+  @apply bg-background text-foreground;
+  @apply no-scrollbar;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 
-  body {
-    @apply bg-background text-foreground font-sans;
-    min-height: 100dvh; /* Use dynamic viewport height */
-    width: 100%;
-    overflow-x: hidden;
-    overscroll-behavior-y: none;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  @supports (-webkit-touch-callout: none) {
-    /* iOS Safari specific fixes */
-    body {
-      /* Remove fixed height to prevent keyboard issues */
-      height: 100dvh;
-      min-height: -webkit-fill-available;
-      @apply relative;
-    }
-
-    /* Prevent zoom on input focus */
-    input,
-    textarea,
-    select {
-      @apply appearance-none;
-      font-size: 16px;
-    }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 

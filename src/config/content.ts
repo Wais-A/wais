@@ -1,71 +1,44 @@
+// src/config/content.ts
+
 import type { Content } from "@/types/content";
-// content.ts
-// Content configuration utilizing centralized personal information
 import { person } from "./person";
 
-/**
- * Content Configuration Module
- *
- * @packageDocumentation Centralizes all static content configuration for the website,
- * leveraging personal information from the person config. This ensures consistent
- * content management and easy updates across the application.
- *
- * @see person.ts for personal information configuration
- */
-
-/**
- * Main content configuration object
- *
- * @type {Content}
- * @property {object} home - Homepage content configuration
- *    @property {string} title - Main professional title
- *    @property {string} subtitle - Brief tagline
- *    @property {string} description - Detailed professional summary
- *    @property {Array<Project>} projects - Featured projects showcase
- *
- * @property {object} blog - Blog section configuration
- *    @property {string} title - Blog section title
- *    @property {string} description - Blog section description
- *    @property {number} postsPerPage - Pagination control for blog posts
- *
- * @property {object} contact - Contact section configuration
- *    @property {string} title - Contact section header
- *    @property {string} description - Contact section description
- *    @property {string} email - Contact email (pulled from person config)
- *    @property {object} form - Contact form configuration
- *
- * @property {Array<Social>} social - Social media links configuration
- *    Each entry contains platform name and URL (URLs pulled from person config)
- */
 export const content: Content = {
   home: {
-    title: "Full-stack Developer",
-    subtitle: "Building modern web experiences",
+    title: "Software Engineer",
+    subtitle: "Full-stack Development & IT Support",
     description:
-      "I create performant and accessible web applications using React, Next.js, and TypeScript.",
+      "Building modern web applications with JavaScript, React, and Node.js while pursuing Computer Science at LCCC.",
     projects: [
       {
-        title: "Project One",
-        description: "Description of the first project",
-        tags: ["React", "TypeScript", "Tailwind"],
-        link: "https://project1.com",
-        image: "https://picsum.photos/600/400",
+        title: "Team Development Projects",
+        description:
+          "Collaborated on multiple full-stack web applications using modern technologies and agile methodologies.",
+        tags: ["React", "Node.js", "JavaScript", "TypeScript"],
+        link: "https://github.com/wais-a",
+        image: "/images/project1.png",
       },
-      // Add more projects as needed
+      {
+        title: "IT Support Systems",
+        description:
+          "Managed and resolved technical support tickets for staff and students at LCCC.",
+        tags: ["Technical Support", "Problem Solving", "Customer Service"],
+        image: "/images/project2.png",
+      },
     ],
   },
 
   blog: {
-    title: "Blog",
-    description: "Thoughts on development, design, and technology",
+    title: "Technical Blog",
+    description:
+      "Thoughts and insights on software development, IT support, and technology.",
     postsPerPage: 6,
   },
 
   contact: {
     title: "Get in Touch",
-    description: "Have a project in mind? Let's talk about it.",
+    description: "Interested in collaborating? Let's discuss your project.",
     email: person.email,
-
     form: {
       endpoint: "/api/contact",
       fields: [
@@ -81,4 +54,9 @@ export const content: Content = {
     { platform: "LinkedIn", url: person.linkedin },
     { platform: "BlueSky", url: person.bluesky },
   ],
+
+  about: {
+    description:
+      "Full-stack developer and IT professional with experience in both software development and technical support. Currently pursuing Computer Science at LCCC while working as an IT Student Employee.",
+  },
 };

@@ -14,21 +14,31 @@ const BASE_URL =
   "http://localhost:3000";
 
 /**
+ * Viewport configuration optimized for iOS keyboard handling
+ * - width=device-width: Makes the viewport responsive
+ * - initial-scale=1: Sets default zoom level
+ * - viewport-fit=cover: Ensures content fills the screen
+ * - user-scalable=no: Prevents unwanted scaling during keyboard events
+ * - maximum-scale=1: Additional prevention of unwanted zooming
+ */
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  minimumScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  // Adding height to help with iOS keyboard behavior
+  height: "device-height",
+};
+
+/**
  * Generates metadata for a page, including Open Graph properties.
  *
  * @param title - The title of the page. Defaults to site title if not provided.
  * @param description - The description of the page. Defaults to site description if not provided.
  * @returns An object containing metadata properties.
  */
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1.0,
-  viewportFit: "cover",
-  minimumScale: 1.0,
-  maximumScale: 1.0,
-  userScalable: false,
-};
-
 export function generateMetadata(
   title?: string,
   description?: string

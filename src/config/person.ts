@@ -1,22 +1,21 @@
+// src/config/person.ts
+
 import type { Person } from "@/types";
-// personal.ts
-// Central configuration file for all personal information
-// This serves as a single source of truth for personal details
 
 export const person: Person = {
   // Basic Information
   first: "Wais",
   last: "Almakaleh",
   name: "Wais Almakaleh",
-  role: "Full-stack Developer",
-  location: "America/New_York",
+  role: "Software Engineer",
+  location: "Pottsville, PA",
   avatar: "/images/avatar.jpg",
-  languages: ["English", "Other"],
+  languages: ["English", "Arabic"],
 
   // Contact Information
-  email: "mailto:95wais@gmail.com",
+  email: "mailto:walmakaleh@mymail.lccc.edu",
 
-  // Social Links - Each property provides direct access to the link
+  // Social Links
   github: "https://github.com/wais-a",
   linkedin: "https://www.linkedin.com/in/wais-almakaleh",
   bluesky: "https://bsky.app/profile/wais-a.bsky.social",
@@ -24,24 +23,63 @@ export const person: Person = {
   // Professional Experience
   work: [
     {
-      company: "Company Name",
-      timeframe: "2022 - Present",
-      role: "Full-stack Developer",
-      achievements: ["Achievement 1", "Achievement 2"],
+      company: "Lehigh Carbon Community College",
+      timeframe: "March 2023 - Present",
+      role: "I.T. Student Employee",
+      achievements: [
+        "Efficiently respond and resolve support tickets and assist staff, professors, and students, enhancing campus productivity and reducing downtime",
+        "Deliver prompt and courteous IT support via phone calls",
+        "Provide on-demand, in-person IT support, resolving complex issues for users",
+      ],
+    },
+    {
+      company: "Lambda School",
+      timeframe: "September 2019 – March 2022",
+      role: "Software Engineer",
+      achievements: [
+        "Collaborated with teams with up to 10 members to build and complete websites",
+        "Built over 15 experimental programs with teams that ranged from 3 to 10 individuals",
+        "Designed functional and aesthetically pleasing websites",
+        "Conducted industry research, gaining new skills to solve problems during development",
+      ],
+    },
+    {
+      company: "Clearly Clean Products",
+      timeframe: "August 2021 – March 2022",
+      role: "Assembly Line Worker",
+      achievements: [],
+    },
+    {
+      company: "Lowe's RDC",
+      timeframe: "March 2018 – September 2019",
+      role: "Machine Operator",
+      achievements: [],
+    },
+    {
+      company: "Blue Line Wireless",
+      timeframe: "January 2014 – October 2017",
+      role: "Electronic Sales Associate",
+      achievements: [],
     },
   ],
 
   // Education Background
   education: [
     {
-      institution: "University Name",
-      description: "Computer Science Degree",
-      timeframe: "2018-2022",
+      institution: "Lehigh Carbon Community College",
+      description: "Associate in Science: Computer Science",
+      timeframe: "Expected Graduation: May 2025",
+    },
+    {
+      institution: "Bucknell University",
+      description:
+        "Bucknell University Community College Scholars Program - Selected based on GPA of 3.5 or higher, leadership abilities, and problem-solving skills",
+      timeframe: "June 2024 – July 2024",
     },
   ],
 
   // Brief bio/description
-  bio: "I create performant and accessible web applications using React, Next.js, and TypeScript.",
+  bio: "A proficient, dedicated, bilingual software engineer experienced working on teams of diverse individuals with unique perspectives. Skilled in JavaScript, Python, React, Node.js, and various database technologies.",
 };
 
 export default person;

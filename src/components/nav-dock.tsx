@@ -33,8 +33,7 @@ export function NavDock() {
       <Dock
         className={cn(
           "fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center py-4 shadow-md transition-transform duration-300",
-          // Apply translation based on visibility
-          isVisible ? "translate-y-0" : "translate-y-full"
+          isVisible ? "translate-y-0" : "translate-y-[150%]" // Increased translation distance
         )}
         direction="middle"
         iconDistance={dockConfig.iconDistance}

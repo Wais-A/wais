@@ -83,12 +83,16 @@ export type Project = {
  * @property home - Home page content
  * @property blog - Blog section content
  * @property contact - Contact page content
+ * @property about - About section content
  * @property social - Social media links
  */
 export type Content = {
   home: HomeContent;
   blog: BlogContent;
   contact: ContactContent;
+  about: {
+    description: string;
+  };
   social: Array<{
     platform: string;
     url: string;

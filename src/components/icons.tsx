@@ -7,7 +7,7 @@
  */
 
 import type { IconProps } from "@/types";
-import { HomeIcon, MailIcon } from "lucide-react";
+import { CircleUserRound, HomeIcon } from "lucide-react";
 
 /**
  * Collection of icon components used in the application
@@ -17,7 +17,7 @@ import { HomeIcon, MailIcon } from "lucide-react";
 
 export const Icons = {
   home: HomeIcon,
-  email: MailIcon,
+  about: CircleUserRound,
   github: (props: IconProps) => (
     <svg
       viewBox="0 0 438.549 438.549"
