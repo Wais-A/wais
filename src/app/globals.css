@@ -13,7 +13,7 @@
 
     /* Card component colors */
     --card: 30 100% 100% / 50%; /* Background color for card components */
-    --card-foreground: 240 10% 3.9%; /* Text color for card components */
+    --card-foreground: 30 0% 32%; /* Text color for card components */
 
     /* Popover/dropdown colors */
     --popover: 0 0% 100%; /* Background color for popovers/dropdowns */
@@ -26,12 +26,13 @@
     --secondary-foreground: 240 5.9% 10%; /* Text color on secondary buttons */
 
     /* Subtle UI element colors */
-    --muted: 240 4.8% 95.9%; /* Background for muted/subtle elements */
+    --muted: 30deg 0% 96%; /* Background for muted/subtle elements */
     --muted-foreground: 240 3.8% 46.1%; /* Text color for muted elements (subtitles, captions) */
     --accent: 240 4.8% 95.9%; /* Accent color for highlights/emphasis */
     --accent-foreground: 30 0% 32%; /* Text color on accented elements */
 
     /* Form and input colors */
+    --shadow-color: 0 0% 10% / 10%; /* Shadow color for elevated elements */
     --input: 240 5.9% 90%; /* Background color for input fields */
     --border: 240 5.9% 90%; /* Color for borders and dividers */
     --ring: 240 10% 3.9%; /* Focus ring color for interactive elements */
@@ -65,7 +66,7 @@
 
     /* Card component colors - Dark theme */
     --card: 0 0% 0% / 35%; /* Dark mode card background */
-    --card-foreground: 0 0% 98%; /* Dark mode card text */
+    --card-foreground: 30deg 0% 64%; /* Dark mode card text */
 
     /* Popover/dropdown colors - Dark theme */
     --popover: 240 10% 3.9%; /* Dark mode popover background */
@@ -78,12 +79,13 @@
     --secondary-foreground: 0 0% 98%; /* Dark mode secondary button text */
 
     /* Subtle UI element colors - Dark theme */
-    --muted: 240 3.7% 15.9%; /* Dark mode muted background */
+    --muted: 30deg 0% 15%; /* Dark mode muted background */
     --muted-foreground: 240 5% 64.9%; /* Dark mode muted text */
     --accent: 240 3.7% 15.9%; /* Dark mode accent color */
     --accent-foreground: 30 0% 64%; /* Dark mode accent text */
 
     /* Form and input colors - Dark theme */
+    --shadow-color: 0 0% 50% / 10%; /* Shadow color for elevated elements */
     --input: 240 3.7% 15.9%; /* Dark mode input background */
     --border: 240 3.7% 15.9%; /* Dark mode borders */
     --ring: 240 4.9% 83.9%; /* Dark mode focus ring */
@@ -103,7 +105,6 @@
     --grid-overlay: 100 100% 100% / 0.2; /* for dark grid patterns */
   }
 
-
   /* Global styles */
   * {
     @apply border-border;
@@ -114,13 +115,30 @@
     @apply bg-background text-foreground;
     @apply no-scrollbar;
   }
-  
+
   /* Base typography styles */
   h1 {
-    @apply text-5xl font-bold mb-6;
+    @apply text-5xl font-bold mb-6 capitalize;
+  }
+  h2 {
+    @apply text-3xl font-bold mb-6 capitalize;
+  }
+  h3 {
+    @apply text-2xl font-bold mb-6 capitalize;
+  }
+  h4 {
+    @apply text-xl font-semibold mb-4 capitalize;
+  }
+  h5 {
+    @apply text-lg text-card-foreground font-bold mb-6;
+  }
+  h6 {
+    @apply text-xs text-muted-foreground mb-6;
+  }
+  p {
+    @apply text-card-foreground mt-4;
   }
 }
-
 
 /* ------------------------------
    2. Utilities

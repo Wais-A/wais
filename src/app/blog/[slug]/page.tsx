@@ -1,16 +1,3 @@
-/**
- * Dynamic Blog Post Page Component
- *
- * This component handles the rendering of individual blog posts using dynamic routing.
- * It supports MDX content, metadata generation for SEO, and static path generation
- * for optimal performance. The page displays blog post content with features like:
- * - Featured image
- * - Tags
- * - Publication date
- * - Reading time
- * - MDX-rendered content with custom components
- */
-
 import { CustomButton } from "@/components/mdx-components";
 import { getAllBlogPosts, getBlogPost } from "@/lib/blog";
 import { format } from "date-fns";
@@ -18,7 +5,7 @@ import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import "./../../globals.css";
+import { List, Tags } from "@/components/tagAndList";
 
 /**
  * Props interface for the blog post page component.
