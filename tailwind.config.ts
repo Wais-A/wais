@@ -67,11 +67,18 @@ export default {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
+        overlay: {
+          background: "hsl(var(--background-overlay))",
+          grid: "hsl(var(--grid-overlay))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      backdropBlur: {
+        sm: "var(--backdrop-blur)",
       },
     },
   },

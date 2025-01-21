@@ -112,6 +112,14 @@ export const person: Person = {
 
   // Brief bio/description
   bio: "A proficient, dedicated, bilingual software engineer experienced working on teams of diverse individuals with unique perspectives. Skilled in JavaScript, Python, React, Node.js, and various database technologies.",
+
+  // Technical Skills
+  skills: {
+    languages: ["JavaScript", "Python", "C", "HTML", "CSS3", "TypeScript"],
+    frameworks: ["React", "Node.js", "Angular", "Redux"],
+    databases: ["SQL", "NoSQL", "Firebase"],
+    tools: ["Git", "REST APIs", "Unit Testing", "Ajax"],
+  },
 };
 
 export default person;

@@ -5,6 +5,20 @@
 import type { Project } from "./content";
 
 /**
+ * Represents technical skills grouped by category
+ * @property languages - Programming languages
+ * @property frameworks - Development frameworks and libraries
+ * @property databases - Database technologies
+ * @property tools - Development tools and utilities
+ */
+export interface Skills {
+  languages: string[];
+  frameworks: string[];
+  databases: string[];
+  tools: string[];
+}
+
+/**
  * Represents a single work experience entry
  * @property company - Name of the employer
  * @property timeframe - Duration of employment (e.g., "2020-2022")
@@ -64,4 +78,5 @@ export interface Person {
   education: Education[];
   bio: string;
   projects: Project[];
+  skills: Skills;
 }

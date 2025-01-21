@@ -11,7 +11,7 @@ export { viewport };
 
 export default function Home() {
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-4xl mx-auto">
       {/* Hero Section */}
       <section className="">
         <h1 className="text-4xl font-bold">

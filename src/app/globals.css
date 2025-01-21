@@ -2,95 +2,148 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ------------------------------
+   1. Base & Theme Configuration
+------------------------------ */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 10% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-    --viewport-height: 100%;
-    --viewport-safe-height: 100%;
+    /* Main page colors */
+    --background: 0 0% 100%; /* Main background color for the page */
+    --foreground: 240 10% 3.9%; /* Main text color */
+
+    /* Card component colors */
+    --card: 30 100% 100% / 50%; /* Background color for card components */
+    --card-foreground: 240 10% 3.9%; /* Text color for card components */
+
+    /* Popover/dropdown colors */
+    --popover: 0 0% 100%; /* Background color for popovers/dropdowns */
+    --popover-foreground: 240 10% 3.9%; /* Text color for popovers/dropdowns */
+
+    /* Button and interactive element colors */
+    --primary: 240 5.9% 10%; /* Primary button/action color */
+    --primary-foreground: 0 0% 98%; /* Text color on primary buttons */
+    --secondary: 240 4.8% 95.9%; /* Secondary button/action color */
+    --secondary-foreground: 240 5.9% 10%; /* Text color on secondary buttons */
+
+    /* Subtle UI element colors */
+    --muted: 240 4.8% 95.9%; /* Background for muted/subtle elements */
+    --muted-foreground: 240 3.8% 46.1%; /* Text color for muted elements (subtitles, captions) */
+    --accent: 240 4.8% 95.9%; /* Accent color for highlights/emphasis */
+    --accent-foreground: 30 0% 32%; /* Text color on accented elements */
+
+    /* Form and input colors */
+    --input: 240 5.9% 90%; /* Background color for input fields */
+    --border: 240 5.9% 90%; /* Color for borders and dividers */
+    --ring: 240 10% 3.9%; /* Focus ring color for interactive elements */
+
+    /* Alert and error colors */
+    --destructive: 0 84.2% 60.2%; /* Color for destructive actions/errors */
+    --destructive-foreground: 0 0% 98%; /* Text color on destructive elements */
+
+    /* Chart/Graph colors */
+    --chart-1: 12 76% 61%; /* First color in data visualizations */
+    --chart-2: 173 58% 39%; /* Second color in data visualizations */
+    --chart-3: 197 37% 24%; /* Third color in data visualizations */
+    --chart-4: 43 74% 66%; /* Fourth color in data visualizations */
+    --chart-5: 27 87% 67%; /* Fifth color in data visualizations */
+
+    /* For those bg-white/50 and bg-black/50 patterns */
+    --background-overlay: 0 0% 100% / 0.5; /* light mode */
+    --grid-overlay: 0 0% 0% / 0.2; /* for your grid patterns */
+
+    /* Layout variables */
+    --radius: 0.5rem; /* Border radius for rounded corners */
+    --viewport-height: 100%; /* Full viewport height */
+    --viewport-safe-height: 100%; /* Safe area height for mobile devices */
+    --backdrop-blur: blur(8px); /* for your backdrop-blur-sm usage */
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    /* Main page colors - Dark theme */
+    --background: 240 10% 3.9%; /* Dark mode background */
+    --foreground: 0 0% 98%; /* Dark mode text color */
+
+    /* Card component colors - Dark theme */
+    --card: 0 0% 0% / 35%; /* Dark mode card background */
+    --card-foreground: 0 0% 98%; /* Dark mode card text */
+
+    /* Popover/dropdown colors - Dark theme */
+    --popover: 240 10% 3.9%; /* Dark mode popover background */
+    --popover-foreground: 0 0% 98%; /* Dark mode popover text */
+
+    /* Button and interactive element colors - Dark theme */
+    --primary: 0 0% 98%; /* Dark mode primary button */
+    --primary-foreground: 240 5.9% 10%; /* Dark mode primary button text */
+    --secondary: 240 3.7% 15.9%; /* Dark mode secondary button */
+    --secondary-foreground: 0 0% 98%; /* Dark mode secondary button text */
+
+    /* Subtle UI element colors - Dark theme */
+    --muted: 240 3.7% 15.9%; /* Dark mode muted background */
+    --muted-foreground: 240 5% 64.9%; /* Dark mode muted text */
+    --accent: 240 3.7% 15.9%; /* Dark mode accent color */
+    --accent-foreground: 30 0% 64%; /* Dark mode accent text */
+
+    /* Form and input colors - Dark theme */
+    --input: 240 3.7% 15.9%; /* Dark mode input background */
+    --border: 240 3.7% 15.9%; /* Dark mode borders */
+    --ring: 240 4.9% 83.9%; /* Dark mode focus ring */
+
+    /* Alert and error colors - Dark theme */
+    --destructive: 0 62.8% 30.6%; /* Dark mode destructive actions */
+    --destructive-foreground: 0 0% 98%; /* Dark mode destructive text */
+
+    /* Chart/Graph colors - Dark theme variants */
+    --chart-1: 220 70% 50%; /* Dark mode chart color 1 */
+    --chart-2: 160 60% 45%; /* Dark mode chart color 2 */
+    --chart-3: 30 80% 55%; /* Dark mode chart color 3 */
+    --chart-4: 280 65% 60%; /* Dark mode chart color 4 */
+    --chart-5: 340 75% 55%; /* Dark mode chart color 5 */
+
+    --background-overlay: 0 0% 0% / 0.5; /* dark mode */
+    --grid-overlay: 100 100% 100% / 0.2; /* for dark grid patterns */
   }
 
-  /* Add safe area insets for mobile */
+
+  /* Global styles */
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body {
+    @apply bg-background text-foreground;
+    @apply no-scrollbar;
+  }
+  
+  /* Base typography styles */
+  h1 {
+    @apply text-5xl font-bold mb-6;
+  }
 }
 
-* {
-  @apply border-border;
-}
 
-html,
-body {
-  @apply bg-background text-foreground;
-  @apply no-scrollbar;
-}
-
+/* ------------------------------
+   2. Utilities
+------------------------------ */
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-
   .webkit-overflow-touch {
     -webkit-overflow-scrolling: touch;
   }
   .webkit-tap-transparent {
     -webkit-tap-highlight-color: transparent;
   }
-
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
 }
 
+/* ------------------------------
+   3. Additional Rules
+------------------------------ */
 .changing-theme * {
   transition: none !important;
 }
