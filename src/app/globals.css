@@ -112,8 +112,9 @@
 
   html,
   body {
-    @apply bg-background text-foreground;
-    @apply no-scrollbar;
+    @apply bg-background text-foreground no-scrollbar;
+    min-height: -webkit-fill-available; /* Keep this for iOS Safari */
+    height: 100%;
   }
 
   /* Base typography styles */
@@ -144,6 +145,10 @@
    2. Utilities
 ------------------------------ */
 @layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -153,10 +158,6 @@
   .webkit-tap-transparent {
     -webkit-tap-highlight-color: transparent;
   }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
 }
 
 /* ------------------------------
@@ -164,10 +165,4 @@
 ------------------------------ */
 .changing-theme * {
   transition: none !important;
-}
-
-@supports (padding: max(0px)) {
-  .pb-safe {
-    padding-bottom: max(env(safe-area-inset-bottom), 1rem);
-  }
 }

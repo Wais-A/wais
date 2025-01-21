@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { List, Tags } from "@/components/tagAndList";
+import { Tags } from "@/components/tagAndList";
 
 /**
  * Props interface for the blog post page component.
@@ -86,20 +86,13 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="space-y-2">
             {post.metadata.tags && (
               <div className="flex gap-2">
-                {post.metadata.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-sm px-2 py-1 rounded-full bg-neutral-100 dark:bg-neutral-800"
-                  >
-                    {tag}
-                  </span>
-                ))}
+                {post.metadata.tags && <Tags items={post.metadata.tags} />}
               </div>
             )}
 
             <h1 className="text-4xl font-bold">{post.metadata.title}</h1>
 
-            <div className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
+            <div className="flex items-center gap-2 text-sm">
               <time dateTime={post.metadata.date}>
                 {format(new Date(post.metadata.date), "MMMM dd, yyyy")}
               </time>
@@ -116,7 +109,6 @@ export default async function BlogPostPage({ params }: Props) {
         {/* Content container with Tailwind Typography and dark mode support */}
         <div
           className="prose prose-neutral dark:prose-invert max-w-none overflow-hidden"
-          style={{ paddingBottom: "80px" }}
         >
           {/* Render MDX content with custom components support */}
           <MDXRemote source={post.content} components={{ CustomButton }} />

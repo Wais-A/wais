@@ -13,7 +13,7 @@ export const metadata = generateMetadata(
 
 export default function About() {
   return (
-    <main>
+    <main className="container mx-auto px-4" >
       <section className="relative">
         <h1>About Me</h1>
         <h5>{person.bio}</h5>

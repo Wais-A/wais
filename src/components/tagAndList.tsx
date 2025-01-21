@@ -1,14 +1,41 @@
-// components/TagsAndList.tsx
 import type React from "react";
 import Card from "@/components/card";
 
 // Tags Component
 export interface TagsProps {
-  items: object;
+  items: object | string | string[]; // Now accepts object, string array, or single string
   className?: string;
 }
 
 export const Tags: React.FC<TagsProps> = ({ items, className }) => {
+  // Handle single tag
+  if (typeof items === "string") {
+    return (
+      <span
+        className={`font-medium bg-muted px-3 py-1 rounded-full text-sm max-sm:text-xs ${className}`}
+      >
+        {items}
+      </span>
+    );
+  }
+
+  // Handle array of tags
+  if (Array.isArray(items)) {
+    return (
+      <div className="flex flex-wrap gap-2">
+        {items.map((item) => (
+          <span
+            key={item}
+            className={`font-medium bg-muted px-3 py-1 rounded-full text-sm max-sm:text-xs ${className}`}
+          >
+            {item}
+          </span>
+        ))}
+      </div>
+    );
+  }
+
+  // Handle grouped tags
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
       {Object.entries(items).map(([category, itemList]) => (
@@ -17,14 +44,15 @@ export const Tags: React.FC<TagsProps> = ({ items, className }) => {
           <h4 className="text-lg font-bold mb-2">{category}</h4>
           {/* Item Tags */}
           <div className="flex flex-wrap gap-2">
-            {Array.isArray(itemList) && itemList.map((item: string) => (
-              <span
-                key={item}
-                className={`font-medium bg-muted px-3 py-1 rounded-full text-sm max-sm:text-xs ${className}`}
-              >
-                {item}
-              </span>
-            ))}
+            {Array.isArray(itemList) &&
+              itemList.map((item: string) => (
+                <span
+                  key={item}
+                  className={`font-medium bg-muted px-3 py-1 rounded-full text-sm max-sm:text-xs ${className}`}
+                >
+                  {item}
+                </span>
+              ))}
           </div>
         </div>
       ))}
@@ -62,9 +90,10 @@ export const List = <T extends ListItem>({
   return (
     <div className="space-y-8">
       {items.map((item) => {
-        const itemKey = 'institution' in item 
-          ? item.institution 
-          : `${item.company}-${item.role}`;
+        const itemKey =
+          "institution" in item
+            ? item.institution
+            : `${item.company}-${item.role}`;
 
         return (
           <Card
