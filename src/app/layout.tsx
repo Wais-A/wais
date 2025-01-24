@@ -4,6 +4,7 @@ import { themeConfig } from "@/config/theme";
 import { generateMetadata, viewport } from "@/lib/metadata";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Providers } from "./providers";
 import "./globals.css";
 
 /**
@@ -35,7 +36,7 @@ export { viewport };
 /**
  * Root layout component that wraps all pages
  * Implements:
- * - Dark mode as default theme
+ * - Dark mode using next-themes
  * - Custom font loading and fallbacks
  * - Responsive grid background with overlay
  * - Fixed navigation dock
@@ -50,21 +51,24 @@ export default function RootLayout({
     <html
       lang={siteConfig.meta.lang || "en"}
       className={themeConfig.colors.background}
+      suppressHydrationWarning
     >
       <body
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
-        {/* Main container with grid background and gradient overlay */}
-        <div className="w-full bg-background dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2] relative overflow-y-auto min-h-dvh lg:py-20 ">
-          {/* Radial gradient mask for background pattern */}
-          <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-background [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
-          {/* Content container with z-index to appear above background */}
-          <div className="relative z-10 max-w-6xl mx-auto px-4">
-            <main style={{ paddingBottom: "80px" }}>{children}</main>
+        <Providers>
+          {/* Main container with grid background and gradient overlay */}
+          <div className="w-full bg-background dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2] relative overflow-y-auto min-h-dvh lg:py-20 ">
+            {/* Radial gradient mask for background pattern */}
+            <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-background [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
+            {/* Content container with z-index to appear above background */}
+            <div className="relative z-10 max-w-6xl mx-auto px-4">
+              <main style={{ paddingBottom: "80px" }}>{children}</main>
+            </div>
+            {/* Fixed navigation dock at the bottom */}
+            <NavDock />
           </div>
-          {/* Fixed navigation dock at the bottom */}
-          <NavDock />
-        </div>
+        </Providers>
       </body>
     </html>
   );

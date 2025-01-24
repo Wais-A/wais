@@ -1,7 +1,5 @@
 "use client";
 
-import { themeConfig } from "@/config/theme";
-
 import { buttonVariants } from "@/components/ui/button";
 import {
   Tooltip,
@@ -9,45 +7,33 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { themeConfig } from "@/config/theme";
 import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 /**
  * Theme Toggle Component
  *
  * Manages theme switching with the following features:
- * - Syncs with system preferences on initial load
- * - Persists theme choice in localStorage
- * - Prevents transition flicker during theme changes
+ * - Uses next-themes for theme management
+ * - Syncs with system preferences
+ * - Persists theme choice
+ * - Prevents transition flicker
  * - Provides visual feedback through tooltips
  * - Handles SSR by deferring mount
  */
 export function ThemeToggle() {
-  // Track component mount state for SSR
   const [mounted, setMounted] = useState(false);
-  // Track next theme state for tooltip
-  const [mode, setMode] = useState("Light");
+  const { theme, setTheme } = useTheme();
 
-  /**
-   * Handles theme switching with transition prevention
-   * 1. Adds class to prevent transitions during switch
-   * 2. Updates theme classes and localStorage
-   * 3. Updates tooltip text
-   * 4. Removes transition prevention after switch
-   */
-  const toggleDarkMode = () => {
-    // Prevent transition flicker
+  // Handle theme switching
+  const toggleTheme = () => {
+    // Add class to prevent transitions during switch
     document.documentElement.classList.add("changing-theme");
 
-    if (document.documentElement.classList.contains("dark")) {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-      setMode("Dark"); // Show Dark option when in light mode
-    } else {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-      setMode("Light"); // Show Light option when in dark mode
-    }
+    // Toggle theme
+    setTheme(theme === "dark" ? "light" : "dark");
 
     // Re-enable transitions after theme switch
     setTimeout(() => {
@@ -55,21 +41,9 @@ export function ThemeToggle() {
     }, themeConfig.transitions.themeSwitchDuration);
   };
 
-  /**
-   * Initialize theme on component mount
-   * - Checks localStorage and system preferences
-   * - Sets initial theme and tooltip state
-   * - Enables client-side rendering
-   */
+  // Enable client-side rendering
   useEffect(() => {
     setMounted(true);
-    const isDark =
-      localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
-
-    document.documentElement.classList.toggle("dark", isDark);
-    setMode(isDark ? "Light" : "Dark");
   }, []);
 
   // Prevent SSR flash
@@ -81,7 +55,7 @@ export function ThemeToggle() {
         <TooltipTrigger asChild>
           <button
             type="button"
-            onClick={toggleDarkMode}
+            onClick={toggleTheme}
             aria-label="Toggle theme"
             className={cn(
               buttonVariants({ variant: "ghost", size: "icon" }),
@@ -124,7 +98,9 @@ export function ThemeToggle() {
             </svg>
           </button>
         </TooltipTrigger>
-        <TooltipContent>Switch to {mode} Mode</TooltipContent>
+        <TooltipContent>
+          Switch to {theme === "dark" ? "Light" : "Dark"} Mode
+        </TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );
