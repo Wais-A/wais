@@ -1,33 +1,26 @@
 /**
  * Navigation Configuration Module
  *
- * @packageDocumentation Defines the site-wide navigation structure, including main navigation
- * links and social media links. Uses centralized personal information from person config
- * for social media URLs.
+ * Implements the site-wide navigation structure using the Navigation interface.
+ * Centralizes all navigation-related configuration including main navigation
+ * links and social media links.
  *
- * @see person.ts for social media URL configuration
- * @see Icons component for available icon definitions
+ * @see {@link Navigation} in types/site.ts for type definitions
+ * @see {@link person} in person.ts for social media URL configuration
+ * @see {@link Icons} in components/custom-ui/icons.ts for available icons
  */
+
 import { Icons } from "@/components/custom-ui/icons";
 import { person } from "@/config/person";
-
 import type { Navigation } from "@/types";
 
 /**
- * Navigation configuration object
+ * Navigation configuration object implementing the Navigation interface.
+ * Defines both the main navigation bar items and social media links.
  *
- * @type {Navigation}
- * @property {Array<NavItem>} navbar - Main navigation items
- *    Each item includes:
- *    - href: Internal route path
- *    - icon: Icon component from Icons collection
- *    - label: Display text for the link
- *
- * @property {Array<SocialLink>} social - Social media navigation items
- *    Each item includes:
- *    - label: Platform name
- *    - url: External URL (pulled from person config)
- *    - icon: Platform-specific icon from Icons collection
+ * Main navigation uses internal routes while social links use external URLs
+ * from the person configuration. All items include an icon from the Icons
+ * collection for consistent visual representation.
  */
 export const navigation: Navigation = {
   navbar: [

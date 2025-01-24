@@ -68,6 +68,11 @@ export interface Navigation {
  *    @property description - Site description for SEO
  *    @property baseURL - Base URL for absolute path generation
  *    @property ogImage - Default Open Graph image for social sharing
+ *    @property lang - Site language code
+ *    @property locale - Site locale for internationalization
+ * @property theme - Theme configuration
+ *    @property defaultMode - Default theme mode ("light" | "dark")
+ *    @property transitionDuration - Duration for theme transitions in milliseconds
  * @property projects - Array of featured projects
  */
 export interface SiteConfig {
@@ -76,6 +81,12 @@ export interface SiteConfig {
     description: string;
     baseURL: string;
     ogImage: string;
+    lang: string;
+    locale: string;
+  };
+  theme: {
+    defaultMode: "light" | "dark";
+    transitionDuration: number;
   };
   projects: Project[];
 }

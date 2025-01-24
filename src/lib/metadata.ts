@@ -34,6 +34,7 @@ export const viewport: Viewport = {
  * @param description - The description of the page. Defaults to site description if not provided.
  * @returns An object containing metadata properties.
  */
+
 export function generateMetadata(
   title?: string,
   description?: string
@@ -54,7 +55,7 @@ export function generateMetadata(
           height: 630,
         },
       ],
-      locale: "en-US",
+      locale: siteConfig.meta.locale,
       type: "website",
     },
     alternates: {

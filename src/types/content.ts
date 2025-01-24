@@ -93,8 +93,4 @@ export type Content = {
   about: {
     description: string;
   };
-  social: Array<{
-    platform: string;
-    url: string;
-  }>;
 };

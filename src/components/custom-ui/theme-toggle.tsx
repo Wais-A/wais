@@ -1,5 +1,7 @@
 "use client";
 
+import { themeConfig } from "@/config/theme";
+
 import { buttonVariants } from "@/components/ui/button";
 import {
   Tooltip,
@@ -10,11 +12,31 @@ import {
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
+/**
+ * Theme Toggle Component
+ *
+ * Manages theme switching with the following features:
+ * - Syncs with system preferences on initial load
+ * - Persists theme choice in localStorage
+ * - Prevents transition flicker during theme changes
+ * - Provides visual feedback through tooltips
+ * - Handles SSR by deferring mount
+ */
 export function ThemeToggle() {
+  // Track component mount state for SSR
   const [mounted, setMounted] = useState(false);
+  // Track next theme state for tooltip
   const [mode, setMode] = useState("Light");
 
+  /**
+   * Handles theme switching with transition prevention
+   * 1. Adds class to prevent transitions during switch
+   * 2. Updates theme classes and localStorage
+   * 3. Updates tooltip text
+   * 4. Removes transition prevention after switch
+   */
   const toggleDarkMode = () => {
+    // Prevent transition flicker
     document.documentElement.classList.add("changing-theme");
 
     if (document.documentElement.classList.contains("dark")) {
@@ -27,11 +49,18 @@ export function ThemeToggle() {
       setMode("Light"); // Show Light option when in dark mode
     }
 
+    // Re-enable transitions after theme switch
     setTimeout(() => {
       document.documentElement.classList.remove("changing-theme");
-    }, 50);
+    }, themeConfig.transitions.themeSwitchDuration);
   };
 
+  /**
+   * Initialize theme on component mount
+   * - Checks localStorage and system preferences
+   * - Sets initial theme and tooltip state
+   * - Enables client-side rendering
+   */
   useEffect(() => {
     setMounted(true);
     const isDark =
@@ -40,14 +69,10 @@ export function ThemeToggle() {
         window.matchMedia("(prefers-color-scheme: dark)").matches);
 
     document.documentElement.classList.toggle("dark", isDark);
-    // Set initial mode to the opposite of current theme
-    if (isDark) {
-      setMode("Light");
-    } else {
-      setMode("Dark");
-    }
+    setMode(isDark ? "Light" : "Dark");
   }, []);
 
+  // Prevent SSR flash
   if (!mounted) return null;
 
   return (
@@ -63,7 +88,7 @@ export function ThemeToggle() {
               "rounded-full"
             )}
           >
-            {/* Rest of your SVG code remains the same */}
+            {/* Sun icon - visible in dark mode */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               role="img"
@@ -72,7 +97,7 @@ export function ThemeToggle() {
               viewBox="0 0 24 24"
               strokeWidth={1.8}
               stroke="currentColor"
-              className=" hidden dark:block transition-none"
+              className="hidden dark:block transition-none"
             >
               <path
                 strokeLinecap="round"
@@ -80,6 +105,7 @@ export function ThemeToggle() {
                 d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
               />
             </svg>
+            {/* Moon icon - visible in light mode */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               role="img"

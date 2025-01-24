@@ -1,23 +1,24 @@
 /**
  * Icons Module
  *
- * A centralized collection of icon components used throughout the application.
- * Icons are imported from external icon libraries and re-exported with consistent naming.
- * This pattern allows for easy icon management and switching of icon providers.
+ * Centralizes icon components for consistent usage across the application.
+ * Combines icons from lucide-react with custom SVG implementations.
  */
 
 import type { IconProps } from "@/types";
 import { CircleUserRound, HomeIcon } from "lucide-react";
 
 /**
- * Collection of icon components used in the application
- * Each icon is a React component that accepts IconProps
- * Theme icons are handled directly in theme-toggle.tsx
+ * Icon collection with consistent prop interface.
+ * Each icon is either imported from lucide-react or
+ * implemented as an optimized SVG component.
  */
-
 export const Icons = {
+  // Lucide icons
   home: HomeIcon,
   about: CircleUserRound,
+
+  // Custom SVG icons
   github: (props: IconProps) => (
     <svg
       viewBox="0 0 438.549 438.549"
@@ -31,6 +32,7 @@ export const Icons = {
       />
     </svg>
   ),
+
   linkedin: (props: IconProps) => (
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
       <title>LinkedIn</title>
@@ -40,6 +42,7 @@ export const Icons = {
       />
     </svg>
   ),
+
   blog: (props: IconProps) => (
     <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" {...props}>
       <title>Blog</title>
@@ -53,6 +56,7 @@ export const Icons = {
       />
     </svg>
   ),
+
   blueSky: (props: IconProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"

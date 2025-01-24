@@ -1,12 +1,16 @@
 /**
- * Theme Configuration
+ * Theme Configuration Module
  *
- * This file defines the theme settings for the application, including
- * color palettes and visual effects. It allows for easy customization
- * of the application's appearance by modifying these configurations.
+ * Defines the theme settings for the application, including color palettes
+ * and visual effects. Implements the ThemeConfig interface for type safety
+ * and consistent theming across the application.
+ *
+ * @see {@link ThemeConfig} in types/theme.ts for type definitions
  */
 
-export const themeConfig = {
+import type { ThemeConfig } from "@/types";
+
+export const themeConfig: ThemeConfig = {
   colors: {
     primary: "emerald", // Primary color used for main interactive elements
     accent: "indigo", // Accent color for highlights and secondary actions
@@ -17,5 +21,8 @@ export const themeConfig = {
     gradient: true, // Enables gradient backgrounds across components
     hover: "scale", // Hover effect type: "scale", "glow", or "none"
     opacity: 0.5, // Opacity level applied to specific UI elements
+  },
+  transitions: {
+    themeSwitchDuration: 50, // Match the duration in ThemeToggle
   },
 };

@@ -1,6 +1,14 @@
-// src/config/content.ts
+/**
+ * Content Configuration Module
+ *
+ * Implements content structure for different sections of the website,
+ * including home, blog, contact, and about pages. Uses the Content
+ * interface to ensure type safety and consistent structure.
+ *
+ * @see {@link Content} in types/content.ts for type definitions
+ */
 
-import type { Content } from "@/types/content";
+import type { Content } from "@/types";
 import { person } from "./person";
 
 export const content: Content = {
@@ -32,12 +40,6 @@ export const content: Content = {
       ],
     },
   },
-
-  social: [
-    { platform: "GitHub", url: person.github },
-    { platform: "LinkedIn", url: person.linkedin },
-    { platform: "BlueSky", url: person.bluesky },
-  ],
 
   about: {
     description:

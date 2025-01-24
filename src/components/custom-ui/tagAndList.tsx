@@ -1,14 +1,30 @@
 import Card from "@/components/custom-ui/card";
 import type React from "react";
 
-// Tags Component
+/**
+ * Tags Component Props
+ * Supports three display modes:
+ * 1. Single tag (string)
+ * 2. Array of tags (string[])
+ * 3. Grouped tags (object with category keys and string[] values)
+ */
 export interface TagsProps {
-  items: object | string | string[]; // Now accepts object, string array, or single string
+  items: object | string | string[];
   className?: string;
 }
 
+/**
+ * Tags Component
+ *
+ * A flexible tag display component that handles multiple data structures:
+ * - Single tag: Renders one tag pill
+ * - Tag array: Renders a horizontal list of tag pills
+ * - Grouped tags: Renders a grid of categorized tag groups
+ *
+ * All tags maintain consistent styling with optional custom classes.
+ */
 export const Tags: React.FC<TagsProps> = ({ items, className }) => {
-  // Handle single tag
+  // Single tag display
   if (typeof items === "string") {
     return (
       <span
@@ -19,7 +35,7 @@ export const Tags: React.FC<TagsProps> = ({ items, className }) => {
     );
   }
 
-  // Handle array of tags
+  // Array of tags display
   if (Array.isArray(items)) {
     return (
       <div className="flex flex-wrap gap-2">
@@ -35,14 +51,12 @@ export const Tags: React.FC<TagsProps> = ({ items, className }) => {
     );
   }
 
-  // Handle grouped tags
+  // Grouped tags display with categories
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
       {Object.entries(items).map(([category, itemList]) => (
         <div key={category}>
-          {/* Category Title */}
           <h4 className="text-lg font-bold mb-2">{category}</h4>
-          {/* Item Tags */}
           <div className="flex flex-wrap gap-2">
             {Array.isArray(itemList) &&
               itemList.map((item: string) => (
@@ -60,13 +74,19 @@ export const Tags: React.FC<TagsProps> = ({ items, className }) => {
   );
 };
 
-// List Component
+/**
+ * List Component Props
+ * Generic type T must extend ListItem (WorkItem | EducationItem)
+ */
 export interface ListProps<T> {
   items: T[];
   className?: string;
   renderItem?: (item: T) => React.ReactNode;
 }
 
+/**
+ * Work experience item structure
+ */
 type WorkItem = {
   company: string;
   timeframe: string;
@@ -74,6 +94,9 @@ type WorkItem = {
   achievements: string[];
 };
 
+/**
+ * Education item structure
+ */
 type EducationItem = {
   institution: string;
   description: string;
@@ -82,6 +105,16 @@ type EducationItem = {
 
 type ListItem = WorkItem | EducationItem;
 
+/**
+ * List Component
+ *
+ * Renders a vertical list of cards for work experience or education items.
+ * Features:
+ * - Responsive layout with flexible content structure
+ * - Custom rendering support through renderItem prop
+ * - Default rendering with consistent card layout
+ * - Type discrimination between work and education items
+ */
 export const List = <T extends ListItem>({
   items,
   className = "",
@@ -90,6 +123,7 @@ export const List = <T extends ListItem>({
   return (
     <div className="space-y-8">
       {items.map((item) => {
+        // Generate unique key based on item type
         const itemKey =
           "institution" in item
             ? item.institution
@@ -104,7 +138,7 @@ export const List = <T extends ListItem>({
               renderItem(item)
             ) : (
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                {/* Left side - Title and Company/Institution */}
+                {/* Title and Organization */}
                 <div className="flex flex-col">
                   {"role" in item ? (
                     <>
@@ -123,7 +157,7 @@ export const List = <T extends ListItem>({
                   )}
                 </div>
 
-                {/* Center - Achievements */}
+                {/* Achievements (work experience only) */}
                 {"achievements" in item && item.achievements.length > 0 && (
                   <ul className="list-disc list-inside space-y-2 flex-grow">
                     {item.achievements.map((achievement) => (
@@ -137,7 +171,7 @@ export const List = <T extends ListItem>({
                   </ul>
                 )}
 
-                {/* Right side - Timeframe */}
+                {/* Timeframe */}
                 <div className="md:text-right whitespace-nowrap">
                   <h6 className="text-muted-foreground text-sm">
                     {item.timeframe}

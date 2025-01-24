@@ -26,10 +26,15 @@ export type ThemeEffects = {
   opacity: number;
 };
 
+export type TransitionEffect = {
+  themeSwitchDuration: number;
+};
+
 /**
  * Complete theme configuration combining colors and effects
  */
 export type ThemeConfig = {
   colors: ThemeColors;
   effects: ThemeEffects;
+  transitions: TransitionEffect;
 };
