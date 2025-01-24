@@ -31,7 +31,7 @@ export function getDockConfig(screenWidth: number): DockConfig {
     return {
       iconDistance: 65,
       iconMagnification: 35,
-      iconSize: 30,
+      iconSize: 35,
     };
   }
 

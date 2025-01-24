@@ -44,7 +44,7 @@ export function NavDock() {
       <Dock
         className={cn(
           // Base styles
-          "fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center py-4 shadow-md",
+          "fixed bottom-5 max-sm:bottom-2 left-0 right-0 z-50 flex items-center justify-center py-4 shadow-md",
           // Mobile optimizations
           "webkit-overflow-touch webkit-tap-transparent",
           // Visual effects
