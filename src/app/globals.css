@@ -124,8 +124,8 @@
   }
 
   body {
-    transition: background-color var(--theme-transition-duration) ease,
-      color var(--theme-transition-duration) ease;
+    transition: background-color var(--theme-transition-duration) ease, color
+      var(--theme-transition-duration) ease;
   }
 
   /* Typography scale */
@@ -170,8 +170,8 @@
       animation: none !important;
     }
 
-    transition: background-color var(--theme-transition-duration) ease,
-      color var(--theme-transition-duration) ease;
+    transition: background-color var(--theme-transition-duration) ease, color
+      var(--theme-transition-duration) ease;
   }
 }
 
@@ -179,17 +179,15 @@
    Component Transitions
 ------------------------------ */
 .dock-transition {
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    width 0.2s ease,
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.2s ease,
     height 0.2s ease;
 }
 
 .dock-icon-transition {
-  transition: width 0.2s ease,
-    height 0.2s ease,
-    margin 0.2s ease;
+  transition: width 0.2s ease, height 0.2s ease, margin 0.2s ease;
 }
 
 button svg {
-  transition: transform var(--theme-transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform var(--theme-transition-duration)
+    cubic-bezier(0.4, 0, 0.2, 1);
 }

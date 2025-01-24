@@ -22,7 +22,7 @@ interface CardProps {
 export default function Card({ children, className }: CardProps) {
   return (
     <div
-      className={`relative bg-card backdrop-blur-sm rounded-xl p-6 border transition-all hover:shadow-lg hover:shadow-shadowColor ${className}`}
+      className={`relative bg-card/30 backdrop-blur-md rounded-xl p-6 border transition-all hover:shadow-lg hover:shadow-shadowColor ${className}`}
     >
       {children}
     </div>
