@@ -144,6 +144,15 @@
   p {
     @apply text-card-foreground my-2 sm:pb-[50px];
   }
+  :root {
+    --theme-transition-duration: 300ms; /* Should match themeConfig.transitions.themeSwitchDuration */
+  }
+
+  /* Smooth color transitions for theme changes */
+  body {
+    transition: background-color var(--theme-transition-duration) ease, color
+      var(--theme-transition-duration) ease;
+  }
 }
 
 /* ------------------------------
@@ -166,14 +175,27 @@
   .webkit-tap-transparent {
     -webkit-tap-highlight-color: transparent;
   }
+  .changing-theme {
+    & * {
+      transition: none !important;
+      animation: none !important;
+    }
+
+    /* Preserve these transitions during theme change */
+    transition: background-color var(--theme-transition-duration) ease, color
+      var(--theme-transition-duration) ease;
+  }
+
+  /* Icon transition optimization */
+  .theme-icon-transition {
+    transition: transform var(--theme-transition-duration)
+      cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease;
+  }
 }
 
 /* ------------------------------
    Theme Transition Control
 ------------------------------ */
-.changing-theme * {
-  transition: none !important;
-}
 
 .dock-transition {
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.2s ease,
@@ -182,4 +204,9 @@
 
 .dock-icon-transition {
   transition: width 0.2s ease, height 0.2s ease, margin 0.2s ease;
+}
+
+button svg {
+  transition: transform var(--theme-transition-duration)
+    cubic-bezier(0.4, 0, 0.2, 1);
 }

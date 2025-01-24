@@ -25,17 +25,13 @@ import { useEffect, useState } from "react";
  */
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
 
   // Handle theme switching
   const toggleTheme = () => {
-    // Add class to prevent transitions during switch
-    document.documentElement.classList.add("changing-theme");
-
     // Toggle theme
-    setTheme(theme === "dark" ? "light" : "dark");
-
-    // Re-enable transitions after theme switch
+    document.documentElement.classList.add("changing-theme");
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
     setTimeout(() => {
       document.documentElement.classList.remove("changing-theme");
     }, themeConfig.transitions.themeSwitchDuration);
@@ -47,7 +43,17 @@ export function ThemeToggle() {
   }, []);
 
   // Prevent SSR flash
-  if (!mounted) return null;
+  if (!mounted) {
+    // Return empty div with matching structure during loading
+    return (
+      <div
+        className={cn(
+          buttonVariants({ variant: "ghost", size: "icon" }),
+          "rounded-full"
+        )}
+      />
+    );
+  }
 
   return (
     <TooltipProvider>
@@ -59,7 +65,7 @@ export function ThemeToggle() {
             aria-label="Toggle theme"
             className={cn(
               buttonVariants({ variant: "ghost", size: "icon" }),
-              "rounded-full"
+              "rounded-full relative"
             )}
           >
             {/* Sun icon - visible in dark mode */}
@@ -71,7 +77,11 @@ export function ThemeToggle() {
               viewBox="0 0 24 24"
               strokeWidth={1.8}
               stroke="currentColor"
-              className="hidden dark:block transition-none"
+              className={`h-[1.2rem] w-[1.2rem] transition-transform ${
+                resolvedTheme === "dark"
+                  ? "rotate-0 scale-100"
+                  : "rotate-90 scale-0 hidden"
+              }`}
             >
               <path
                 strokeLinecap="round"
@@ -88,7 +98,11 @@ export function ThemeToggle() {
               viewBox="0 0 24 24"
               strokeWidth={1.8}
               stroke="currentColor"
-              className="block dark:hidden transition-none"
+              className={`absolute h-[1.2rem] w-[1.2rem] transition-transform ${
+                resolvedTheme === "dark"
+                  ? "rotate-90 scale-0 hidden"
+                  : "rotate-0 scale-100"
+              }`}
             >
               <path
                 strokeLinecap="round"
@@ -99,7 +113,7 @@ export function ThemeToggle() {
           </button>
         </TooltipTrigger>
         <TooltipContent>
-          Switch to {theme === "dark" ? "Light" : "Dark"} Mode
+          Switch to {resolvedTheme === "dark" ? "Light" : "Dark"} Mode
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
