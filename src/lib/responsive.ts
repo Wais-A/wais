@@ -9,6 +9,16 @@ import { BREAKPOINTS } from "@/types/responsive";
 import type { DockConfig } from "@/types/responsive";
 import { useEffect, useState } from "react";
 
+// Add device type detection
+type DeviceType = "mobile" | "tablet" | "desktop";
+
+function detectDevice(userAgent: string): DeviceType {
+  const isMobile =
+    /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+  const isTablet = /iPad|Android(?!.*Mobile)|Tablet/i.test(userAgent);
+  return isMobile ? "mobile" : isTablet ? "tablet" : "desktop";
+}
+
 /**
  * Default dock configuration for desktop screens.
  * Used during server-side rendering before client-side hydration.
@@ -26,25 +36,23 @@ const defaultConfig: DockConfig = {
  * @param screenWidth - The current viewport width in pixels
  * @returns DockConfig object with appropriate measurements for the screen size
  */
-export function getDockConfig(screenWidth: number): DockConfig {
-  if (screenWidth <= BREAKPOINTS.sm) {
-    return {
-      iconDistance: 65,
-      iconMagnification: 35,
-      iconSize: 35,
-    };
+export function getDockConfig(deviceType: DeviceType): DockConfig {
+  switch (deviceType) {
+    case "mobile":
+      return {
+        iconDistance: 65,
+        iconMagnification: 35,
+        iconSize: 35,
+      };
+    case "tablet":
+      return {
+        iconDistance: 110,
+        iconMagnification: 48,
+        iconSize: 36,
+      };
+    default: // desktop
+      return defaultConfig;
   }
-
-  if (screenWidth <= BREAKPOINTS.lg) {
-    return {
-      iconDistance: 110,
-      iconMagnification: 48,
-      iconSize: 36,
-    };
-  }
-
-  // Restore original desktop values
-  return defaultConfig;
 }
 
 /**
@@ -122,25 +130,49 @@ export function useScrollVisibility() {
  *
  * @returns DockConfig object with current responsive measurements
  */
-export function useDockConfig(): DockConfig {
-  const [dockConfig, setDockConfig] = useState<DockConfig>(defaultConfig);
+export function useDockConfig(userAgent?: string): DockConfig {
+  const [dockConfig, setDockConfig] = useState<DockConfig>(() => {
+    if (typeof window === "undefined" && userAgent) {
+      return getDockConfig(detectDevice(userAgent));
+    }
+    return defaultConfig;
+  });
 
   useEffect(() => {
-    // Update config with actual window width after mount
-    setDockConfig(getDockConfig(window.innerWidth));
-
-    const updateDockConfig = () => {
-      setDockConfig(getDockConfig(window.innerWidth));
+    const update = () => {
+      const width = window.innerWidth;
+      const deviceType =
+        width <= BREAKPOINTS.sm
+          ? "mobile"
+          : width <= BREAKPOINTS.lg
+            ? "tablet"
+            : "desktop";
+      setDockConfig(getDockConfig(deviceType));
     };
 
-    // Set up debounced resize handler
-    const handleResize = createDebouncedResizeHandler(updateDockConfig);
-    window.addEventListener("resize", handleResize);
+    // Initial update
+    update();
 
+    // Create ResizeObserver
+    const observer = new ResizeObserver((entries) => {
+      // Only trigger update if actual dimension changes
+      for (const entry of entries) {
+        if (entry.contentRect.width !== window.innerWidth) {
+          update();
+        }
+      }
+    });
+
+    // Observe the document element
+    if (document.documentElement) {
+      observer.observe(document.documentElement);
+    }
+
+    // Cleanup function
     return () => {
-      window.removeEventListener("resize", handleResize);
+      observer.disconnect();
     };
-  }, []);
+  }, []); // Empty dependency array ensures this runs once
 
   return dockConfig;
 }
@@ -151,15 +183,3 @@ export function useDockConfig(): DockConfig {
  * @param updateDockConfig - Function to update dock configuration
  * @returns Debounced event handler function with 200ms delay
  */
-function createDebouncedResizeHandler(updateDockConfig: () => void) {
-  let timeoutId: number | undefined;
-
-  return () => {
-    if (timeoutId !== undefined) {
-      clearTimeout(timeoutId);
-    }
-    timeoutId = window.setTimeout(() => {
-      updateDockConfig();
-    }, 200);
-  };
-}

@@ -33,9 +33,9 @@ export interface DockConfig {
  * @property 2xl - 2X large screens (1536px)
  */
 export const BREAKPOINTS = {
-  sm: 640, // Tailwind's sm
-  md: 768, // Tailwind's md
-  lg: 1024, // Tailwind's lg
-  xl: 1280, // Tailwind's xl
-  "2xl": 1536, // Tailwind's 2xl
+  xs: 480,
+  sm: 640,
+  md: 768,
+  lg: 1024,
+  xl: 1280,
 } as const;

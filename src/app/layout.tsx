@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "./providers";
 import "./globals.css";
+import { headers } from "next/headers";
 
 /**
  * Configure Geist Sans font for primary text
@@ -42,11 +43,14 @@ export { viewport };
  * - Fixed navigation dock
  * - Content padding for dock visibility
  */
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = await headers();
+  const userAgent = headersList.get("user-agent") || "";
+
   return (
     <html
       lang={siteConfig.meta.lang || "en"}
@@ -66,7 +70,7 @@ export default function RootLayout({
               <main style={{ paddingBottom: "80px" }}>{children}</main>
             </div>
             {/* Fixed navigation dock at the bottom */}
-            <NavDock />
+            <NavDock userAgent={userAgent} />
           </div>
         </Providers>
       </body>

@@ -174,3 +174,12 @@
 .changing-theme * {
   transition: none !important;
 }
+
+.dock-transition {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.2s ease,
+    height 0.2s ease;
+}
+
+.dock-icon-transition {
+  transition: width 0.2s ease, height 0.2s ease, margin 0.2s ease;
+}
