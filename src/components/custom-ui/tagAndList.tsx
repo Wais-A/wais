@@ -1,5 +1,5 @@
+import Card from "@/components/custom-ui/card";
 import type React from "react";
-import Card from "@/components/card";
 
 // Tags Component
 export interface TagsProps {

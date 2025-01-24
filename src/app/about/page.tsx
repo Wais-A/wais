@@ -1,5 +1,5 @@
-import Card from "@/components/card";
-import { List, Tags } from "@/components/tagAndList";
+import Card from "@/components/custom-ui/card";
+import { List, Tags } from "@/components/custom-ui/tagAndList";
 import { content } from "@/config/content";
 import { person } from "@/config/person";
 
@@ -13,7 +13,7 @@ export const metadata = generateMetadata(
 
 export default function About() {
   return (
-    <main className="container mx-auto px-4" >
+    <main className="container mx-auto px-4">
       <section className="relative">
         <h1>About Me</h1>
         <h5>{person.bio}</h5>

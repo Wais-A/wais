@@ -1,9 +1,9 @@
+import Card from "@/components/custom-ui/card";
+import { Tags } from "@/components/custom-ui/tagAndList";
 import { content } from "@/config/content";
 import { person } from "@/config/person";
 import { generateMetadata } from "@/lib/metadata";
 import { viewport } from "@/lib/metadata";
-import {Tags} from "@/components/tagAndList";
-import Card from "@/components/card"
 
 export const metadata = generateMetadata(
   "Wais Almakaleh",
@@ -30,15 +30,11 @@ export default function Home() {
         <h2>Featured Projects</h2>
         <div className="grid gap-6 md:grid-cols-2">
           {content.home.projects.map((project) => (
-            <Card
-              key={project.title}
-            >
+            <Card key={project.title}>
               <h3>{project.title}</h3>
-              <p>
-                {project.description}
-              </p>
+              <p>{project.description}</p>
               <div className="flex gap-2 mt-4">
-                <Tags items={project.tags}/>
+                <Tags items={project.tags} />
               </div>
             </Card>
           ))}

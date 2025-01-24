@@ -8,7 +8,7 @@
  * @see person.ts for social media URL configuration
  * @see Icons component for available icon definitions
  */
-import { Icons } from "@/components/icons";
+import { Icons } from "@/components/custom-ui/icons";
 import { person } from "@/config/person";
 
 import type { Navigation } from "@/types";

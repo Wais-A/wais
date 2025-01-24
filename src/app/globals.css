@@ -57,6 +57,10 @@
     --viewport-height: 100%; /* Full viewport height */
     --viewport-safe-height: 100%; /* Safe area height for mobile devices */
     --backdrop-blur: blur(8px); /* for your backdrop-blur-sm usage */
+
+    /* Font family variables */
+    --font-geist-sans: "Geist", system-ui, sans-serif;
+    --font-geist-mono: "Geist Mono", ui-monospace, monospace;
   }
 
   .dark {
@@ -112,11 +116,13 @@
 
   html,
   body {
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
     @apply bg-background text-foreground no-scrollbar;
-    min-height: -webkit-fill-available; /* Keep this for iOS Safari */
+    min-height: -webkit-fill-available; /* for iOS Safari */
     height: 100%;
   }
-
   /* Base typography styles */
   h1 {
     @apply text-5xl font-bold mb-6 capitalize;
@@ -166,4 +172,3 @@
 .changing-theme * {
   transition: none !important;
 }
-

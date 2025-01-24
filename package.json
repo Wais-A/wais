@@ -4,14 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "dev:debug": "cross-env NODE_OPTIONS=--inspect next dev --turbopack",
+    "build": "npm run clean && next build",
     "start": "next start",
+    "clean": "rimraf .next/ && rimraf dist/",
     "format": "biome format --write ./src",
     "lint": "biome lint --write ./src",
     "check": "biome check --write ./src",
-    "types": "tsc --noEmit",
+    "types": "tsc --noEmit --pretty",
+    "fix": "npm run lint && npm run format",
     "verify": "npm run types && npm run check",
-    "docs": "typedoc"
+    "docs": "typedoc --out docs src"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
@@ -33,7 +36,6 @@
     "next": "15.1.4",
     "next-mdx-remote": "^5.0.0",
     "react": "^19.0.0",
-    "react-aria-components": "^1.6.0",
     "react-dom": "^19.0.0",
     "react-syntax-highlighter": "^15.6.1",
     "tailwind-merge": "^2.6.0",
@@ -46,8 +48,6 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-syntax-highlighter": "^15.5.13",
-    "eslint": "^9.18.0",
-    "eslint-config-next": "^15.1.4",
     "glob": "^11.0.1",
     "postcss": "^8",
     "rimraf": "^6.0.1",

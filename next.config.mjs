@@ -32,6 +32,7 @@ const withMDX = createMDX({
   options: {
     remarkPlugins: [], // Add remark plugins here if needed
     rehypePlugins: [], // Add rehype plugins here if needed
+    providerImportSource: "@mdx-js/react",
   },
 });
 

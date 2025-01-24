@@ -1,11 +1,11 @@
-import { CustomButton } from "@/components/mdx-components";
+import { CustomButton } from "@/components/pages/blog/mdx-components";
+import { Tags } from "@/components/custom-ui/tagAndList";
 import { getAllBlogPosts, getBlogPost } from "@/lib/blog";
 import { format } from "date-fns";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Tags } from "@/components/tagAndList";
 
 /**
  * Props interface for the blog post page component.
@@ -107,9 +107,7 @@ export default async function BlogPostPage({ params }: Props) {
         </header>
 
         {/* Content container with Tailwind Typography and dark mode support */}
-        <div
-          className="prose prose-neutral dark:prose-invert max-w-none overflow-hidden"
-        >
+        <div className="prose prose-neutral dark:prose-invert max-w-none overflow-hidden">
           {/* Render MDX content with custom components support */}
           <MDXRemote source={post.content} components={{ CustomButton }} />
         </div>

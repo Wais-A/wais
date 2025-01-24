@@ -82,6 +82,10 @@ export default {
         sm: "var(--backdrop-blur)",
       },
     },
+    fontFamily: {
+      sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
+      mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
+    },
   },
   plugins: [
     require("tailwindcss-animate"),

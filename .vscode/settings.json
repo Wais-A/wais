@@ -6,5 +6,8 @@
     "Stylesheet",
     "tabler",
     "turbopack"
-  ]
+  ],
+  "search.exclude": {
+    "**/docs": true
+  }
 }

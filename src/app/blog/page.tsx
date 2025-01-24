@@ -1,7 +1,7 @@
+import Card from "@/components/custom-ui/card";
+import { Tags } from "@/components/custom-ui/tagAndList";
 import { getAllBlogPosts } from "@/lib/blog";
 import type { Metadata } from "next";
-import Card from '@/components/card';
-import {Tags} from '@/components/tagAndList';
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -27,21 +27,21 @@ export default async function BlogPage() {
                       src={post.metadata.image}
                       alt={post.metadata.title}
                       className="object-cover w-full h-full transition-transform group-hover:scale-[1.01]"
-                      />
+                    />
                   </div>
                 )}
                 <div className="space-y-2">
                   {post.metadata.tags && (
                     <div className="flex gap-2">
-                      {post.metadata.tags && <Tags items={post.metadata.tags} />}
+                      {post.metadata.tags && (
+                        <Tags items={post.metadata.tags} />
+                      )}
                     </div>
                   )}
                   <h2 className="text-2xl font-bold group-hover:text-neutral-950 dark:group-hover:text-neutral-400 transition-colors">
                     {post.metadata.title}
                   </h2>
-                  <p>
-                    {post.metadata.description}
-                  </p>
+                  <p>{post.metadata.description}</p>
                   <div>
                     <time dateTime={post.metadata.date}>
                       {new Date(post.metadata.date).toLocaleDateString(

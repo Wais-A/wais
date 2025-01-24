@@ -1,4 +1,3 @@
-// ThemeToggle component for switching between light and dark modes
 "use client";
 
 import { buttonVariants } from "@/components/ui/button";
@@ -13,24 +12,21 @@ import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
+  const [mode, setMode] = useState("Light");
 
   const toggleDarkMode = () => {
-    // Add a class during the theme transition
     document.documentElement.classList.add("changing-theme");
 
     if (document.documentElement.classList.contains("dark")) {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
+      setMode("Dark"); // Show Dark option when in light mode
     } else {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
+      setMode("Light"); // Show Light option when in dark mode
     }
 
-    /**
-     * Handles the initial theme setting on component mount.
-     * Sets the theme based on user's preference stored in localStorage
-     * or system's color scheme preference.
-     */
     setTimeout(() => {
       document.documentElement.classList.remove("changing-theme");
     }, 50);
@@ -44,6 +40,12 @@ export function ThemeToggle() {
         window.matchMedia("(prefers-color-scheme: dark)").matches);
 
     document.documentElement.classList.toggle("dark", isDark);
+    // Set initial mode to the opposite of current theme
+    if (isDark) {
+      setMode("Light");
+    } else {
+      setMode("Dark");
+    }
   }, []);
 
   if (!mounted) return null;
@@ -61,10 +63,11 @@ export function ThemeToggle() {
               "rounded-full"
             )}
           >
+            {/* Rest of your SVG code remains the same */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              role="img" // Add role
-              aria-label="Theme icon" // Add aria-label
+              role="img"
+              aria-label="Theme icon"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.8}
@@ -79,13 +82,13 @@ export function ThemeToggle() {
             </svg>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              role="img" // Add role
-              aria-label="Theme icon" // Add aria-label
+              role="img"
+              aria-label="Theme icon"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.8}
               stroke="currentColor"
-              className="block dark:hidden transition-none "
+              className="block dark:hidden transition-none"
             >
               <path
                 strokeLinecap="round"
@@ -95,7 +98,7 @@ export function ThemeToggle() {
             </svg>
           </button>
         </TooltipTrigger>
-        <TooltipContent>Toggle theme</TooltipContent>
+        <TooltipContent>Switch to {mode} Mode</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

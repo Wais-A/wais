@@ -36,28 +36,46 @@ export function useScrollVisibility() {
 
   useEffect(() => {
     let lastScroll = 0;
+    let upScrollDistance = 0; // Track the distance scrolled upward
 
     function handleScroll() {
       const scrollingElement = document.scrollingElement;
       const currentScroll = scrollingElement ? scrollingElement.scrollTop : 0;
+      const SCROLL_THRESHOLD = 150; // Minimum pixels to scroll up before showing navbar
 
-      if (currentScroll < 50) {
+      // Always show navbar in the first 300px from top
+      if (currentScroll < 300) {
         setIsVisible(true);
+        upScrollDistance = 0; // Reset upward scroll tracking
+        lastScroll = currentScroll;
         return;
       }
 
+      // Always show navbar when near the bottom of the page
       if (
         window.innerHeight + currentScroll >=
         (scrollingElement ? scrollingElement.scrollHeight : 0) - 50
       ) {
         setIsVisible(true);
+        upScrollDistance = 0; // Reset upward scroll tracking
+        lastScroll = currentScroll;
         return;
       }
 
+      // Determine scroll direction and update tracking
       if (currentScroll > lastScroll) {
+        // Scrolling down
         setIsVisible(false);
+        upScrollDistance = 0; // Reset upward scroll tracking
       } else {
-        setIsVisible(true);
+        // Scrolling up
+        const scrollDifference = lastScroll - currentScroll;
+        upScrollDistance += scrollDifference;
+
+        // Only show navbar if we've scrolled up enough
+        if (upScrollDistance >= SCROLL_THRESHOLD) {
+          setIsVisible(true);
+        }
       }
 
       lastScroll = currentScroll;
@@ -71,7 +89,7 @@ export function useScrollVisibility() {
   return isVisible;
 }
 
-// Keep your other existing functions...
+
 
 // Hook to handle responsive dock configuration
 export function useDockConfig(): DockConfig {
