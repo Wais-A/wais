@@ -1,0 +1,107 @@
+---
+title: "Building Responsive Layouts with CSS Grid"
+description: "A comprehensive guide to creating modern layouts using CSS Grid"
+date: "2024-01-22"
+author: "Wais Almakaleh"
+readingTime: "6 min read"
+tags: ["css", "web design", "responsive design"]
+image: "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+---
+
+CSS Grid has revolutionized the way we approach web layouts, offering a powerful system for creating complex, responsive designs. In this post, we'll explore how to leverage CSS Grid to build modern, flexible layouts that work across all devices.
+
+## Understanding CSS Grid Fundamentals
+
+CSS Grid introduces a two-dimensional layout system that transforms how we structure web content. Unlike traditional methods, Grid provides precise control over both rows and columns simultaneously, enabling more sophisticated layouts with less code.
+
+### The Basic Grid Structure
+
+Let's start with a simple grid layout that demonstrates the fundamental concepts:
+
+```css
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 1rem;
+}
+```
+
+## Creating Responsive Layouts
+
+One of Grid's strongest features is its ability to create responsive layouts without media queries. Here's an example component that demonstrates this:
+
+```tsx
+export function ResponsiveGrid() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {items.map((item) => (
+        <Card key={item.id} className="p-4">
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+        </Card>
+      ))}
+    </div>
+  );
+}
+```
+
+### Advanced Grid Techniques
+
+Grid offers several powerful features that make complex layouts possible:
+
+## Grid Areas
+## Auto-fit and Auto-fill
+## Minmax Function
+
+Here's a more complex example showing these concepts in action:
+
+```tsx
+function AdvancedLayout() {
+  return (
+    <div className="grid grid-cols-[minmax(200px,_1fr)_2fr] gap-6">
+      <aside className="bg-slate-100 p-4">
+        <nav>Navigation Content</nav>
+      </aside>
+      <main className="grid auto-rows-max gap-4">
+        <header>Header Content</header>
+        <section>Main Content</section>
+        <footer>Footer Content</footer>
+      </main>
+    </div>
+  );
+}
+```
+
+## Best Practices and Tips
+
+When working with CSS Grid, keep these principles in mind:
+
+## Start with mobile-first designs
+## Use semantic HTML
+## Leverage Grid's auto-placement algorithms
+## Consider accessibility
+
+### Performance Considerations
+
+While Grid is powerful, it's important to use it judiciously:
+
+```tsx
+function OptimizedGrid({ items }) {
+  return (
+    <div className="grid grid-cols-auto-fit min-[250px] gap-4">
+      {items.map((item) => (
+        <div key={item.id} className="will-change-transform">
+          <img src={item.image} alt={item.alt} loading="lazy" />
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+## Conclusion
+
+CSS Grid has become an indispensable tool in modern web development. By understanding its capabilities and best practices, we can create more maintainable and flexible layouts that enhance the user experience across all devices.
+
+Remember, the best layouts are those that serve both the content and the user while maintaining clean, semantic code.

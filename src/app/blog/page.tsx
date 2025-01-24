@@ -57,7 +57,7 @@ export default async function BlogPage() {
                   <p>{post.metadata.description}</p>
 
                   {/* Post metadata */}
-                  <div>
+                  <div className="flex items-center gap-2 text-sm">
                     <time dateTime={post.metadata.date}>
                       {new Date(post.metadata.date).toLocaleDateString(
                         "en-US",
