@@ -23,6 +23,6 @@ export const themeConfig: ThemeConfig = {
     opacity: 0.5, // Opacity level applied to specific UI elements
   },
   transitions: {
-    themeSwitchDuration: 50, // Match the duration in ThemeToggle
+    themeSwitchDuration: 300, // Match the duration in ThemeToggle
   },
 };

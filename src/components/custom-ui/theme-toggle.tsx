@@ -1,5 +1,6 @@
 "use client";
 
+import { Icons } from "@/components/custom-ui/icons";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Tooltip,
@@ -10,7 +11,7 @@ import {
 import { themeConfig } from "@/config/theme";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 /**
  * Theme Toggle Component
@@ -27,32 +28,26 @@ export function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
 
-  // Handle theme switching
-  const toggleTheme = () => {
-    // Toggle theme
+  const toggleTheme = useCallback(() => {
     document.documentElement.classList.add("changing-theme");
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
     setTimeout(() => {
       document.documentElement.classList.remove("changing-theme");
     }, themeConfig.transitions.themeSwitchDuration);
-  };
+  }, [resolvedTheme, setTheme]);
 
-  // Enable client-side rendering
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Prevent SSR flash
+  // Keep the existing class computation
+  const buttonClasses = cn(
+    buttonVariants({ variant: "ghost", size: "icon" }),
+    "rounded-full relative"
+  );
+
   if (!mounted) {
-    // Return empty div with matching structure during loading
-    return (
-      <div
-        className={cn(
-          buttonVariants({ variant: "ghost", size: "icon" }),
-          "rounded-full"
-        )}
-      />
-    );
+    return <div className={buttonClasses} />;
   }
 
   return (
@@ -62,58 +57,29 @@ export function ThemeToggle() {
           <button
             type="button"
             onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className={cn(
-              buttonVariants({ variant: "ghost", size: "icon" }),
-              "rounded-full relative"
-            )}
+            aria-label={`Switch to ${
+              resolvedTheme === "dark" ? "light" : "dark"
+            } mode`}
+            className={buttonClasses}
           >
-            {/* Sun icon - visible in dark mode */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-label="Theme icon"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.8}
-              stroke="currentColor"
+            <Icons.themeSun
               className={`h-[1.2rem] w-[1.2rem] transition-transform ${
                 resolvedTheme === "dark"
                   ? "rotate-0 scale-100"
                   : "rotate-90 scale-0 hidden"
               }`}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
-              />
-            </svg>
-            {/* Moon icon - visible in light mode */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-label="Theme icon"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.8}
-              stroke="currentColor"
+            />
+            <Icons.themeMoon
               className={`absolute h-[1.2rem] w-[1.2rem] transition-transform ${
                 resolvedTheme === "dark"
                   ? "rotate-90 scale-0 hidden"
                   : "rotate-0 scale-100"
               }`}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"
-              />
-            </svg>
+            />
           </button>
         </TooltipTrigger>
         <TooltipContent>
-          Switch to {resolvedTheme === "dark" ? "Light" : "Dark"} Mode
+          Switch to {resolvedTheme === "dark" ? "light" : "dark"} mode
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
