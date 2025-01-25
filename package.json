@@ -5,15 +5,15 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "dev:debug": "cross-env NODE_OPTIONS=--inspect next dev --turbopack",
-    "build": "npm run clean && next build",
+    "build": "pnpm clean && next build",
     "start": "next start",
     "clean": "rimraf .next/ && rimraf dist/",
     "format": "biome format --write ./src",
     "lint": "biome lint --write ./src",
     "check": "biome check --write ./src",
     "types": "tsc --noEmit --pretty",
-    "fix": "npm run lint && npm run format",
-    "verify": "npm run types && npm run check",
+    "fix": "pnpm  lint && pnpm  format",
+    "verify": "pnpm  types && pnpm  check",
     "docs": "typedoc --out docs src"
   },
   "dependencies": {

@@ -1,10 +1,10 @@
 import Card from "@/components/custom-ui/card";
 import { Tags } from "@/components/custom-ui/tagAndList";
+import { TextAnimate } from "@/components/ui/text-animate";
 import { content } from "@/config/content";
 import { person } from "@/config/person";
 import { generateMetadata } from "@/lib/metadata";
 import { viewport } from "@/lib/metadata";
-import { TextAnimate } from "@/components/ui/text-animate";
 /**
  * Generate page-specific metadata
  * Overrides default metadata with home page specific title and description
@@ -31,13 +31,18 @@ export default function Home() {
       {/* Hero Section: Personal introduction with role and description */}
       <section>
         <h1>
-          <TextAnimate animation="blurInUp" by="character" startOnView={false} className="text-4xl">
+          <TextAnimate
+            animation="blurInUp"
+            by="character"
+            startOnView={false}
+            className="text-4xl text-foreground"
+          >
             {person.name}
           </TextAnimate>
         </h1>
-          <span className="block text-2xl font-normal mt-2 text-foreground">
-            {content.home.title}
-          </span>
+        <span className="block text-2xl font-normal mt-2 text-foreground">
+          {content.home.title}
+        </span>
 
         <p>{content.home.description}</p>
       </section>
