@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "./providers";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
 import { headers } from "next/headers";
 
 /**
@@ -67,7 +68,9 @@ export default async function RootLayout({
             <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-background [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
             {/* Content container with z-index to appear above background */}
             <div className="relative z-10 max-w-6xl mx-auto px-4">
-              <main style={{ paddingBottom: "80px" }}>{children}</main>
+              <main style={{ paddingBottom: "80px" }}>
+                {children} <Analytics />
+              </main>
             </div>
             {/* Fixed navigation dock at the bottom */}
             <NavDock userAgent={userAgent} />
