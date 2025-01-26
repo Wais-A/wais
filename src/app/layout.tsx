@@ -70,7 +70,7 @@ export default async function RootLayout({
             {/* Content container with z-index to appear above background */}
             <div className="relative z-10 max-w-6xl mx-auto px-4">
               <main style={{ paddingBottom: "80px" }}>
-                {children} <Analytics /> <SpeedInsights/>
+                {children} <Analytics /> <SpeedInsights />
               </main>
             </div>
             {/* Fixed navigation dock at the bottom */}
