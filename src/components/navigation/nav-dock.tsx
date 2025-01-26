@@ -1,5 +1,9 @@
 "use client";
 
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import { useMediaQuery } from "react-responsive";
+
 import { ThemeToggle } from "@/components/custom-ui/theme-toggle";
 import { buttonVariants } from "@/components/ui/button";
 import { Dock, DockIcon } from "@/components/ui/dock";
@@ -10,63 +14,70 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { navigation } from "@/config/navigation";
-import { useDockConfig, useScrollVisibility } from "@/lib/responsive";
+import { useScrollVisibility } from "@/lib/responsive";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 
-/**
- * Navigation Dock Component
- *
- * A macOS-style dock navigation that provides:
- * 1. Responsive Behavior
- *    - Auto-hides on scroll down
- *    - Shows on scroll up
- *    - Always visible at page top/bottom
- *    - Adapts to mobile and desktop viewports
- *
- * 2. Visual Features
- *    - Semi-transparent backdrop with blur
- *    - Smooth show/hide transitions
- *    - Icon magnification on hover
- *    - Accessible tooltips
- *
- * 3. Navigation Sections
- *    - Internal navigation links
- *    - External social links
- *    - Theme toggle
- */
+export function NavDock() {
+  // A short delay before showing the dock
+  const [showDock, setShowDock] = useState(false);
 
-interface NavDockProps {
-  userAgent?: string;
-}
+  // Wait 300ms after mount, then allow the dock to slide in
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowDock(true);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, []);
 
-export function NavDock({ userAgent }: NavDockProps) {
+  // Other hooks
   const isVisible = useScrollVisibility();
-  const dockConfig = useDockConfig(userAgent);
+  const isSmall = useMediaQuery({ maxWidth: 640 });
+  const isMedium = useMediaQuery({ maxWidth: 768 });
+
+  // Determine numeric props
+  let iconSize = 35;
+  let iconMagnification = 50;
+  let iconDistance = 35;
+  const direction: "top" | "middle" | "bottom" = "middle";
+
+  if (isSmall) {
+    iconSize = 35;
+    iconMagnification = 50;
+    iconDistance = 30;
+  } else if (isMedium) {
+    iconSize = 35;
+    iconMagnification = 45;
+    iconDistance = 40;
+  } else {
+    iconSize = 40;
+    iconMagnification = 60;
+    iconDistance = 140;
+  }
+
+  // If not ready yet, push the dock below the screen. Once showDock=true,
+  // use isVisible to decide if it’s fully up ("translate-y-0") or partially hidden.
+  const positionClass = !showDock
+    ? "translate-y-[200%]" // below screen
+    : isVisible
+      ? "translate-y-0" // fully visible
+      : "translate-y-[150%] max-sm:translate-y-[200%]"; // hidden on scroll
 
   return (
     <TooltipProvider>
       <Dock
         className={cn(
-          // Base styles
           "dock-transition",
-
           "fixed bottom-5 max-sm:bottom-2 sm:bottom-[max(1.25rem,env(safe-area-inset-bottom))] left-0 right-0 z-50 flex items-center justify-center py-4 shadow-md",
-          // Mobile optimizations
           "webkit-overflow-touch webkit-tap-transparent",
-          // Visual effects
           "bg-background/30 backdrop-blur-md",
-          // Visibility transitions
+          // Smooth transform transition (slide in/out)
           "transition-transform duration-300",
-
-          isVisible
-            ? "translate-y-0"
-            : "translate-y-[150%] max-sm:translate-y-full"
+          positionClass
         )}
-        direction="middle"
-        iconDistance={dockConfig.iconDistance}
-        iconMagnification={dockConfig.iconMagnification}
-        iconSize={dockConfig.iconSize}
+        iconDistance={iconDistance}
+        iconMagnification={iconMagnification}
+        iconSize={iconSize}
+        direction={direction}
       >
         {/* Main Navigation Links */}
         {navigation.navbar.map((item) => (
@@ -78,8 +89,7 @@ export function NavDock({ userAgent }: NavDockProps) {
                   aria-label={item.label}
                   className={cn(
                     buttonVariants({ variant: "ghost", size: "icon" }),
-                    "rounded-full",
-                    "flex items-center justify-center"
+                    "rounded-full flex items-center justify-center"
                   )}
                 >
                   <item.icon />
@@ -90,7 +100,6 @@ export function NavDock({ userAgent }: NavDockProps) {
           </DockIcon>
         ))}
 
-        {/* Section Divider */}
         <div className="mx-2 h-8 w-px bg-muted" />
 
         {/* Social Media Links */}
@@ -105,8 +114,7 @@ export function NavDock({ userAgent }: NavDockProps) {
                   aria-label={item.label}
                   className={cn(
                     buttonVariants({ variant: "ghost", size: "icon" }),
-                    "rounded-full",
-                    "flex items-center justify-center"
+                    "rounded-full flex items-center justify-center"
                   )}
                 >
                   <item.icon />
@@ -117,7 +125,6 @@ export function NavDock({ userAgent }: NavDockProps) {
           </DockIcon>
         ))}
 
-        {/* Section Divider */}
         <div className="mx-2 h-8 w-px bg-muted" />
 
         {/* Theme Toggle */}

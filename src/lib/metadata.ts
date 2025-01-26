@@ -2,7 +2,8 @@
  * Metadata Generation Module
  *
  * This module provides functions to generate metadata for different pages
- * of the application, enhancing SEO and social sharing capabilities.
+ * of the application, enhancing SEO and social sharing capabilities while
+ * maintaining accessibility standards.
  */
 
 import { siteConfig } from "@/config/site";
@@ -14,38 +15,61 @@ const BASE_URL =
   "http://localhost:3000";
 
 /**
- * Viewport configuration optimized for iOS keyboard handling
+ * Viewport configuration optimized for accessibility and responsive design
  * - width=device-width: Makes the viewport responsive
  * - initial-scale=1: Sets default zoom level
- * - viewport-fit=cover: Ensures content fills the screen
- * - user-scalable=no: Prevents unwanted scaling during keyboard events
- * - maximum-scale=1: Additional prevention of unwanted zooming
+ * - viewport-fit=cover: Ensures content fills the screen on notched devices
  */
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  colorScheme: "dark light",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
 };
 
 /**
- * Generates metadata for a page, including Open Graph properties.
+ * Generates metadata for a page, including comprehensive SEO properties
+ * and social media tags while maintaining accessibility standards.
  *
  * @param title - The title of the page. Defaults to site title if not provided.
  * @param description - The description of the page. Defaults to site description if not provided.
  * @returns An object containing metadata properties.
  */
-
 export function generateMetadata(
   title?: string,
   description?: string
 ): Metadata {
-  return {
+  const pageTitle = title
+    ? `${title} | ${siteConfig.meta.title}`
+    : siteConfig.meta.title;
+  const pageDescription = description || siteConfig.meta.description;
+
+  const metadata: Metadata = {
     metadataBase: new URL(BASE_URL),
-    title: title || siteConfig.meta.title,
-    description: description || siteConfig.meta.description,
+    title: pageTitle,
+    description: pageDescription,
+    applicationName: siteConfig.meta.title,
+    authors: siteConfig.meta.authors,
+    keywords: siteConfig.meta.keywords,
+    referrer: "origin-when-cross-origin",
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
     openGraph: {
-      title: title || siteConfig.meta.title,
-      description: description || siteConfig.meta.description,
+      title: pageTitle,
+      description: pageDescription,
       url: BASE_URL,
       siteName: siteConfig.meta.title,
       images: [
@@ -53,13 +77,39 @@ export function generateMetadata(
           url: siteConfig.meta.ogImage,
           width: 1200,
           height: 630,
+          alt: `${siteConfig.meta.title} social preview image`,
         },
       ],
       locale: siteConfig.meta.locale,
       type: "website",
     },
+    twitter: siteConfig.meta.twitterHandle
+      ? {
+          card: "summary_large_image",
+          title: pageTitle,
+          description: pageDescription,
+          images: [
+            {
+              url: siteConfig.meta.ogImage,
+              alt: `${siteConfig.meta.title} social preview image`,
+            },
+          ],
+          creator: siteConfig.meta.twitterHandle,
+        }
+      : null,
     alternates: {
       canonical: BASE_URL,
+      languages: siteConfig.meta.alternateLocales || {},
+    },
+    verification: siteConfig.meta.verification,
+    icons: {
+      icon: "/favicon.ico",
+      apple: [
+        { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      ],
+      shortcut: "/favicon.ico",
     },
   };
+
+  return metadata;
 }

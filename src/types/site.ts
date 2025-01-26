@@ -75,15 +75,38 @@ export interface Navigation {
  *    @property transitionDuration - Duration for theme transitions in milliseconds
  * @property projects - Array of featured projects
  */
-export interface SiteConfig {
-  meta: {
-    title: string;
-    description: string;
-    baseURL: string;
-    ogImage: string;
-    lang: string;
-    locale: string;
+/**
+ * SEO metadata configuration
+ */
+export interface SeoMeta {
+  title: string;
+  description: string;
+  baseURL: string;
+  ogImage: string;
+  lang: string;
+  locale: string;
+  keywords?: string[];
+  authors?: { name: string; url?: string }[];
+  twitterHandle?: string;
+  alternateLocales?: { [key: string]: string };
+  verification?: {
+    google?: string;
+    yandex?: string;
+    bing?: string;
   };
+}
+
+/**
+ * Site Configuration Interface
+ *
+ * Main configuration type for the entire site
+ *
+ * @property meta - Site-wide metadata including SEO configurations
+ * @property theme - Theme configuration including mode and transitions
+ * @property projects - Array of featured projects
+ */
+export interface SiteConfig {
+  meta: SeoMeta;
   theme: {
     defaultMode: "light" | "dark";
     transitionDuration: number;

@@ -1,14 +1,14 @@
 import Card from "@/components/custom-ui/card";
 import { Tags } from "@/components/custom-ui/tagAndList";
 import { getAllBlogPosts } from "@/lib/blog";
+import { generateMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Blog | Your Blog Name",
-  description:
-    "Read my latest blog posts about technology, development, and more.",
-};
+export const metadata: Metadata = generateMetadata(
+  "Blog",
+  "Read my latest blog posts about technology, development, and more."
+);
 
 /**
  * Blog Index Page Component
@@ -31,7 +31,7 @@ export default async function BlogPage() {
             {/* Article preview with hover effects and metadata */}
             <article className="border-b pb-8 last:border-b-0">
               <Link href={`/blog/${post.slug}`} className="group">
-                {/* Featured image with hover zoom effect */}
+                {/* Featured preview with hover zoom effect */}
                 {post.metadata.image && (
                   <div className="mb-4 aspect-video overflow-hidden rounded-lg">
                     <img
