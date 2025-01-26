@@ -42,12 +42,12 @@ export function NavDock() {
 
   if (isSmall) {
     iconSize = 35;
-    iconMagnification = 50;
-    iconDistance = 30;
+    iconMagnification = 35;
+    iconDistance = 50;
   } else if (isMedium) {
     iconSize = 35;
-    iconMagnification = 45;
-    iconDistance = 40;
+    iconMagnification = 40;
+    iconDistance = 60;
   } else {
     iconSize = 40;
     iconMagnification = 60;
