@@ -10,7 +10,7 @@ import { viewport } from "@/lib/metadata";
  * Overrides default metadata with home page specific title and description
  */
 export const metadata = generateMetadata(
-  "Wais Almakaleh",
+  undefined,
   "Personal portfolio and blog"
 );
 export { viewport };

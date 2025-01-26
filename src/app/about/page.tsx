@@ -6,7 +6,7 @@ import { generateMetadata, viewport } from "@/lib/metadata";
 
 export { viewport };
 export const metadata = generateMetadata(
-  "About - Wais Almakaleh",
+  "About",
   content.about?.description || "Learn more about me and my work."
 );
 
