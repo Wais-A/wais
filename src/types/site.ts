@@ -1,9 +1,4 @@
-/**
- * Site Configuration Types Module
- *
- * @packageDocumentation Defines TypeScript interfaces and types for site-wide configuration,
- * including navigation, social links, and project information.
- */
+
 
 import type { Project } from "./content";
 
@@ -15,30 +10,14 @@ import type { Project } from "./content";
  */
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
-/**
- * Navigation Item Interface
- *
- * Defines structure for main navigation links
- *
- *  href - URL or route path for the navigation item
- *  icon - React component that renders the item's icon
- *  label - Display text for the navigation item
- */
+
 export interface NavItem {
   url: string;
   icon: React.ComponentType<IconProps>;
   label: string;
 }
 
-/**
- * Social Media Link Interface
- *
- * Defines structure for social media links
- *
- *  label - Platform name (e.g., "GitHub", "Twitter")
- *  url - Full URL to social media profile
- *  icon - React component that renders the platform's icon
- */
+
 export interface SocialItem {
   label: string;
   url: string;

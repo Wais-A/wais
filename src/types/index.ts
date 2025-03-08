@@ -1,7 +1,7 @@
 /**
  * Type Definitions Index
  *
- * @packageDocumentation Central export point for all application type definitions.
+ *  Central export point for all application type definitions.
  * This file aggregates and re-exports all types, interfaces, and type utilities
  * from their respective modules, providing a single import point for type usage
  * across the application.

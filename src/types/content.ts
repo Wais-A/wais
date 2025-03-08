@@ -59,17 +59,7 @@ export type ContactContent = {
   };
 };
 
-/**
- * Project Information Type
- *
- * Defines structure for project showcase items
- *
- *  title - Project name
- *  description - Brief project description
- *  image - URL to project preview image
- *  tags - Array of technology/skill tags
- *  link - Optional URL to project (e.g. GitHub, live demo)
- */
+
 export type Project = {
   title: string;
   description: string;

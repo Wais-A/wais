@@ -1,12 +1,4 @@
-/**
- * Theme Configuration Module
- *
- * Defines the theme settings for the application, including color palettes
- * and visual effects. Implements the ThemeConfig interface for type safety
- * and consistent theming across the application.
- *
- *  {@link ThemeConfig} in types/theme.ts for type definitions
- */
+
 
 import type { ThemeConfig } from "@/types";
 

@@ -1,11 +1,4 @@
-/**
- * Site Configuration Module
- *
- * Implements site-wide configuration including metadata and featured projects.
- * Uses the SiteConfig interface to ensure type safety and consistent structure.
- *
- *  {@link SiteConfig} in types/site.ts for type definitions
- */
+
 
 import type { SiteConfig } from "@/types";
 import { person } from "./person";

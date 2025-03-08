@@ -11,36 +11,30 @@ import {
 import { themeConfig } from "@/config/theme";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-/**
- * Theme Toggle Component
- *
- * Manages theme switching with the following features:
- * - Uses next-themes for theme management
- * - Syncs with system preferences
- * - Persists theme choice
- * - Prevents transition flicker
- * - Provides visual feedback through tooltips
- * - Handles SSR by deferring mount
- */
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
+  const timeoutRef = useRef<number | null>(null);
 
   const toggleTheme = useCallback(() => {
     document.documentElement.classList.add("changing-theme");
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
-    setTimeout(() => {
+    // Clear any existing timeout before setting a new one
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = window.setTimeout(() => {
       document.documentElement.classList.remove("changing-theme");
     }, themeConfig.transitions.themeSwitchDuration);
   }, [resolvedTheme, setTheme]);
 
   useEffect(() => {
     setMounted(true);
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
   }, []);
 
-  // Keep the existing class computation
   const buttonClasses = cn(
     buttonVariants({ variant: "ghost", size: "icon" }),
     "rounded-full relative"

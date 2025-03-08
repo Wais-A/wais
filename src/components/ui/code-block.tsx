@@ -33,6 +33,7 @@ export const CodeBlock = ({
 }: CodeBlockProps) => {
   const [copied, setCopied] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState(0);
+  const timeoutRef = React.useRef<number | null>(null);
 
   const tabsExist = tabs.length > 0;
 
@@ -41,9 +42,18 @@ export const CodeBlock = ({
     if (textToCopy) {
       await navigator.clipboard.writeText(textToCopy);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      // Clear any previous timeout before setting a new one
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      timeoutRef.current = window.setTimeout(() => setCopied(false), 2000);
     }
   };
+
+  // Cleanup timeout on unmount
+  React.useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   const activeCode = tabsExist ? tabs[activeTab].code : code;
   const activeLanguage = tabsExist
@@ -57,7 +67,7 @@ export const CodeBlock = ({
     <div className="relative w-full rounded-lg bg-slate-900 p-4 font-mono text-sm">
       <div className="flex flex-col gap-2">
         {tabsExist && (
-          <div className="flex  overflow-x-auto">
+          <div className="flex overflow-x-auto">
             {tabs.map((tab, index) => (
               <button
                 type="button"

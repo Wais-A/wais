@@ -5,7 +5,7 @@
  * work experience, education, and skills. Uses the Person interface
  * to ensure type safety and consistent structure.
  *
- *  {@link Person} in types/person.ts for type definitions
+ *   in types/person.ts for type definitions
  */
 
 import type { Person } from "@/types";
