@@ -1,9 +1,9 @@
 import { Tags } from "@/components/custom-ui/tagAndList";
+import { MDXRenderer } from "@/components/pages/blog/mdx-renderer";
 import { getAllBlogPosts, getBlogPost } from "@/lib/blog";
 import { generateMetadata as baseGenerateMetadata } from "@/lib/metadata";
 import { format } from "date-fns";
 import type { Metadata } from "next";
-import { MDXRenderer } from "@/components/pages/blog/mdx-renderer";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
@@ -14,9 +14,9 @@ import { Suspense } from "react";
  * requiring async handling of the slug parameter.
  */
 interface Props {
-  params: Promise<{
+  params: {
     slug: string;
-  }>;
+  };
 }
 
 /**
@@ -26,7 +26,7 @@ interface Props {
  */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
-    const { slug } = await params;
+    const { slug } = params;
     const post = await getBlogPost(slug);
 
     // Generate base metadata with title and description
@@ -120,7 +120,7 @@ export default async function BlogPostPage({ params }: Props) {
             {/* Topic tags */}
             {post.metadata.tags && (
               <div className="flex gap-2">
-                <Tags items={post.metadata.tags} />
+                <Tags items={post.metadata.tags ?? []} />
               </div>
             )}
 
@@ -134,7 +134,7 @@ export default async function BlogPostPage({ params }: Props) {
               {post.metadata.readingTime && (
                 <>
                   <span aria-hidden="true">•</span>
-                  <span>{post.metadata.readingTime} read</span>
+                  <span>{post.metadata.readingTime ?? []} read</span>
                 </>
               )}
               {post.metadata.author && (
@@ -149,9 +149,7 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* MDX content with Tailwind Typography styling */}
         <Suspense
-          fallback={
-            <div className="animate-pulse h-64 bg-muted rounded-lg"></div>
-          }
+          fallback={<div className="animate-pulse h-64 bg-muted rounded-lg" />}
         >
           <MDXRenderer content={post.content} />
         </Suspense>

@@ -1,8 +1,6 @@
-
 import { Icons } from "@/components/custom-ui/icons";
 import { person } from "@/config/person";
 import type { Navigation } from "@/types";
-
 
 export const navigation: Navigation = {
   navbar: [

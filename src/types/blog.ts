@@ -1,4 +1,3 @@
-
 export interface BlogPost {
   metadata: {
     title: string;

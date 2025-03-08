@@ -1,5 +1,3 @@
-
-
 import type { Project } from "./content";
 
 /**
@@ -10,13 +8,11 @@ import type { Project } from "./content";
  */
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
-
 export interface NavItem {
   url: string;
   icon: React.ComponentType<IconProps>;
   label: string;
 }
-
 
 export interface SocialItem {
   label: string;

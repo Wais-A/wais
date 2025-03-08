@@ -5,7 +5,7 @@
  * including home, blog, contact, and about pages. Uses the Content
  * interface to ensure type safety and consistent structure.
  *
- *  
+ *
  */
 
 // src/config/content.ts
@@ -22,7 +22,8 @@ export const content: Content = {
 
   blog: {
     title: "Technical Blog",
-    description: "Thoughts and insights on software development, IT support, and technology.",
+    description:
+      "Thoughts and insights on software development, IT support, and technology.",
     postsPerPage: 6,
   },
 

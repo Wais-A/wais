@@ -16,42 +16,51 @@ const POSTS_PATH = path.join(process.cwd(), "src/content/blog");
 
 // Create cache instance
 type CacheContent = BlogPost | BlogPost[];
-const postCache = new LRUCache<string,  CacheContent>({
+const postCache = new LRUCache<string, CacheContent>({
   max: 20, // Cache size - 20 posts
   ttl: 1000 * 60 * 5, // 5 minutes
 });
 
+let isReading = new Map<string, Promise<BlogPost>>();
+
 export async function getBlogPost(slug: string): Promise<BlogPost> {
-  // Check cache first
   const cachedPost = postCache.get(slug);
   if (cachedPost && !Array.isArray(cachedPost)) {
     return cachedPost;
   }
+  // If a read is already in progress, reuse that promise
+  if (isReading.has(slug)) {
+    return isReading.get(slug)!;
+  }
 
-  // If not cached, read from filesystem
-  const filePath = path.join(POSTS_PATH, `${slug}.mdx`);
-  const fileContent = await fs.readFile(filePath, "utf8");
-  const { data, content } = matter(fileContent);
+  // Otherwise set up a read operation
+  const readPromise = (async () => {
+    const filePath = path.join(POSTS_PATH, `${slug}.mdx`);
+    const fileContent = await fs.readFile(filePath, "utf8");
+    const { data, content } = matter(fileContent);
+    const post: BlogPost = {
+      metadata: {
+        title: data.title,
+        description: data.description,
+        date: data.date,
+        tags: data.tags,
+        image: data.image,
+        author: data.author,
+        readingTime: data.readingTime,
+      },
+      slug,
+      content,
+    };
+    postCache.set(slug, post);
+    return post;
+  })();
+  isReading.set(slug, readPromise);
 
-  const post: BlogPost = {
-    metadata: {
-      title: data.title,
-      description: data.description,
-      date: data.date,
-      tags: data.tags,
-      image: data.image,
-      author: data.author,
-      readingTime: data.readingTime,
-    },
-    slug,
-    content,
-  };
-
-  // Cache the post
-  postCache.set(slug, post);
-  return post;
+  // Once done, remove from map
+  const result = await readPromise;
+  isReading.delete(slug);
+  return result;
 }
-
 export async function getAllBlogPosts(): Promise<BlogPost[]> {
   // Cache key for all posts list
   const ALL_POSTS_CACHE_KEY = "__all_posts__";

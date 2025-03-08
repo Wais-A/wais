@@ -48,7 +48,7 @@ export default async function BlogPage() {
                   {/* Topic tags */}
                   {post.metadata.tags && (
                     <div className="flex gap-2">
-                      <Tags items={post.metadata.tags} />
+                      <Tags items={post.metadata.tags ?? []} />
                     </div>
                   )}
 
@@ -66,7 +66,7 @@ export default async function BlogPage() {
                     {post.metadata.readingTime && (
                       <>
                         <span>•</span>
-                        <span>{post.metadata.readingTime}</span>
+                        <span>{post.metadata.readingTime ?? []}</span>
                       </>
                     )}
                   </div>

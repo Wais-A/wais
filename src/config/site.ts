@@ -1,5 +1,3 @@
-
-
 import type { SiteConfig } from "@/types";
 import { person } from "./person";
 import { themeConfig } from "./theme";

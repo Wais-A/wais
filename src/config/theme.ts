@@ -1,5 +1,3 @@
-
-
 import type { ThemeConfig } from "@/types";
 
 export const themeConfig: ThemeConfig = {
