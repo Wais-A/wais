@@ -1,4 +1,5 @@
 import Card from "@/components/custom-ui/card";
+import type { Skills } from "@/types/person"; // Add this import
 import type React from "react";
 
 /**
@@ -11,7 +12,7 @@ import type React from "react";
 // src/components/custom-ui/tagAndList.tsx
 // Update the interface definition
 export interface TagsProps {
-  items: Record<string, string[]> | string | string[];
+  items: Record<string, string[]> | string | string[] | Skills;
   className?: string;
 }
 
