@@ -5,9 +5,9 @@
  * Centralizes all navigation-related configuration including main navigation
  * links and social media links.
  *
- * @see {@link Navigation} in types/site.ts for type definitions
- * @see {@link person} in person.ts for social media URL configuration
- * @see {@link Icons} in components/custom-ui/icons.ts for available icons
+ *  {@link Navigation} in types/site.ts for type definitions
+ *  {@link person} in person.ts for social media URL configuration
+ *  {@link Icons} in components/custom-ui/icons.ts for available icons
  */
 
 import { Icons } from "@/components/custom-ui/icons";

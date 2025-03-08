@@ -4,9 +4,9 @@
 
 /**
  * Defines the color scheme configuration
- * @property primary - Primary brand color
- * @property accent - Secondary accent color
- * @property background - Theme mode setting
+ *  primary - Primary brand color
+ *  accent - Secondary accent color
+ *  background - Theme mode setting
  */
 export type ThemeColors = {
   primary: string;
@@ -16,9 +16,9 @@ export type ThemeColors = {
 
 /**
  * Defines visual effects configuration
- * @property gradient - Whether gradient effects are enabled
- * @property hover - Type of hover animation to use
- * @property opacity - Global opacity level for translucent elements
+ *  gradient - Whether gradient effects are enabled
+ *  hover - Type of hover animation to use
+ *  opacity - Global opacity level for translucent elements
  */
 export type ThemeEffects = {
   gradient: boolean;

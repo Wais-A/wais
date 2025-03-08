@@ -9,16 +9,16 @@
  *
  * Defines the structure for individual blog posts including metadata and content
  *
- * @property metadata - Post metadata
- *    @property title - Post title
- *    @property description - Brief description or excerpt
- *    @property date - Publication date
- *    @property tags - Optional array of topic tags
- *    @property image - Optional featured image URL
- *    @property author - Optional post author
- *    @property readingTime - Optional estimated reading duration
- * @property slug - URL-friendly identifier
- * @property content - Main post content (typically MDX)
+ *  metadata - Post metadata
+ *     title - Post title
+ *     description - Brief description or excerpt
+ *     date - Publication date
+ *     tags - Optional array of topic tags
+ *     image - Optional featured image URL
+ *     author - Optional post author
+ *     readingTime - Optional estimated reading duration
+ *  slug - URL-friendly identifier
+ *  content - Main post content (typically MDX)
  */
 export interface BlogPost {
   metadata: {

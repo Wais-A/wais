@@ -4,10 +4,10 @@
 
 /**
  * Represents a form field configuration
- * @property name - Field identifier used in form submission
- * @property label - Display label for the form field
- * @property type - Input type (text, email, or textarea)
- * @property required - Whether the field is mandatory
+ *  name - Field identifier used in form submission
+ *  label - Display label for the form field
+ *  type - Input type (text, email, or textarea)
+ *  required - Whether the field is mandatory
  */
 export type FormField = {
   name: string;
@@ -18,10 +18,10 @@ export type FormField = {
 
 /**
  * Content structure for the home page
- * @property title - Main headline
- * @property subtitle - Secondary headline
- * @property description - Page description or introduction
- * @property projects - Array of featured projects
+ *  title - Main headline
+ *  subtitle - Secondary headline
+ *  description - Page description or introduction
+ *  projects - Array of featured projects
  */
 export type HomeContent = {
   title: string;
@@ -32,9 +32,9 @@ export type HomeContent = {
 
 /**
  * Content structure for the blog section
- * @property title - Blog section title
- * @property description - Blog section description
- * @property postsPerPage - Number of posts to display per page
+ *  title - Blog section title
+ *  description - Blog section description
+ *  postsPerPage - Number of posts to display per page
  */
 export type BlogContent = {
   title: string;
@@ -44,10 +44,10 @@ export type BlogContent = {
 
 /**
  * Content structure for the contact page
- * @property title - Contact page title
- * @property description - Contact page description
- * @property email - Contact email address
- * @property form - Form configuration including endpoint and fields
+ *  title - Contact page title
+ *  description - Contact page description
+ *  email - Contact email address
+ *  form - Form configuration including endpoint and fields
  */
 export type ContactContent = {
   title: string;
@@ -64,11 +64,11 @@ export type ContactContent = {
  *
  * Defines structure for project showcase items
  *
- * @property title - Project name
- * @property description - Brief project description
- * @property image - URL to project preview image
- * @property tags - Array of technology/skill tags
- * @property link - Optional URL to project (e.g. GitHub, live demo)
+ *  title - Project name
+ *  description - Brief project description
+ *  image - URL to project preview image
+ *  tags - Array of technology/skill tags
+ *  link - Optional URL to project (e.g. GitHub, live demo)
  */
 export type Project = {
   title: string;
@@ -80,11 +80,11 @@ export type Project = {
 
 /**
  * Global content configuration combining all section content
- * @property home - Home page content
- * @property blog - Blog section content
- * @property contact - Contact page content
- * @property about - About section content
- * @property social - Social media links
+ *  home - Home page content
+ *  blog - Blog section content
+ *  contact - Contact page content
+ *  about - About section content
+ *  social - Social media links
  */
 export type Content = {
   home: HomeContent;

@@ -15,7 +15,8 @@ import { LRUCache } from "lru-cache"; // Import LRUCache
 const POSTS_PATH = path.join(process.cwd(), "src/content/blog");
 
 // Create cache instance
-const postCache = new LRUCache<string, BlogPost | BlogPost[]>({
+type CacheContent = BlogPost | BlogPost[];
+const postCache = new LRUCache<string,  CacheContent>({
   max: 20, // Cache size - 20 posts
   ttl: 1000 * 60 * 5, // 5 minutes
 });

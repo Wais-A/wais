@@ -1,12 +1,12 @@
 import { Tags } from "@/components/custom-ui/tagAndList";
-import { CustomButton } from "@/components/pages/blog/mdx-components";
 import { getAllBlogPosts, getBlogPost } from "@/lib/blog";
 import { generateMetadata as baseGenerateMetadata } from "@/lib/metadata";
 import { format } from "date-fns";
 import type { Metadata } from "next";
-import { MDXRemote } from "next-mdx-remote/rsc";
+import {MDXRenderer} from "@/components/pages/blog/mdx-renderer"
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 /**
  * Props interface for the blog post page component.
@@ -148,9 +148,13 @@ export default async function BlogPostPage({ params }: Props) {
         </header>
 
         {/* MDX content with Tailwind Typography styling */}
-        <div className="prose prose-neutral dark:prose-invert max-w-none overflow-hidden">
-          <MDXRemote source={post.content} components={{ CustomButton }} />
-        </div>
+        <Suspense
+          fallback={
+            <div className="animate-pulse h-64 bg-muted rounded-lg"></div>
+          }
+        >
+          <MDXRenderer content={post.content} />
+        </Suspense>
       </article>
     );
   } catch (error) {

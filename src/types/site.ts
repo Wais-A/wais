@@ -20,9 +20,9 @@ export type IconProps = React.HTMLAttributes<SVGElement>;
  *
  * Defines structure for main navigation links
  *
- * @property href - URL or route path for the navigation item
- * @property icon - React component that renders the item's icon
- * @property label - Display text for the navigation item
+ *  href - URL or route path for the navigation item
+ *  icon - React component that renders the item's icon
+ *  label - Display text for the navigation item
  */
 export interface NavItem {
   url: string;
@@ -35,9 +35,9 @@ export interface NavItem {
  *
  * Defines structure for social media links
  *
- * @property label - Platform name (e.g., "GitHub", "Twitter")
- * @property url - Full URL to social media profile
- * @property icon - React component that renders the platform's icon
+ *  label - Platform name (e.g., "GitHub", "Twitter")
+ *  url - Full URL to social media profile
+ *  icon - React component that renders the platform's icon
  */
 export interface SocialItem {
   label: string;
@@ -50,8 +50,8 @@ export interface SocialItem {
  *
  * Combines main navigation and social links
  *
- * @property navbar - Array of main navigation items
- * @property social - Array of social media links
+ *  navbar - Array of main navigation items
+ *  social - Array of social media links
  */
 export interface Navigation {
   navbar: NavItem[];
@@ -63,17 +63,17 @@ export interface Navigation {
  *
  * Main configuration type for the entire site
  *
- * @property meta - Site-wide metadata
- *    @property title - Site name/title
- *    @property description - Site description for SEO
- *    @property baseURL - Base URL for absolute path generation
- *    @property ogImage - Default Open Graph image for social sharing
- *    @property lang - Site language code
- *    @property locale - Site locale for internationalization
- * @property theme - Theme configuration
- *    @property defaultMode - Default theme mode ("light" | "dark")
- *    @property transitionDuration - Duration for theme transitions in milliseconds
- * @property projects - Array of featured projects
+ *  meta - Site-wide metadata
+ *     title - Site name/title
+ *     description - Site description for SEO
+ *     baseURL - Base URL for absolute path generation
+ *     ogImage - Default Open Graph image for social sharing
+ *     lang - Site language code
+ *     locale - Site locale for internationalization
+ *  theme - Theme configuration
+ *     defaultMode - Default theme mode ("light" | "dark")
+ *     transitionDuration - Duration for theme transitions in milliseconds
+ *  projects - Array of featured projects
  */
 /**
  * SEO metadata configuration
@@ -101,9 +101,9 @@ export interface SeoMeta {
  *
  * Main configuration type for the entire site
  *
- * @property meta - Site-wide metadata including SEO configurations
- * @property theme - Theme configuration including mode and transitions
- * @property projects - Array of featured projects
+ *  meta - Site-wide metadata including SEO configurations
+ *  theme - Theme configuration including mode and transitions
+ *  projects - Array of featured projects
  */
 export interface SiteConfig {
   meta: SeoMeta;

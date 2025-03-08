@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 
 /**
  * Card Component Props
- * @property children - Card content
- * @property className - Optional CSS classes for custom styling
+ *  children - Card content
+ *  className - Optional CSS classes for custom styling
  */
 interface CardProps {
   children: ReactNode;

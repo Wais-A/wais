@@ -5,7 +5,7 @@
  * including home, blog, contact, and about pages. Uses the Content
  * interface to ensure type safety and consistent structure.
  *
- * @see {@link Content} in types/content.ts for type definitions
+ *  {@link Content} in types/content.ts for type definitions
  */
 
 // src/config/content.ts

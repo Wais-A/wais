@@ -4,7 +4,7 @@
  * Implements site-wide configuration including metadata and featured projects.
  * Uses the SiteConfig interface to ensure type safety and consistent structure.
  *
- * @see {@link SiteConfig} in types/site.ts for type definitions
+ *  {@link SiteConfig} in types/site.ts for type definitions
  */
 
 import type { SiteConfig } from "@/types";

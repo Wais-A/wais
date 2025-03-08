@@ -13,8 +13,7 @@
     "check": "biome check --write ./src",
     "types": "tsc --noEmit --pretty",
     "fix": "pnpm lint && pnpm  format",
-    "verify": "pnpm types && pnpm check",
-    "docs": "typedoc --out docs src"
+    "verify": "pnpm types && pnpm check"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
@@ -57,8 +56,6 @@
     "postcss": "^8.5.3",
     "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.17",
-    "typedoc": "^0.27.9",
-    "typedoc-plugin-markdown": "^4.4.2",
     "typescript": "^5.8.2"
   },
   "packageManager": "pnpm@10.6.1+sha512.40ee09af407fa9fbb5fbfb8e1cb40fbb74c0af0c3e10e9224d7b53c7658528615b2c92450e74cfad91e3a2dcafe3ce4050d80bda71d757756d2ce2b66213e9a3",
