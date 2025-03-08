@@ -1,32 +1,27 @@
+// src/app/blog/[slug]/page.tsx
 import { Tags } from "@/components/custom-ui/tagAndList";
 import { MDXRenderer } from "@/components/pages/blog/mdx-renderer";
 import { getAllBlogPosts, getBlogPost } from "@/lib/blog";
 import { generateMetadata as baseGenerateMetadata } from "@/lib/metadata";
 import { format } from "date-fns";
+import { Calendar, Clock, User } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 /**
- * Props interface for the blog post page component.
- * Next.js 13+ wraps dynamic route parameters in a Promise,
- * requiring async handling of the slug parameter.
- */
-interface Props {
-  params: {
-    slug: string;
-  };
-}
-
-/**
  * Generates metadata for the blog post including OpenGraph data
- * for social media sharing. Falls back to generic metadata if
- * the post is not found.
+ * for social media sharing.
  */
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   try {
-    const { slug } = params;
+    // Await the promise to resolve the actual params
+    const { slug } = await params;
     const post = await getBlogPost(slug);
 
     // Generate base metadata with title and description
@@ -72,8 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 /**
- * Generates static paths for all blog posts during build time
- * to enable static generation of blog post pages.
+ * Generates static paths for all blog posts during build time.
  */
 export async function generateStaticParams() {
   const posts = await getAllBlogPosts();
@@ -84,27 +78,23 @@ export async function generateStaticParams() {
 
 /**
  * Blog Post Page Component
- *
- * Renders a full blog post with:
- * - Optimized featured image using next/image
- * - Rich metadata display (tags, date, reading time)
- * - MDX content with custom component support
- * - Responsive typography with dark mode support
- *
- * Uses Tailwind Typography for consistent content styling
- * and includes error handling with 404 redirect.
  */
-export default async function BlogPostPage({ params }: Props) {
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   try {
+    // Await the params promise
     const { slug } = await params;
     const post = await getBlogPost(slug);
 
     return (
-      <article className="container mx-auto py-8 px-4">
-        <header className="mb-8">
-          {/* Featured preview with next/image optimization */}
+      <article className="container mx-auto py-6 px-4 sm:py-8 max-w-[100dvw] sm:max-w-3xl">
+        <header className="mb-6 sm:mb-10 text-center">
+          {/* Featured image at the top */}
           {post.metadata.image && (
-            <div className="mb-8 aspect-video overflow-hidden rounded-lg">
+            <div className="mb-5 sm:mb-6 aspect-video overflow-hidden rounded-lg shadow-md">
               <Image
                 src={post.metadata.image}
                 alt={post.metadata.title}
@@ -116,32 +106,42 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
           )}
 
-          <div className="space-y-2">
-            {/* Topic tags */}
-            {post.metadata.tags && (
-              <div className="flex gap-2">
-                <Tags items={post.metadata.tags ?? []} />
-              </div>
-            )}
+          {/* Title first */}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 leading-tight text-center">
+            {post.metadata.title}
+          </h1>
 
-            <h1 className="text-4xl font-bold">{post.metadata.title}</h1>
+          {/* Topic tags below the title */}
+          {post.metadata.tags && (
+            <div className="flex justify-center flex-wrap gap-1 sm:gap-2 mb-4 sm:mb-5">
+              <Tags items={post.metadata.tags ?? []} />
+            </div>
+          )}
 
-            {/* Post metadata */}
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <time dateTime={post.metadata.date}>
-                {format(new Date(post.metadata.date), "MMMM dd, yyyy")}
-              </time>
-              {post.metadata.readingTime && (
-                <>
-                  <span aria-hidden="true">•</span>
-                  <span>{post.metadata.readingTime ?? []} read</span>
-                </>
-              )}
+          {/* Post metadata with icons in a non-wrapping compact layout */}
+          <div className="whitespace-nowrap overflow-x-auto no-scrollbar px-2 py-3 border-t border-b border-muted text-xs sm:text-sm text-muted-foreground">
+            <div className="flex items-center justify-center space-x-3 sm:space-x-6 min-w-max mx-auto">
               {post.metadata.author && (
-                <>
-                  <span aria-hidden="true">•</span>
-                  <span>By {post.metadata.author}</span>
-                </>
+                <div className="flex items-center gap-1">
+                  <User size={14} className="text-primary shrink-0" />
+                  <span className="truncate max-w-24 sm:max-w-none">
+                    {post.metadata.author}
+                  </span>
+                </div>
+              )}
+
+              <div className="flex items-center gap-1">
+                <Calendar size={14} className="text-primary shrink-0" />
+                <time dateTime={post.metadata.date}>
+                  {format(new Date(post.metadata.date), "MMM dd, yyyy")}
+                </time>
+              </div>
+
+              {post.metadata.readingTime && (
+                <div className="flex items-center gap-1">
+                  <Clock size={14} className="text-primary shrink-0" />
+                  <span>{post.metadata.readingTime}</span>
+                </div>
               )}
             </div>
           </div>
@@ -149,9 +149,13 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* MDX content with Tailwind Typography styling */}
         <Suspense
-          fallback={<div className="animate-pulse h-64 bg-muted rounded-lg" />}
+          fallback={
+            <div className="animate-pulse h-32 sm:h-64 bg-muted rounded-lg" />
+          }
         >
-          <MDXRenderer content={post.content} />
+          <div className="text-sm sm:text-base">
+            <MDXRenderer content={post.content} />
+          </div>
         </Suspense>
       </article>
     );

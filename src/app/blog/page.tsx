@@ -1,8 +1,11 @@
+// src/app/blog/page.tsx
 import Card from "@/components/custom-ui/card";
 import { Tags } from "@/components/custom-ui/tagAndList";
 import { getAllBlogPosts } from "@/lib/blog";
 import { generateMetadata } from "@/lib/metadata";
-import { format, parseISO } from "date-fns"; // Add this import
+import { parseISO } from "date-fns";
+import { format } from "date-fns";
+import { Calendar, Clock } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,24 +17,18 @@ export const metadata: Metadata = generateMetadata(
 
 /**
  * Blog Index Page Component
- *
- * Displays a list of blog posts with rich previews including:
- * - Featured images with hover animations
- * - Topic tags for easy categorization
- * - Post metadata (date and reading time)
- * - Responsive card layout
  */
 export default async function BlogPage() {
   const posts = await getAllBlogPosts();
 
   return (
     <div className="max-w-3xl mx-auto py-8 px-4">
-      <h1>Blog</h1>
+      <h1 className="text-center mb-8">Blog</h1>
       <div className="space-y-8">
         {posts.map((post) => (
-          <Card key={post.slug}>
+          <Card key={post.slug} className="overflow-hidden">
             {/* Article preview with hover effects and metadata */}
-            <article className="border-b pb-8 last:border-b-0">
+            <article className="border-b pb-6 last:border-b-0 last:pb-0">
               <Link href={`/blog/${post.slug}`} className="group">
                 {/* Featured preview with hover zoom effect */}
                 {post.metadata.image && (
@@ -39,36 +36,47 @@ export default async function BlogPage() {
                     <Image
                       src={post.metadata.image}
                       alt={post.metadata.title}
+                      width={800}
+                      height={450}
                       className="object-cover w-full h-full transition-transform group-hover:scale-[1.01]"
                     />
                   </div>
                 )}
 
-                <div className="space-y-2">
-                  {/* Topic tags */}
+                <div className="space-y-2 text-center">
+                  {/* Post title first */}
+                  <h2 className="text-xl sm:text-2xl font-bold group-hover:text-neutral-950 dark:group-hover:text-neutral-400 transition-colors">
+                    {post.metadata.title}
+                  </h2>
+
+                  {/* Topic tags below title */}
                   {post.metadata.tags && (
-                    <div className="flex gap-2">
+                    <div className="flex justify-center flex-wrap gap-1 sm:gap-2 mb-2">
                       <Tags items={post.metadata.tags ?? []} />
                     </div>
                   )}
 
-                  {/* Post title with hover effect */}
-                  <h2 className="text-2xl font-bold group-hover:text-neutral-950 dark:group-hover:text-neutral-400 transition-colors">
-                    {post.metadata.title}
-                  </h2>
-                  <p>{post.metadata.description}</p>
+                  <p className="text-sm sm:text-base line-clamp-2 text-card-foreground max-w-lg mx-auto">
+                    {post.metadata.description}
+                  </p>
 
                   {/* Post metadata */}
-                  <div className="flex items-center gap-2 text-sm">
-                    <time dateTime={post.metadata.date}>
-                      {format(parseISO(post.metadata.date), "MMMM dd, yyyy")}
-                    </time>
-                    {post.metadata.readingTime && (
-                      <>
-                        <span>•</span>
-                        <span>{post.metadata.readingTime ?? []}</span>
-                      </>
-                    )}
+                  <div className="whitespace-nowrap overflow-x-auto no-scrollbar px-2 py-3 mt-2 text-xs sm:text-sm text-muted-foreground">
+                    <div className="flex items-center justify-center space-x-3 sm:space-x-6 min-w-max mx-auto">
+                      <div className="flex items-center gap-1">
+                        <Calendar size={14} className="text-primary shrink-0" />
+                        <time dateTime={post.metadata.date}>
+                          {format(parseISO(post.metadata.date), "MMM dd, yyyy")}
+                        </time>
+                      </div>
+
+                      {post.metadata.readingTime && (
+                        <div className="flex items-center gap-1">
+                          <Clock size={14} className="text-primary shrink-0" />
+                          <span>{post.metadata.readingTime}</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </Link>

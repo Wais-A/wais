@@ -153,6 +153,59 @@
 }
 
 /* ------------------------------
+   Prose & Code Block Customization
+------------------------------ */
+@layer components {
+  /* Basic prose code styles */
+  .prose pre {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  }
+
+  .prose code {
+    @apply whitespace-normal break-words;
+  }
+
+  /* Override Tailwind Typography for better wrapping */
+  .prose pre code {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* Make inline code wrap properly */
+  .prose :not(pre) > code {
+    @apply whitespace-normal break-words;
+    padding: 0.1em 0.4em;
+    border-radius: 0.25rem;
+    overflow-wrap: break-word !important;
+  }
+}
+
+/* Mobile code block styles outside of layer to avoid circular deps */
+@media (max-width: 640px) {
+  .prose pre {
+    position: relative;
+  }
+
+  .prose pre::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 15px;
+    background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.3));
+    pointer-events: none;
+  }
+
+  .prose pre code {
+    font-size: 0.8rem;
+  }
+}
+
+/* ------------------------------
    Utility Classes
 ------------------------------ */
 @layer utilities {
@@ -172,6 +225,22 @@
 
     transition: background-color var(--theme-transition-duration) ease, color
       var(--theme-transition-duration) ease;
+  }
+
+  .overflow-wrap-anywhere {
+    overflow-wrap: anywhere;
+  }
+
+  .word-break-all {
+    word-break: break-all;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
   }
 }
 

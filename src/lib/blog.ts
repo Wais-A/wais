@@ -21,7 +21,7 @@ const postCache = new LRUCache<string, CacheContent>({
   ttl: 1000 * 60 * 5, // 5 minutes
 });
 
-let isReading = new Map<string, Promise<BlogPost>>();
+const isReading = new Map<string, Promise<BlogPost>>();
 
 export async function getBlogPost(slug: string): Promise<BlogPost> {
   const cachedPost = postCache.get(slug);
@@ -30,7 +30,10 @@ export async function getBlogPost(slug: string): Promise<BlogPost> {
   }
   // If a read is already in progress, reuse that promise
   if (isReading.has(slug)) {
-    return isReading.get(slug)!;
+    const existingPromise = isReading.get(slug);
+    if (existingPromise) {
+      return existingPromise;
+    }
   }
 
   // Otherwise set up a read operation
