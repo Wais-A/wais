@@ -1,27 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+// src/lib/responsive.ts
+import { useEffect, useState, useRef } from "react"; // Add useRef import
 
-/**
- * useScrollVisibility - A client-only hook that hides/shows the dock
- */
 export function useScrollVisibility() {
   const [isVisible, setIsVisible] = useState(true);
+  const lastScrollRef = useRef(0);
+  const upScrollDistanceRef = useRef(0);
 
   useEffect(() => {
-    let lastScroll = 0;
-    let upScrollDistance = 0;
-
     function handleScroll() {
       const scrollingElement = document.scrollingElement;
       const currentScroll = scrollingElement ? scrollingElement.scrollTop : 0;
-      const SCROLL_THRESHOLD = 150; // how many pixels to scroll up to show dock
+      const SCROLL_THRESHOLD = 150;
 
       // Always show in first 300px of page
       if (currentScroll < 300) {
         setIsVisible(true);
-        upScrollDistance = 0;
-        lastScroll = currentScroll;
+        upScrollDistanceRef.current = 0;
+        lastScrollRef.current = currentScroll;
         return;
       }
 
@@ -31,24 +28,24 @@ export function useScrollVisibility() {
         (scrollingElement ? scrollingElement.scrollHeight : 0) - 50
       ) {
         setIsVisible(true);
-        upScrollDistance = 0;
-        lastScroll = currentScroll;
+        upScrollDistanceRef.current = 0;
+        lastScrollRef.current = currentScroll;
         return;
       }
 
       // Otherwise, hide on scroll down, show on scroll up
-      if (currentScroll > lastScroll) {
+      if (currentScroll > lastScrollRef.current) {
         setIsVisible(false);
-        upScrollDistance = 0;
+        upScrollDistanceRef.current = 0;
       } else {
-        const scrollDifference = lastScroll - currentScroll;
-        upScrollDistance += scrollDifference;
-        if (upScrollDistance >= SCROLL_THRESHOLD) {
+        const scrollDifference = lastScrollRef.current - currentScroll;
+        upScrollDistanceRef.current += scrollDifference;
+        if (upScrollDistanceRef.current >= SCROLL_THRESHOLD) {
           setIsVisible(true);
         }
       }
 
-      lastScroll = currentScroll;
+      lastScrollRef.current = currentScroll;
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true });

@@ -8,21 +8,14 @@ import type React from "react";
  * 2. Array of tags (string[])
  * 3. Grouped tags (object with category keys and string[] values)
  */
+// src/components/custom-ui/tagAndList.tsx
+// Update the interface definition
 export interface TagsProps {
-  items: object | string | string[];
+  items: Record<string, string[]> | string | string[];
   className?: string;
 }
 
-/**
- * Tags Component
- *
- * A flexible tag display component that handles multiple data structures:
- * - Single tag: Renders one tag pill
- * - Tag array: Renders a horizontal list of tag pills
- * - Grouped tags: Renders a grid of categorized tag groups
- *
- * All tags maintain consistent styling with optional custom classes.
- */
+// Update the handling of object type in the component
 export const Tags: React.FC<TagsProps> = ({ items, className }) => {
   // Single tag display
   if (typeof items === "string") {
@@ -51,10 +44,10 @@ export const Tags: React.FC<TagsProps> = ({ items, className }) => {
     );
   }
 
-  // Grouped tags display with categories
+  // Grouped tags display with categories (object case)
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {Object.entries(items).map(([category, itemList]) => (
+      {Object.entries(items as Record<string, string[]>).map(([category, itemList]) => (
         <div key={category}>
           <h4 className="text-lg font-bold mb-2">{category}</h4>
           <div className="flex flex-wrap gap-2">

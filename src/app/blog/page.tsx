@@ -4,6 +4,7 @@ import { getAllBlogPosts } from "@/lib/blog";
 import { generateMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = generateMetadata(
   "Blog",
@@ -34,7 +35,7 @@ export default async function BlogPage() {
                 {/* Featured preview with hover zoom effect */}
                 {post.metadata.image && (
                   <div className="mb-4 aspect-video overflow-hidden rounded-lg">
-                    <img
+                    <Image
                       src={post.metadata.image}
                       alt={post.metadata.title}
                       className="object-cover w-full h-full transition-transform group-hover:scale-[1.01]"
