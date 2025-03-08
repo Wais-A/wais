@@ -47,22 +47,24 @@ export const Tags: React.FC<TagsProps> = ({ items, className }) => {
   // Grouped tags display with categories (object case)
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {Object.entries(items as Record<string, string[]>).map(([category, itemList]) => (
-        <div key={category}>
-          <h4 className="text-lg font-bold mb-2">{category}</h4>
-          <div className="flex flex-wrap gap-2">
-            {Array.isArray(itemList) &&
-              itemList.map((item: string) => (
-                <span
-                  key={item}
-                  className={`font-medium bg-muted px-3 py-1 rounded-full text-sm max-sm:text-xs ${className}`}
-                >
-                  {item}
-                </span>
-              ))}
+      {Object.entries(items as Record<string, string[]>).map(
+        ([category, itemList]) => (
+          <div key={category}>
+            <h4 className="text-lg font-bold mb-2">{category}</h4>
+            <div className="flex flex-wrap gap-2">
+              {Array.isArray(itemList) &&
+                itemList.map((item: string) => (
+                  <span
+                    key={item}
+                    className={`font-medium bg-muted px-3 py-1 rounded-full text-sm max-sm:text-xs ${className}`}
+                  >
+                    {item}
+                  </span>
+                ))}
+            </div>
           </div>
-        </div>
-      ))}
+        )
+      )}
     </div>
   );
 };

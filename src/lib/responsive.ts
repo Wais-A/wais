@@ -1,7 +1,7 @@
 "use client";
 
 // src/lib/responsive.ts
-import { useEffect, useState, useRef } from "react"; // Add useRef import
+import { useEffect, useRef, useState } from "react"; // Add useRef import
 
 export function useScrollVisibility() {
   const [isVisible, setIsVisible] = useState(true);

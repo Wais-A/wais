@@ -54,9 +54,11 @@ export async function getBlogPost(slug: string): Promise<BlogPost> {
 export async function getAllBlogPosts(): Promise<BlogPost[]> {
   // Cache key for all posts list
   const ALL_POSTS_CACHE_KEY = "__all_posts__";
-  
+
   // Check cache first
-  const cachedPosts = postCache.get(ALL_POSTS_CACHE_KEY) as BlogPost[] | undefined;
+  const cachedPosts = postCache.get(ALL_POSTS_CACHE_KEY) as
+    | BlogPost[]
+    | undefined;
   if (cachedPosts) {
     return cachedPosts;
   }

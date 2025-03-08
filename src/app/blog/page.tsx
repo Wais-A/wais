@@ -2,9 +2,10 @@ import Card from "@/components/custom-ui/card";
 import { Tags } from "@/components/custom-ui/tagAndList";
 import { getAllBlogPosts } from "@/lib/blog";
 import { generateMetadata } from "@/lib/metadata";
+import { format, parseISO } from "date-fns"; // Add this import
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
 export const metadata: Metadata = generateMetadata(
   "Blog",
@@ -60,14 +61,7 @@ export default async function BlogPage() {
                   {/* Post metadata */}
                   <div className="flex items-center gap-2 text-sm">
                     <time dateTime={post.metadata.date}>
-                      {new Date(post.metadata.date).toLocaleDateString(
-                        "en-US",
-                        {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        }
-                      )}
+                      {format(parseISO(post.metadata.date), "MMMM dd, yyyy")}
                     </time>
                     {post.metadata.readingTime && (
                       <>

@@ -8,29 +8,28 @@
  * @see {@link Content} in types/content.ts for type definitions
  */
 
+// src/config/content.ts
 import type { Content } from "@/types";
 import { person } from "./person";
 
 export const content: Content = {
   home: {
-    title: "Software Engineer",
+    title: person.role, // Use role from person directly
     subtitle: "Full-stack Development & IT Support",
-    description:
-      "Building modern web applications with JavaScript, React, and Node.js while pursuing Computer Science at LCCC.",
+    description: person.bio, // Use bio from person
     projects: person.projects.slice(0, 2),
   },
 
   blog: {
     title: "Technical Blog",
-    description:
-      "Thoughts and insights on software development, IT support, and technology.",
+    description: "Thoughts and insights on software development, IT support, and technology.",
     postsPerPage: 6,
   },
 
   contact: {
     title: "Get in Touch",
     description: "Interested in collaborating? Let's discuss your project.",
-    email: person.email,
+    email: person.email, // Use email from person
     form: {
       endpoint: "/api/contact",
       fields: [
@@ -42,7 +41,6 @@ export const content: Content = {
   },
 
   about: {
-    description:
-      "Full-stack developer and IT professional with experience in both software development and technical support. Currently pursuing Computer Science at LCCC while working as an IT Student Employee.",
+    description: person.bio, // Use bio from person
   },
 };
