@@ -3,7 +3,7 @@ import { getAllBlogPosts, getBlogPost } from "@/lib/blog";
 import { generateMetadata as baseGenerateMetadata } from "@/lib/metadata";
 import { format } from "date-fns";
 import type { Metadata } from "next";
-import {MDXRenderer} from "@/components/pages/blog/mdx-renderer"
+import { MDXRenderer } from "@/components/pages/blog/mdx-renderer";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
