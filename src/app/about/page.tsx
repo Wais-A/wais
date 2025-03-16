@@ -39,7 +39,12 @@ export default function About() {
             {person.contact.phone && (
               <div className="flex items-center gap-2">
                 <Phone size={16} className="text-primary" />
-                <span>{person.contact.phone}</span>
+                <a
+                  href={`tel:${person.contact.phone}`}
+                  className="hover:underline"
+                >
+                  {person.contact.phone}
+                </a>
               </div>
             )}
             <div className="flex items-center gap-2">
