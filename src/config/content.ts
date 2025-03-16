@@ -1,16 +1,19 @@
-// src/config/content.ts
+/**
+ * Content Configuration Module
+ */
+
 import type { Content } from "@/types";
 import { person } from "./person";
 
 export const content: Content = {
   home: {
-    title: person.role, // References person.ts
-    description: person.bio, // Single source of truth
+    title: person.role,
+    description: person.bio,
     projects: person.projects.slice(0, 2),
   },
 
   blog: {
-    title: "Blog",
+    title: "Technical Blog",
     description:
       "Thoughts and insights on software development, IT support, and technology.",
     postsPerPage: 6,
@@ -19,7 +22,7 @@ export const content: Content = {
   contact: {
     title: "Get in Touch",
     description: "Interested in collaborating? Let's discuss your project.",
-    email: person.email, // Use email from person
+    email: person.contact.email, // Updated to use the new contact object structure
     form: {
       endpoint: "/api/contact",
       fields: [
@@ -31,6 +34,6 @@ export const content: Content = {
   },
 
   about: {
-    description: person.bio, // Use bio from person
+    description: person.bio,
   },
 };

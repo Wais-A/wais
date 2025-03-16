@@ -1,3 +1,7 @@
+/**
+ * Person Configuration Module
+ */
+
 import type { Person } from "@/types";
 
 export const person: Person = {
@@ -11,7 +15,10 @@ export const person: Person = {
   languages: ["English", "Arabic"],
 
   // Contact Information
-  email: "mailto:walmakaleh@mymail.lccc.edu",
+  contact: {
+    email: "walmakaleh@mymail.lccc.edu",
+    phone: "917-690-6292",
+  },
 
   // Social Links
   github: "https://github.com/wais-a",
@@ -54,41 +61,51 @@ export const person: Person = {
   work: [
     {
       company: "Lehigh Carbon Community College",
+      location: "Schnecksville, PA",
       timeframe: "March 2023 - Present",
       role: "I.T. Student Employee",
+      category: "technical",
       achievements: [
         "Efficiently respond and resolve support tickets and assist staff, professors, and students, enhancing campus productivity and reducing downtime",
         "Deliver prompt and courteous IT support via phone calls",
-        "Provide on-demand, in-person IT support, resolving complex issues for users",
+        "Provide on-demand, in-person IT support, resolving complex issues for users, thereby improving the overall user experience on campus",
       ],
     },
     {
       company: "Lambda School",
+      location: "Los Angeles, CA",
       timeframe: "September 2019 – March 2022",
       role: "Software Engineer",
+      category: "technical",
       achievements: [
-        "Collaborated with teams with up to 10 members to build and complete websites",
+        "Collaborated with teams with up to 10 members to build and complete websites on a responsive and functional deadline on both the front and back end",
         "Built over 15 experimental programs with teams that ranged from 3 to 10 individuals",
-        "Designed functional and aesthetically pleasing websites",
+        "Designed functional and aesthetically pleasing websites to create an enjoyable customer experience",
         "Conducted industry research, gaining new skills to solve problems during development",
       ],
     },
     {
       company: "Clearly Clean Products",
+      location: "Frackville, PA",
       timeframe: "August 2021 – March 2022",
       role: "Assembly Line Worker",
+      category: "other",
       achievements: [],
     },
     {
       company: "Lowe's RDC",
+      location: "Pottsville, PA",
       timeframe: "March 2018 – September 2019",
       role: "Machine Operator",
+      category: "other",
       achievements: [],
     },
     {
       company: "Blue Line Wireless",
+      location: "Brooklyn, NY",
       timeframe: "January 2014 – October 2017",
       role: "Electronic Sales Associate",
+      category: "other",
       achievements: [],
     },
   ],
@@ -97,13 +114,15 @@ export const person: Person = {
   education: [
     {
       institution: "Lehigh Carbon Community College",
+      location: "Schnecksville, PA",
       description: "Associate in Science: Computer Science",
       timeframe: "Expected Graduation: May 2025",
     },
     {
       institution: "Bucknell University",
+      location: "Lewisburg, PA",
       description:
-        "Bucknell University Community College Scholars Program - Selected based on GPA of 3.5 or higher, leadership abilities, and problem-solving skills",
+        "Bucknell University Community College Scholars Program - One of a few students from LCCC selected for a competitive, six-week academic program. Selected based on a GPA of 3.5 or higher, leadership abilities, problem-solving skills, and campus engagement.",
       timeframe: "June 2024 – July 2024",
     },
   ],
@@ -117,5 +136,9 @@ export const person: Person = {
     frameworks: ["React", "Node.js", "Angular", "Redux"],
     databases: ["SQL", "NoSQL", "Firebase"],
     tools: ["Git", "REST APIs", "Unit Testing", "Ajax"],
+    additional: [
+      "Fluent in English and Arabic",
+      "Microsoft Office Suite (Word, Excel, PowerPoint)",
+    ],
   },
 };
