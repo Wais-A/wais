@@ -55,12 +55,23 @@ export function NavDock() {
   }
 
   // If not ready yet, push the dock below the screen. Once showDock=true,
-  // use isVisible to decide if it’s fully up ("translate-y-0") or partially hidden.
+  // use isVisible to decide if it's fully up ("translate-y-0") or partially hidden.
   const positionClass = !showDock
     ? "translate-y-[200%]" // below screen
     : isVisible
       ? "translate-y-0" // fully visible
       : "translate-y-[150%] max-sm:translate-y-[200%]"; // hidden on scroll
+
+  // Define improved button styles with better touch feedback
+  const buttonStyle = cn(
+    buttonVariants({ variant: "ghost", size: "icon" }),
+    "rounded-full flex items-center justify-center",
+    // Improved touch states for mobile
+    "touch-manipulation",
+    "active:bg-accent/80 active:scale-95",
+    // Transition for smooth touch feedback
+    "transition-all duration-150"
+  );
 
   return (
     <TooltipProvider>
@@ -87,10 +98,7 @@ export function NavDock() {
                 <Link
                   href={item.url}
                   aria-label={item.label}
-                  className={cn(
-                    buttonVariants({ variant: "ghost", size: "icon" }),
-                    "rounded-full flex items-center justify-center"
-                  )}
+                  className={buttonStyle}
                 >
                   <item.icon />
                 </Link>
@@ -112,10 +120,7 @@ export function NavDock() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={item.label}
-                  className={cn(
-                    buttonVariants({ variant: "ghost", size: "icon" }),
-                    "rounded-full flex items-center justify-center"
-                  )}
+                  className={buttonStyle}
                 >
                   <item.icon />
                 </Link>
