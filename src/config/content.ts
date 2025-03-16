@@ -1,13 +1,3 @@
-/**
- * Content Configuration Module
- *
- * Implements content structure for different sections of the website,
- * including home, blog, contact, and about pages. Uses the Content
- * interface to ensure type safety and consistent structure.
- *
- *
- */
-
 // src/config/content.ts
 import type { Content } from "@/types";
 import { person } from "./person";

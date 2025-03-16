@@ -2,13 +2,6 @@ import Card from "@/components/custom-ui/card";
 import type { Skills } from "@/types/person";
 import type React from "react";
 
-/**
- * Tags Component Props
- * Supports three display modes:
- * 1. Single tag (string)
- * 2. Array of tags (string[])
- * 3. Grouped tags (object with category keys and string[] values)
- */
 export interface TagsProps {
   items: Record<string, string[]> | string | string[] | Skills;
   className?: string;
@@ -69,19 +62,12 @@ export const Tags: React.FC<TagsProps> = ({ items, className }) => {
   );
 };
 
-/**
- * List Component Props
- * Generic type T must extend ListItem (WorkItem | EducationItem)
- */
 export interface ListProps<T> {
   items: T[];
   className?: string;
   renderItem?: (item: T) => React.ReactNode;
 }
 
-/**
- * Work experience item structure
- */
 type WorkItem = {
   company: string;
   timeframe: string;
@@ -89,9 +75,6 @@ type WorkItem = {
   achievements: string[];
 };
 
-/**
- * Education item structure
- */
 type EducationItem = {
   institution: string;
   description: string;
@@ -100,16 +83,6 @@ type EducationItem = {
 
 type ListItem = WorkItem | EducationItem;
 
-/**
- * List Component
- *
- * Renders a vertical list of cards for work experience or education items.
- * Features:
- * - Responsive layout with flexible content structure
- * - Custom rendering support through renderItem prop
- * - Default rendering with consistent card layout
- * - Type discrimination between work and education items
- */
 export const List = <T extends ListItem>({
   items,
   className = "",

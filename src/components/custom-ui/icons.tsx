@@ -1,18 +1,6 @@
-/**
- * Icons Module
- *
- * Centralizes icon components for consistent usage across the application.
- * Combines icons from lucide-react with custom SVG implementations.
- */
-
 import type { IconProps } from "@/types";
 import { CircleUserRound, HomeIcon } from "lucide-react";
 
-/**
- * Icon collection with consistent prop interface.
- * Each icon is either imported from lucide-react or
- * implemented as an optimized SVG component.
- */
 export const Icons = {
   // Lucide icons
   home: HomeIcon,

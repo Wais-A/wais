@@ -11,27 +11,12 @@ import { ArrowRight, Calendar, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-/**
- * Generate page-specific metadata
- * Overrides default metadata with home page specific title and description
- */
 export const metadata = generateMetadata(
   undefined,
   "Personal portfolio and blog"
 );
 export { viewport };
 
-/**
- * Home Page Component
- *
- * Implements a multi-section layout:
- * 1. Hero section with personal introduction
- * 2. Featured projects grid with responsive layout
- * 3. Latest blog post preview
- *
- * Uses centralized content configuration for consistent messaging
- * and person configuration for personal details
- */
 export default async function Home() {
   // Fetch the latest blog post
   const allPosts = await getAllBlogPosts();

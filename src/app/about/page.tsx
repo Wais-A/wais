@@ -11,18 +11,6 @@ export const metadata = generateMetadata(
   content.about?.description || "Learn more about me and my work."
 );
 
-/**
- * About Page Component
- *
- * Displays professional information in a structured layout:
- * 1. Bio section with personal introduction
- * 2. Technical skills displayed as interactive tags
- * 3. Work experience timeline
- * 4. Educational background
- *
- * Data is pulled from centralized person configuration
- * for consistent information across the site.
- */
 export default function About() {
   return (
     <main className="container mx-auto px-4 max-w-4xl">

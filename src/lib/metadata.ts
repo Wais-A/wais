@@ -1,11 +1,3 @@
-/**
- * Metadata Generation Module
- *
- * This module provides functions to generate metadata for different pages
- * of the application, enhancing SEO and social sharing capabilities while
- * maintaining accessibility standards.
- */
-
 import { siteConfig } from "@/config/site";
 import type { Metadata, Viewport } from "next";
 
@@ -14,12 +6,6 @@ const BASE_URL =
   `https://${siteConfig.meta.baseURL}` ||
   "http://localhost:3000";
 
-/**
- * Viewport configuration optimized for accessibility and responsive design
- * - width=device-width: Makes the viewport responsive
- * - initial-scale=1: Sets default zoom level
- * - viewport-fit=cover: Ensures content fills the screen on notched devices
- */
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -31,14 +17,6 @@ export const viewport: Viewport = {
   ],
 };
 
-/**
- * Generates metadata for a page, including comprehensive SEO properties
- * and social media tags while maintaining accessibility standards.
- *
- * @param title - The title of the page. Defaults to site title if not provided.
- * @param description - The description of the page. Defaults to site description if not provided.
- * @returns An object containing metadata properties.
- */
 export function generateMetadata(
   title?: string,
   description?: string

@@ -1,10 +1,3 @@
-/**
- * Blog Post Management Module
- *
- * Provides functionality for retrieving and managing blog posts stored as MDX files.
- * Each post contains frontmatter metadata and MDX content.
- */
-
 // src/lib/blog.ts
 import { promises as fs } from "node:fs";
 import path from "node:path";

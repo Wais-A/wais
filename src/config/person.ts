@@ -1,13 +1,3 @@
-/**
- * Person Configuration Module
- *
- * Implements personal and professional information including biography,
- * work experience, education, and skills. Uses the Person interface
- * to ensure type safety and consistent structure.
- *
- *   in types/person.ts for type definitions
- */
-
 import type { Person } from "@/types";
 
 export const person: Person = {
