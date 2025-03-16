@@ -3,8 +3,14 @@ import { Tags } from "@/components/custom-ui/tagAndList";
 import { TextAnimate } from "@/components/ui/text-animate";
 import { content } from "@/config/content";
 import { person } from "@/config/person";
+import { getAllBlogPosts } from "@/lib/blog";
 import { generateMetadata } from "@/lib/metadata";
 import { viewport } from "@/lib/metadata";
+import { format, parseISO } from "date-fns";
+import { ArrowRight, Calendar, Clock } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+
 /**
  * Generate page-specific metadata
  * Overrides default metadata with home page specific title and description
@@ -18,14 +24,19 @@ export { viewport };
 /**
  * Home Page Component
  *
- * Implements a two-section layout:
+ * Implements a multi-section layout:
  * 1. Hero section with personal introduction
  * 2. Featured projects grid with responsive layout
+ * 3. Latest blog post preview
  *
  * Uses centralized content configuration for consistent messaging
  * and person configuration for personal details
  */
-export default function Home() {
+export default async function Home() {
+  // Fetch the latest blog post
+  const allPosts = await getAllBlogPosts();
+  const latestPost = allPosts.length > 0 ? allPosts[0] : null;
+
   return (
     <div className="max-w-5xl mx-auto">
       {/* Hero Section: Personal introduction with role and description */}
@@ -48,7 +59,7 @@ export default function Home() {
       </section>
 
       {/* Projects Grid: Responsive layout with project cards */}
-      <section>
+      <section className="mb-16">
         <h2>Featured Projects</h2>
         <div className="grid gap-6 md:grid-cols-2">
           {content.home.projects.map((project) => (
@@ -63,6 +74,67 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* Latest Blog Post */}
+      {latestPost && (
+        <section className="mb-16">
+          <div className="flex justify-between items-center mb-6">
+            <h2>Latest from the Blog</h2>
+            <Link
+              href="/blog"
+              className="text-primary flex items-center hover:underline"
+            >
+              View all posts
+              <ArrowRight className="ml-1 h-4 w-4" />
+            </Link>
+          </div>
+
+          <Card className="overflow-hidden">
+            <Link href={`/blog/${latestPost.slug}`} className="group">
+              {latestPost.metadata.image && (
+                <div className="mb-4 aspect-video overflow-hidden rounded-lg">
+                  <Image
+                    src={latestPost.metadata.image}
+                    alt={latestPost.metadata.title}
+                    width={800}
+                    height={450}
+                    className="object-cover w-full h-full transition-transform group-hover:scale-[1.01]"
+                  />
+                </div>
+              )}
+
+              <div className="space-y-3">
+                <h3 className="group-hover:text-primary transition-colors">
+                  {latestPost.metadata.title}
+                </h3>
+
+                <p className="text-card-foreground line-clamp-2">
+                  {latestPost.metadata.description}
+                </p>
+
+                <div className="flex items-center text-xs sm:text-sm text-muted-foreground pt-2">
+                  <div className="flex items-center mr-4">
+                    <Calendar size={14} className="mr-1" />
+                    <time dateTime={latestPost.metadata.date}>
+                      {format(
+                        parseISO(latestPost.metadata.date),
+                        "MMM dd, yyyy"
+                      )}
+                    </time>
+                  </div>
+
+                  {latestPost.metadata.readingTime && (
+                    <div className="flex items-center">
+                      <Clock size={14} className="mr-1" />
+                      <span>{latestPost.metadata.readingTime}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </Link>
+          </Card>
+        </section>
+      )}
     </div>
   );
 }

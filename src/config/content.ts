@@ -14,9 +14,8 @@ import { person } from "./person";
 
 export const content: Content = {
   home: {
-    title: person.role, // Use role from person directly
-    subtitle: "Full-stack Development & IT Support",
-    description: person.bio, // Use bio from person
+    title: person.role, // References person.ts
+    description: person.bio, // Single source of truth
     projects: person.projects.slice(0, 2),
   },
 

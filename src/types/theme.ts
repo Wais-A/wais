@@ -1,16 +1,45 @@
-/**
- * Theme type definitions for the application's styling system
- */
+// src/types/theme.ts
+
+// Available theme color options for primary color
+export type ThemeColorOption =
+  | "slate"
+  | "gray"
+  | "zinc"
+  | "neutral"
+  | "stone"
+  | "red"
+  | "orange"
+  | "amber"
+  | "yellow"
+  | "lime"
+  | "green"
+  | "emerald"
+  | "teal"
+  | "cyan"
+  | "sky"
+  | "blue"
+  | "indigo"
+  | "violet"
+  | "purple"
+  | "fuchsia"
+  | "pink"
+  | "rose";
+
+// Available theme hover effect options
+export type ThemeHoverEffect = "scale" | "glow" | "none";
+
+// Available theme background mode options
+export type ThemeBackgroundMode = "dark" | "light";
 
 export type ThemeColors = {
-  primary: string;
-  accent: string;
-  background: "dark" | "light";
+  primary: ThemeColorOption;
+  accent: ThemeColorOption;
+  background: ThemeBackgroundMode;
 };
 
 export type ThemeEffects = {
   gradient: boolean;
-  hover: "scale" | "glow" | "none";
+  hover: ThemeHoverEffect;
   opacity: number;
 };
 
@@ -18,9 +47,7 @@ export type TransitionEffect = {
   themeSwitchDuration: number;
 };
 
-/**
- * Complete theme configuration combining colors and effects
- */
+// Complete theme configuration
 export type ThemeConfig = {
   colors: ThemeColors;
   effects: ThemeEffects;
