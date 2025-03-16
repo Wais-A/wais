@@ -10,7 +10,7 @@ export const content: Content = {
   },
 
   blog: {
-    title: "Technical Blog",
+    title: "Blog",
     description:
       "Thoughts and insights on software development, IT support, and technology.",
     postsPerPage: 6,
