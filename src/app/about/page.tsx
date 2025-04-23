@@ -1,10 +1,10 @@
 import Card from "@/components/custom-ui/card";
 import { List, Tags } from "@/components/custom-ui/tagAndList";
-import { TextAnimate } from "@/components/ui/text-animate";
+// import { TextAnimate } from "@/components/ui/text-animate";
 import { content } from "@/config/content";
 import { person } from "@/config/person";
 import { generateMetadata, viewport } from "@/lib/metadata";
-import { Mail, Phone } from "lucide-react";
+import { Mail } from "lucide-react";
 
 export { viewport };
 export const metadata = generateMetadata(
