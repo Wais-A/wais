@@ -25,28 +25,28 @@ export default function About() {
     <main className="container mx-auto px-4 max-w-4xl">
       {/* Bio Section with Contact Info */}
       <section className="relative mb-12">
-       /** <h1>
-         * <TextAnimate animation="blurInUp" by="word">
-         *   About Me
-         * </TextAnimate>
-        </h1> */
+{/*         <h1>
+          <TextAnimate animation="blurInUp" by="word">
+            About Me
+          </TextAnimate>
+        </h1> */}
         <Card className="p-6">
           <h5 className="text-lg text-card-foreground mb-4">{person.bio}</h5>
           <div className="flex flex-col sm:flex-row sm:items-center gap-3 text-muted-foreground mt-4">
             <div className="flex items-center gap-2">
               <span>📍 {person.location}</span>
             </div>
-            /** {person.contact.phone && (
-             * <div className="flex items-center gap-2">
-             *   <Phone size={16} className="text-primary" />
-             *   <a
-             *     href={`tel:${person.contact.phone}`}
-             *     className="hover:underline"
-             *   >
-             *     {person.contact.phone}
-             *   </a>
-             * </div>
-            )} */
+{/*              {person.contact.phone && (
+              <div className="flex items-center gap-2">
+                <Phone size={16} className="text-primary" />
+                <a
+                  href={`tel:${person.contact.phone}`}
+                  className="hover:underline"
+                >
+                  {person.contact.phone}
+                </a>
+              </div>
+            )} */}
             <div className="flex items-center gap-2">
               <Mail size={16} className="text-primary" />
               <a
