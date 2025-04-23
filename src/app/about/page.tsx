@@ -36,17 +36,17 @@ export default function About() {
             <div className="flex items-center gap-2">
               <span>📍 {person.location}</span>
             </div>
-            {/*{person.contact.phone && (
-              <div className="flex items-center gap-2">
-                <Phone size={16} className="text-primary" />
-                <a
-                  href={`tel:${person.contact.phone}`}
-                  className="hover:underline"
-                >
-                  {person.contact.phone}
-                </a>
-              </div>
-            )}*/}
+            /** {person.contact.phone && (
+             * <div className="flex items-center gap-2">
+             *   <Phone size={16} className="text-primary" />
+             *   <a
+             *     href={`tel:${person.contact.phone}`}
+             *     className="hover:underline"
+             *   >
+             *     {person.contact.phone}
+             *   </a>
+             * </div>
+            )} */
             <div className="flex items-center gap-2">
               <Mail size={16} className="text-primary" />
               <a
