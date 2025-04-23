@@ -1,7 +1,7 @@
 // src/app/blog/page.tsx
 import Card from "@/components/custom-ui/card";
 import { Tags } from "@/components/custom-ui/tagAndList";
-import { TextAnimate } from "@/components/ui/text-animate";
+// import { TextAnimate } from "@/components/ui/text-animate";
 import { content } from "@/config/content";
 import { getAllBlogPosts } from "@/lib/blog";
 import { generateMetadata } from "@/lib/metadata";
