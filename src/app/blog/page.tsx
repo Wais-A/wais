@@ -27,11 +27,11 @@ export default async function BlogPage() {
     <div className="max-w-3xl mx-auto py-8 px-4">
       {/* Header section with title and description */}
       <section className="mb-12">
-       /** <h1>
-         * <TextAnimate animation="blurInUp" by="character" startOnView={false}>
-         *   {content.blog.title}
-         * </TextAnimate>
-        </h1> */
+{/*         <h1>
+          <TextAnimate animation="blurInUp" by="character" startOnView={false}>
+            {content.blog.title}
+          </TextAnimate>
+        </h1>  */}
         <Card className="p-6">
           <h5 className="text-lg text-card-foreground mb-0">
             {content.blog.description}
