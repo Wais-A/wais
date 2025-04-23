@@ -25,10 +25,10 @@ export default function About() {
     <main className="container mx-auto px-4 max-w-4xl">
       {/* Bio Section with Contact Info */}
       <section className="relative mb-12">
-       /* <h1>
-          <TextAnimate animation="blurInUp" by="word">
-            About Me
-          </TextAnimate>
+       /** <h1>
+         * <TextAnimate animation="blurInUp" by="word">
+         *   About Me
+         * </TextAnimate>
         </h1> */
         <Card className="p-6">
           <h5 className="text-lg text-card-foreground mb-4">{person.bio}</h5>
