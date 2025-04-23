@@ -16,8 +16,8 @@ export const person: Person = {
 
   // Contact Information
   contact: {
-    email: "walmakaleh@mymail.lccc.edu",
-    phone: "917-690-6292",
+    email: "contact@wais.me",
+    phone: "",
   },
 
   // Social Links
