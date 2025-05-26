@@ -53,7 +53,7 @@ export default function About() {
                 href={`mailto:${person.contact.email}`}
                 className="hover:underline"
               >
-                {person.contact.email}
+                Contact
               </a>
             </div>
           </div>
