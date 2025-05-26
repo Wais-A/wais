@@ -24,7 +24,7 @@ export default function About() {
   return (
     <main className="container mx-auto px-4 max-w-4xl">
       {/* Bio Section with Contact Info */}
-      <section className="relative mb-12">
+      <section className="relative mb-12 mt-8">
         {/*         <h1>
           <TextAnimate animation="blurInUp" by="word">
             About Me
