@@ -7,7 +7,7 @@ import { getAllBlogPosts } from "@/lib/blog";
 import { generateMetadata } from "@/lib/metadata";
 import { viewport } from "@/lib/metadata";
 import { format, parseISO } from "date-fns";
-import { ArrowRight, Calendar, Clock } from "lucide-react";
+import { ArrowRight, Calendar, Clock, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -40,7 +40,25 @@ export default async function Home() {
           {content.home.title}
         </span>
 
-        <p>{content.home.description}</p>
+        <Card className="p-6 mt-4">
+          <h5 className="text-lg text-card-foreground mb-4">
+            {content.about.description}
+          </h5>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <span>📍 {person.location}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Mail size={16} className="text-primary" />
+              <a
+                href={`mailto:${person.contact.email}`}
+                className="hover:underline"
+              >
+                Contact
+              </a>
+            </div>
+          </div>
+        </Card>
       </section>
 
       {/* Projects Grid: Responsive layout with project cards */}
