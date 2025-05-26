@@ -3,7 +3,7 @@ import { Tags } from "@/components/custom-ui/tagAndList";
 import { content } from "@/config/content";
 import { getAllBlogPosts } from "@/lib/blog";
 import { generateMetadata } from "@/lib/metadata";
-import { parseISO, format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { Calendar, Clock } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
