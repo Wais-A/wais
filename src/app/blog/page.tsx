@@ -1,7 +1,5 @@
-// src/app/blog/page.tsx
 import Card from "@/components/custom-ui/card";
 import { Tags } from "@/components/custom-ui/tagAndList";
-// import { TextAnimate } from "@/components/ui/text-animate";
 import { content } from "@/config/content";
 import { getAllBlogPosts } from "@/lib/blog";
 import { generateMetadata } from "@/lib/metadata";
@@ -27,11 +25,6 @@ export default async function BlogPage() {
     <div className="max-w-3xl mx-auto py-8 px-4">
       {/* Header section with title and description */}
       <section className="mb-12">
-{/*         <h1>
-          <TextAnimate animation="blurInUp" by="character" startOnView={false}>
-            {content.blog.title}
-          </TextAnimate>
-        </h1>  */}
         <Card className="p-6">
           <h5 className="text-lg text-card-foreground mb-0">
             {content.blog.description}
