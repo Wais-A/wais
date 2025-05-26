@@ -4,8 +4,7 @@ import { TextAnimate } from "@/components/ui/text-animate";
 import { content } from "@/config/content";
 import { person } from "@/config/person";
 import { getAllBlogPosts } from "@/lib/blog";
-import { generateMetadata } from "@/lib/metadata";
-import { viewport } from "@/lib/metadata";
+import { generateMetadata, viewport } from "@/lib/metadata";
 import { format, parseISO } from "date-fns";
 import { ArrowRight, Calendar, Clock, Mail } from "lucide-react";
 import Image from "next/image";
@@ -57,10 +56,10 @@ export default async function Home() {
                 Contact
               </a>
             </div>
+
           </div>
         </Card>
       </section>
-
       {/* Projects Grid: Responsive layout with project cards */}
       <section className="mb-16">
         <h2>Featured Projects</h2>

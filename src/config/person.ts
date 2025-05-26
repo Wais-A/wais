@@ -28,18 +28,22 @@ export const person: Person = {
   // Projects
   projects: [
     {
-      title: "Team Development Projects",
+      title: "Team Development",
       description:
         "Collaborated on multiple full-stack web applications using modern technologies and agile methodologies.",
-      tags: ["React", "Node.js", "JavaScript", "TypeScript"],
+      tags: ["iOS Dev", "Database Management", "Full-stack Web Dev"],
       link: "https://github.com/wais-a",
       image: "/images/project1.png",
     },
     {
-      title: "IT Support Systems",
+      title: "IT Specialist",
       description:
         "Managed and resolved technical support tickets for staff and students at LCCC.",
-      tags: ["Technical Support", "Problem Solving", "Customer Service"],
+      tags: [
+        "IT Support",
+        "Customer Service",
+        "Hardware and Software Diagnostics",
+      ],
       image: "/images/project2.png",
     },
     {

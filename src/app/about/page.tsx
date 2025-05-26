@@ -25,7 +25,7 @@ export default function About() {
     <main className="container mx-auto px-4 max-w-4xl">
       {/* Bio Section with Contact Info */}
       <section className="relative mb-12">
-{/*         <h1>
+        {/*         <h1>
           <TextAnimate animation="blurInUp" by="word">
             About Me
           </TextAnimate>
@@ -36,7 +36,7 @@ export default function About() {
             <div className="flex items-center gap-2">
               <span>📍 {person.location}</span>
             </div>
-{/*              {person.contact.phone && (
+            {/*              {person.contact.phone && (
               <div className="flex items-center gap-2">
                 <Phone size={16} className="text-primary" />
                 <a

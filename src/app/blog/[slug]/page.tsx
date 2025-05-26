@@ -16,11 +16,10 @@ import { Suspense } from "react";
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }): Promise<Metadata> {
   try {
-    // Await the promise to resolve the actual params
-    const { slug } = await params;
+    const { slug } = params;
     const post = await getBlogPost(slug);
 
     // Generate base metadata with title and description
@@ -81,11 +80,10 @@ export async function generateStaticParams() {
 export default async function BlogPostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
   try {
-    // Await the params promise
-    const { slug } = await params;
+    const { slug } = params;
     const post = await getBlogPost(slug);
 
     return (
