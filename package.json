@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "dev:debug": "cross-env NODE_OPTIONS=--inspect next dev --turbopack",
     "build": "pnpm clean && next build",
     "start": "next start",
     "clean": "rimraf .next/ && rimraf dist/",
