@@ -61,7 +61,7 @@ export default async function Home() {
       </section>
       {/* Projects Grid: Responsive layout with project cards */}
       <section className="mb-16">
-        <h2>Featured Projects</h2>
+        <h2 className="mt-6">Featured Projects</h2>
         <div className="grid gap-6 md:grid-cols-2">
           {content.home.projects.map((project) => (
             <Card key={project.title}>
