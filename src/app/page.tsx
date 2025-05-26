@@ -56,7 +56,6 @@ export default async function Home() {
                 Contact
               </a>
             </div>
-
           </div>
         </Card>
       </section>
