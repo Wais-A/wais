@@ -1,7 +1,7 @@
 "use client";
 
 import { ThemeProvider } from "next-themes";
-import { SafariThemeManager } from "./safari-theme-manager"; // Adjust import path as needed
+import { SafariThemeManager } from "./safari-theme-manager";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
