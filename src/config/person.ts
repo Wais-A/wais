@@ -62,7 +62,7 @@ export const person: Person = {
     {
       company: "Lehigh Carbon Community College",
       location: "Schnecksville, PA",
-      timeframe: "March 2023 - Present",
+      timeframe: "March 2023 – May 2025",
       role: "I.T. Student Employee",
       category: "technical",
       achievements: [
@@ -128,14 +128,29 @@ export const person: Person = {
   ],
 
   // Brief bio/description
-  bio: "A proficient, dedicated, bilingual software engineer experienced working on teams of diverse individuals with unique perspectives. Skilled in JavaScript, Python, React, Node.js, and various database technologies.",
+  bio: "Software-engineering student skilled in full-stack and mobile development with experience building applications and providing IT support.",
 
   // Technical Skills
   skills: {
-    languages: ["JavaScript", "Python", "C", "HTML", "CSS3", "TypeScript"],
-    frameworks: ["React", "Node.js", "Angular", "Redux"],
-    databases: ["SQL", "NoSQL", "Firebase"],
-    tools: ["Git", "REST APIs", "Unit Testing", "Ajax"],
+    languages: ["TypeScript", "Python", "C", "SQL"],
+    frameworks: ["React", "Redux", "Node.js", "Express", "Swift"],
+    databases: [
+      "PostgreSQL",
+      "MongoDB",
+      "Firebase",
+      "REST/GraphQL APIs",
+      "SwiftData",
+    ],
+    tools: [
+      "Jest",
+      "Mocha",
+      "CI/CD pipelines",
+      "Docker",
+      "Git",
+      "Agile methodology",
+      "Analytical troubleshooting",
+      "Cross-functional collaboration",
+    ],
     additional: [
       "Fluent in English and Arabic",
       "Microsoft Office Suite (Word, Excel, PowerPoint)",
