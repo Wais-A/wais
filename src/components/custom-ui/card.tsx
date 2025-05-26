@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import type { ReactNode } from "react";
 
 interface CardProps {
   children: ReactNode;
@@ -11,7 +11,7 @@ export default function Card({ children, className }: CardProps) {
     <div
       className={cn(
         "relative bg-card/30 backdrop-blur-md rounded-xl p-6 border transition-all hover:shadow-lg hover:shadow-shadowColor",
-        className,
+        className
       )}
     >
       {children}

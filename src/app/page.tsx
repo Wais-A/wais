@@ -39,7 +39,14 @@ export default async function Home() {
           {content.home.title}
         </span>
 
-        <p>{content.home.description}</p>
+        <Card className="p-6 mt-4">
+          <h5 className="text-lg text-card-foreground mb-4">
+            {content.about.description}
+          </h5>
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <span>📍 {person.location}</span>
+          </div>
+        </Card>
       </section>
 
       {/* Projects Grid: Responsive layout with project cards */}
