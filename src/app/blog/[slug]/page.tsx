@@ -1,4 +1,3 @@
-// src/app/blog/[slug]/page.tsx
 import { Tags } from "@/components/custom-ui/tagAndList";
 import { MDXRenderer } from "@/components/pages/blog/mdx-renderer";
 import { getAllBlogPosts, getBlogPost } from "@/lib/blog";
