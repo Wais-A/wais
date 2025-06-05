@@ -16,7 +16,7 @@ export const person: Person = {
 
   // Contact Information
   contact: {
-    email: "contact@wais.me",
+    email: "",
     phone: "",
   },
 
