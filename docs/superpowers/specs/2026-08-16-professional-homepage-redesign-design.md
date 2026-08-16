@@ -2,12 +2,13 @@
 
 ## Goal
 
-Redesign the single-page portfolio to present Wais Almakaleh as a Bucknell Computer Science & Engineering and Physics student with credible software, IT, and undergraduate research experience. Update the site's personal information from the supplied résumé and add a concise Summer 2026 research entry supported by the supplied poster and slides.
+Redesign the single-page portfolio to present Wais Almakaleh as a Bucknell Computer Science & Engineering student with credible software, IT, and undergraduate research experience. Update the site's personal information from the supplied résumé and add a concise Summer 2026 research entry supported by the supplied poster and slides.
 
 ## Source and Conflict Rules
 
 - Use `Wais resume.pdf` as the source of truth for education, technical skills, projects, professional experience, location, and Bucknell email.
 - Use the research poster and slides only to support a concise Undergraduate Researcher entry. Do not create a research-heavy section or reproduce the study presentation.
+- Treat the user's correction that the Bucknell degree is only Computer Science & Engineering as authoritative wherever it conflicts with the résumé.
 - Preserve explicit site decisions made after the résumé was written:
   - Keep the Featured Projects section absent.
   - Keep the About and Blog routes absent.
@@ -53,18 +54,20 @@ The profile rail contains:
 
 - Initial mark or understated identity element
 - Name
-- “Computer Science & Engineering + Physics Student” title
-- Short positioning statement
+- “Computer Science & Engineering Student” title
+- Short factual positioning statement
 - Lewisburg, PA
 - Bucknell email
-- Three concise focus areas: software engineering, IT systems, and human-centered research
+- Three concise focus areas: software development, IT systems, and undergraduate research
 
 The main content column contains, in order:
 
-1. Profile statement
+1. Profile statement, without an oversized slogan or marketing-style headline
 2. Technical Experience
 3. Education and Technical Skills
 4. Additional Experience
+
+Use plain section headings without decorative item counts. In particular, omit the “03 roles” label from Technical Experience.
 
 At the large desktop breakpoint, the profile rail becomes sticky with a top offset of 6rem. Keep the rail compact enough that it remains above the dock at a 720px viewport height.
 
@@ -83,13 +86,13 @@ Collapse to one reading column:
 ### Identity and Contact
 
 - Name: Wais Almakaleh
-- Display title: Computer Science & Engineering + Physics Student
+- Display title: Computer Science & Engineering Student
 - Location: Lewisburg, PA
 - Email: wa003@bucknell.edu
-- Positioning statement: “Bucknell student building software, supporting technical systems, and studying human typing behavior.”
-- Profile statement: “I build software, support technical systems, and explore how people interact with technology through behavioral data.”
+- Positioning statement: “Bucknell University student with experience in software development, IT systems, and undergraduate research.”
+- Profile statement: “I’m a Computer Science & Engineering student at Bucknell University with experience in software development, IT systems, and undergraduate research.”
 
-Do not add the résumé phone number to the public page.
+Do not add the résumé phone number to the public page. Do not place a large slogan above the profile statement.
 
 ### Technical Experience
 
@@ -98,10 +101,10 @@ Do not add the résumé phone number to the public page.
 - Organization: Bucknell University
 - Location: Lewisburg, PA
 - Timeframe: Summer 2026
-- Detail 1: Analyzed 225 fixed-text recordings from 75 users across three sessions to evaluate user-specific typing patterns.
-- Detail 2: Built six-feature profiles from speed, acceleration, and jerk; same-user recordings had a 4.08-fold lower median distance than different-user recordings.
+- Detail 1: Conducted faculty-mentored research in keystroke dynamics, developing a new feature-based approach to characterize individual typing behavior.
+- Detail 2: Built six-feature profiles using speed, acceleration, and jerk; initial results were promising and identified directions for further study.
 
-Keep these two details comparable in visual weight to the other technical roles. Do not add a dedicated research-results panel, study diagram, publication claim, or long methodology explanation.
+Keep these two details comparable in visual weight to the other technical roles. Do not name the faculty mentor or add a dedicated research-results panel, study diagram, publication claim, numerical results, or long methodology explanation.
 
 #### IT Intern
 
@@ -124,7 +127,7 @@ Keep these two details comparable in visual weight to the other technical roles.
 #### Bucknell University
 
 - Location: Lewisburg, PA
-- Program: BS in Computer Science & Engineering and Physics
+- Program: BS in Computer Science & Engineering
 - Timeframe: Expected May 2028
 - Recognition: Bucknell Community College Scholar
 
@@ -188,6 +191,9 @@ The page uses static, local configuration and has no runtime data-loading failur
 - Confirm the route-level content test fails against the old résumé data before implementation and passes afterward.
 - Confirm `/` shows the approved identity, all three technical roles, all three education entries, résumé skills, and two additional-experience rows.
 - Confirm research has exactly two concise details and no standalone research showcase.
+- Confirm the profile uses the direct approved paragraph and has no oversized slogan.
+- Confirm Physics and the prior numerical research details are absent from visible copy.
+- Confirm Technical Experience has no “03 roles” or other decorative count label.
 - Confirm Featured Projects remains absent.
 - Confirm `/about` and `/blog` remain not found.
 - Confirm dock source files are byte-for-byte unchanged during this redesign.
