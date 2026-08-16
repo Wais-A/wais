@@ -12,6 +12,14 @@ test("the home page presents the current resume and concise research profile", a
   const { response, html } = await request("/");
 
   assert.equal(response.status, 200);
+
+  const keywordMetadata = html.match(
+    /<meta\s+name="keywords"\s+content="([^"]*)"\s*\/?>/i
+  )?.[1];
+  assert.ok(keywordMetadata, "the rendered keyword metadata is present");
+  assert.match(keywordMetadata, /undergraduate research/i);
+  assert.doesNotMatch(keywordMetadata, /human-computer interaction/i);
+
   for (const content of [
     "Computer Science &amp; Engineering Student",
     "I’m a Computer Science &amp; Engineering student at Bucknell University with experience in software development, IT systems, and undergraduate research.",

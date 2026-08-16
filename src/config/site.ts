@@ -15,7 +15,7 @@ export const siteConfig: SiteConfig = {
       "computer science",
       "software engineering",
       "IT systems",
-      "human-computer interaction",
+      "undergraduate research",
       ...person.skills.languages,
       ...person.skills.webData,
     ],
