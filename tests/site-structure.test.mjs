@@ -86,7 +86,7 @@ test("the home page presents the current resume and concise research profile", a
     assert.doesNotMatch(pageContent, new RegExp(url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
   assert.doesNotMatch(pageContent, /aria-label="Switch to (?:light|dark) mode"/);
-  const themePlaceholder = /<div\b[^>]*class="[^\"]*(?=.*\brounded-full\b)(?=.*\brelative\b)[^\"]*"[^>]*>\s*<\/div>/g;
+  const themePlaceholder = /<div\b[^>]*\sclass=(["'])(?=[^"']*\brounded-full\b)(?=[^"']*\brelative\b)[^"']*\1[^>]*>\s*<\/div>/g;
   assert.equal((dockContent.match(themePlaceholder) ?? []).length, 1);
   assert.equal((pageContent.match(themePlaceholder) ?? []).length, 0);
 });
