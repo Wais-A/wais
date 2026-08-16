@@ -15,17 +15,9 @@ export default function Home() {
         <ProfileRail />
 
         <div className="min-w-0">
-          <section aria-labelledby="profile-heading">
-            <h2
-              id="profile-heading"
-              className="font-medium text-primary text-xs uppercase tracking-[0.17em]"
-            >
-              Profile
-            </h2>
-            <p className="mt-3 max-w-2xl text-pretty text-muted-foreground leading-7">
-              {person.summary}
-            </p>
-          </section>
+          <p className="max-w-2xl text-pretty text-muted-foreground leading-7">
+            {person.summary}
+          </p>
 
           <TechnicalExperience />
           <EducationSkills />

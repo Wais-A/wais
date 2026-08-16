@@ -48,11 +48,11 @@ test("the home page presents the current resume and concise research profile", a
       .trim()
   );
   assert.deepEqual(sectionHeadings, [
-    "Profile",
     "Technical Experience",
     "Education & Technical Skills",
     "Additional Experience",
   ]);
+  assert.doesNotMatch(html, /<h[1-6]\b[^>]*>\s*Profile\s*<\/h[1-6]>/i);
 
   const researchEntry = html.match(
     /Undergraduate Researcher[\s\S]*?(?=<h3\b|<h2\b|$)/
