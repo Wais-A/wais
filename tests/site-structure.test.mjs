@@ -64,7 +64,7 @@ test("the home page presents the current resume and concise research profile", a
   ]) {
     assert.match(
       researchEntry,
-      new RegExp(content.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&"))
+      new RegExp(content.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
     );
   }
   assert.equal((researchEntry.match(/<li\b/g) ?? []).length, 2);
