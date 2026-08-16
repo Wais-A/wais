@@ -11,7 +11,7 @@ export { viewport };
 export default function Home() {
   return (
     <div className="mx-auto max-w-6xl pb-28">
-      <div className="grid gap-10 py-8 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-16 lg:py-12 xl:gap-20">
+      <div className="grid gap-10 py-8 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-16 lg:py-0 xl:gap-20">
         <ProfileRail />
 
         <div className="min-w-0">
