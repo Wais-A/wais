@@ -903,26 +903,27 @@ git commit -m "fix: correct homepage profile content"
 
 **Files:**
 - Verify only; no planned source changes
+- Create temporary QA copy and screenshots under `/private/tmp`; do not write QA artifacts into the repository
 
 **Interfaces:**
 - Consumes: Completed static homepage and unchanged dock
 - Produces: Evidence that the production build, responsive layout, themes, and dock behavior meet the specification
 
-- [ ] **Step 1: Stop the dedicated development server**
+- [ ] **Step 1: Create an isolated production-QA copy**
 
-Send Ctrl-C to the persistent port-3100 development-server session from Task 1 and wait for it to exit.
+Resolve a fresh directory with `mktemp -d /private/tmp/wais-homepage-qa.XXXXXX`. Copy the checkout into it while excluding `.git`, `.next`, `node_modules`, `.superpowers`, and `tmp`, then symlink the checkout's existing `node_modules` directory into the QA copy.
 
-Expected: Port 3100 is free before Next.js writes a production `.next` build. Do not stop or restart the user's port-3000 process.
+Expected: The temporary copy contains the current source and dependencies but has its own empty `.next` location. Record the resolved absolute QA directory in the verification report. Do not stop, restart, or write build output into the user's port-3000 checkout.
 
 - [ ] **Step 2: Run the production build**
 
-Run: `pnpm exec next build --webpack`
+Run `pnpm exec next build --webpack` with the temporary QA directory as the working directory.
 
 Expected: Build succeeds and the route table contains only `/` plus `/_not-found`.
 
 - [ ] **Step 3: Start the production server**
 
-Run `pnpm exec next start -p 3100` in a persistent terminal session and wait for the ready message.
+Run `pnpm exec next start -p 3100` from the temporary QA directory in a persistent terminal session and wait for the ready message.
 
 Expected: The production site is available at `http://127.0.0.1:3100`.
 
@@ -943,6 +944,7 @@ At 1280×720, verify:
 - Technical Experience has no decorative role count.
 - No Featured Projects or duplicate social links appear.
 - No Next.js error overlay appears.
+- Save screenshot evidence outside the repository at `/private/tmp/wais-home-desktop-dark.png`.
 
 - [ ] **Step 6: Inspect the mobile layout in dark mode**
 
@@ -953,14 +955,17 @@ At 390×844, verify:
 - Education and skills stack vertically.
 - `document.documentElement.scrollWidth <= window.innerWidth`.
 - The final additional-experience row remains clear of the dock.
+- Save screenshot evidence outside the repository at `/private/tmp/wais-home-mobile-dark.png`.
 
 - [ ] **Step 7: Verify light mode and restore the original theme**
 
-Click the existing theme toggle, confirm the page remains legible in light mode, then return it to dark mode. Do not change theme-control code.
+Click the existing theme toggle, confirm the page remains legible in light mode, save `/private/tmp/wais-home-desktop-light.png`, then return it to dark mode. Do not change theme-control code.
 
 - [ ] **Step 8: Verify dock behavior without modifying it**
 
 Confirm the dock contains GitHub, X, LinkedIn, one divider, and the theme toggle in that order. Confirm LinkedIn opens `https://www.linkedin.com/in/wais-al/` while the GitHub and X destinations remain unchanged. Scroll down and up and verify its bottom edge moves below the viewport and returns, with the existing 300ms transition intact.
+
+Use the Browser plugin first for hydrated QA. If Browser setup or selection fails, read its bootstrap troubleshooting documentation and retry. Because this task explicitly permits non-Browser validation when that retry still fails, regular Playwright may then be used as a fallback; record the exact Browser failure and fallback decision in the report.
 
 - [ ] **Step 9: Recheck retired routes**
 
@@ -984,8 +989,8 @@ shasum -a 256 \
 
 Expected: 2 tests pass, TypeScript and Biome report no diagnostics, and all five hashes exactly match the Dock Baseline. The successful production build from Step 2 remains the build evidence.
 
-- [ ] **Step 11: Stop the production server**
+- [ ] **Step 11: Stop the production server and remove the resolved QA copy**
 
-Send Ctrl-C to the persistent port-3100 production-server session and wait for it to exit.
+Send Ctrl-C to the persistent port-3100 production-server session and wait for it to exit. Remove only the exact resolved temporary QA directory recorded in Step 1; preserve the three `/private/tmp/wais-home-*.png` screenshots for review.
 
-Expected: The dedicated verification server exits cleanly without affecting any server the user already had running on port 3000.
+Expected: The dedicated verification server exits cleanly, the isolated build directory is removed, screenshots remain available, and the user's port-3000 process is unaffected.
