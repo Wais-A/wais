@@ -4,18 +4,18 @@ export const person: Person = {
   first: "Wais",
   last: "Almakaleh",
   name: "Wais Almakaleh",
-  role: "Computer Science & Engineering + Physics Student",
+  role: "Computer Science & Engineering Student",
   location: "Lewisburg, PA",
   contact: {
     email: "wa003@bucknell.edu",
   },
   github: "https://github.com/wais-a",
-  linkedin: "https://www.linkedin.com/in/wais-almakaleh",
+  linkedin: "https://www.linkedin.com/in/wais-al/",
   x: "https://x.com/_Wais_a",
-  bio: "Bucknell student building software, supporting technical systems, and studying human typing behavior.",
+  bio: "Bucknell University student with experience in software development, IT systems, and undergraduate research.",
   summary:
-    "I build software, support technical systems, and explore how people interact with technology through behavioral data.",
-  focus: ["Software engineering", "IT systems", "Human-centered research"],
+    "I’m a Computer Science & Engineering student at Bucknell University with experience in software development, IT systems, and undergraduate research.",
+  focus: ["Software development", "IT systems", "Undergraduate research"],
   work: [
     {
       company: "Bucknell University",
@@ -24,8 +24,8 @@ export const person: Person = {
       role: "Undergraduate Researcher",
       category: "technical",
       achievements: [
-        "Analyzed 225 fixed-text recordings from 75 users across three sessions to evaluate user-specific typing patterns.",
-        "Built six-feature profiles from speed, acceleration, and jerk; same-user recordings had a 4.08-fold lower median distance than different-user recordings.",
+        "Conducted faculty-mentored research in keystroke dynamics, developing a new feature-based approach to characterize individual typing behavior.",
+        "Built six-feature profiles using speed, acceleration, and jerk; initial results were promising and identified directions for further study.",
       ],
     },
     {
@@ -69,7 +69,7 @@ export const person: Person = {
     {
       institution: "Bucknell University",
       location: "Lewisburg, PA",
-      description: "BS in Computer Science & Engineering and Physics",
+      description: "BS in Computer Science & Engineering",
       timeframe: "Expected May 2028",
       recognition: "Bucknell Community College Scholar",
     },

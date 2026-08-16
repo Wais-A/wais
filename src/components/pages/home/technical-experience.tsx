@@ -7,17 +7,12 @@ const technicalExperience = person.work.filter(
 export function TechnicalExperience() {
   return (
     <section aria-labelledby="technical-experience" className="mt-16 lg:mt-12">
-      <div className="flex items-end justify-between gap-4 border-border border-b pb-4">
-        <h2
-          id="technical-experience"
-          className="m-0 text-base font-semibold uppercase tracking-[0.14em]"
-        >
-          Technical Experience
-        </h2>
-        <span className="text-muted-foreground text-xs">
-          {technicalExperience.length.toString().padStart(2, "0")} roles
-        </span>
-      </div>
+      <h2
+        id="technical-experience"
+        className="m-0 border-border border-b pb-4 text-base font-semibold uppercase tracking-[0.14em]"
+      >
+        Technical Experience
+      </h2>
 
       <div className="divide-y divide-border">
         {technicalExperience.map((item) => (

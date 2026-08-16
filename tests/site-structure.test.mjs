@@ -13,13 +13,14 @@ test("the home page presents the current resume and concise research profile", a
 
   assert.equal(response.status, 200);
   for (const content of [
-    "Computer Science &amp; Engineering + Physics Student",
+    "Computer Science &amp; Engineering Student",
+    "I’m a Computer Science &amp; Engineering student at Bucknell University with experience in software development, IT systems, and undergraduate research.",
     "Lewisburg, PA",
     "mailto:wa003@bucknell.edu",
     "Undergraduate Researcher",
     "Cardinal Systems, Inc.",
     "I.T. Student Employee",
-    "BS in Computer Science &amp; Engineering and Physics",
+    "BS in Computer Science &amp; Engineering",
     "AS in Computer Science",
     "Lambda School (BloomTech)",
     "JavaScript (ES6+)",
@@ -57,19 +58,22 @@ test("the home page presents the current resume and concise research profile", a
     /Undergraduate Researcher[\s\S]*?(?=<h3\b|<h2\b|$)/
   )?.[0];
   assert.ok(researchEntry, "the research experience entry is present");
-  assert.match(researchEntry, /225 fixed-text recordings from 75 users/);
-  assert.match(researchEntry, /4\.08-fold lower median distance/);
-  assert.equal(
-    (
-      researchEntry.match(
-        /(?:225 fixed-text recordings from 75 users|4\.08-fold lower median distance)/g
-      ) ?? []
-    ).length,
-    2
-  );
+  for (const content of [
+    "Conducted faculty-mentored research in keystroke dynamics, developing a new feature-based approach to characterize individual typing behavior.",
+    "Built six-feature profiles using speed, acceleration, and jerk; initial results were promising and identified directions for further study.",
+  ]) {
+    assert.match(
+      researchEntry,
+      new RegExp(content.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&"))
+    );
+  }
   assert.equal((researchEntry.match(/<li\b/g) ?? []).length, 2);
   assert.match(html, /Lowe(?:'|&#x27;|&#39;)s RDC/);
   assert.doesNotMatch(html, /AUC 0\.899|EER 17\.8%|Research Results/);
+  assert.doesNotMatch(
+    html,
+    /Physics|225 fixed-text|4\.08-fold|Technical work with a human focus|03 roles/
+  );
 
   assert.doesNotMatch(html, /Featured Projects/);
   assert.doesNotMatch(html, />\s*(?:About|Blog)\s*</i);
@@ -105,7 +109,7 @@ test("the home page presents the current resume and concise research profile", a
   for (const url of [
     "https://github.com/wais-a",
     "https://x.com/_Wais_a",
-    "https://www.linkedin.com/in/wais-almakaleh",
+    "https://www.linkedin.com/in/wais-al/",
   ]) {
     assert.equal(
       (

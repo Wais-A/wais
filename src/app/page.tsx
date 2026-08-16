@@ -22,10 +22,7 @@ export default function Home() {
             >
               Profile
             </h2>
-            <p className="mt-3 max-w-2xl text-pretty text-3xl font-semibold tracking-tight sm:text-4xl">
-              Technical work with a human focus.
-            </p>
-            <p className="mt-5 max-w-2xl text-pretty text-muted-foreground leading-7">
+            <p className="mt-3 max-w-2xl text-pretty text-muted-foreground leading-7">
               {person.summary}
             </p>
           </section>
