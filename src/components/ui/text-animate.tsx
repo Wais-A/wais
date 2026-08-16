@@ -1,7 +1,13 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion, MotionProps, Variants } from "motion/react";
+import {
+  AnimatePresence,
+  motion,
+  MotionProps,
+  useReducedMotion,
+  Variants,
+} from "motion/react";
 import { ElementType } from "react";
 
 type AnimationType = "text" | "word" | "character" | "line";
@@ -317,6 +323,7 @@ export function TextAnimate({
   ...props
 }: TextAnimateProps) {
   const MotionComponent = motion.create(Component);
+  const shouldReduceMotion = useReducedMotion();
 
   // Use provided variants or default variants based on animation type
   const finalVariants = animation
@@ -362,10 +369,12 @@ export function TextAnimate({
     <AnimatePresence mode="popLayout">
       <MotionComponent
         variants={finalVariants.container}
-        initial="hidden"
-        whileInView={startOnView ? "show" : undefined}
-        animate={startOnView ? undefined : "show"}
-        exit="exit"
+        initial={shouldReduceMotion ? "show" : "hidden"}
+        whileInView={
+          shouldReduceMotion ? undefined : startOnView ? "show" : undefined
+        }
+        animate={shouldReduceMotion ? "show" : startOnView ? undefined : "show"}
+        exit={shouldReduceMotion ? undefined : "exit"}
         className={cn("whitespace-pre-wrap", className)}
         {...props}
       >
