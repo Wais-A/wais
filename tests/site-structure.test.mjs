@@ -27,12 +27,24 @@ test("the home page presents the current resume and concise research profile", a
     "Unix/Linux CLI",
     "Home Depot",
   ]) {
-    assert.match(html, new RegExp(content.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+    assert.match(
+      html,
+      new RegExp(content.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    );
   }
-  assert.match(html, /<a[^>]+href="mailto:wa003@bucknell\.edu"[^>]*>[^<]*wa003@bucknell\.edu[^<]*<\/a>/);
+  assert.match(
+    html,
+    /<a[^>]+href="mailto:wa003@bucknell\.edu"[^>]*>[^<]*wa003@bucknell\.edu[^<]*<\/a>/
+  );
 
-  const sectionHeadings = [...html.matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/g)].map((match) =>
-    match[1].replace(/<[^>]+>/g, "").replace(/<!--.*?-->/g, "").replace(/&amp;/g, "&").trim(),
+  const sectionHeadings = [
+    ...html.matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/g),
+  ].map((match) =>
+    match[1]
+      .replace(/<[^>]+>/g, "")
+      .replace(/<!--.*?-->/g, "")
+      .replace(/&amp;/g, "&")
+      .trim()
   );
   assert.deepEqual(sectionHeadings, [
     "Profile",
@@ -41,13 +53,19 @@ test("the home page presents the current resume and concise research profile", a
     "Additional Experience",
   ]);
 
-  const researchEntry = html.match(/Undergraduate Researcher[\s\S]*?(?=<h3\b|<h2\b|$)/)?.[0];
+  const researchEntry = html.match(
+    /Undergraduate Researcher[\s\S]*?(?=<h3\b|<h2\b|$)/
+  )?.[0];
   assert.ok(researchEntry, "the research experience entry is present");
   assert.match(researchEntry, /225 fixed-text recordings from 75 users/);
   assert.match(researchEntry, /4\.08-fold lower median distance/);
   assert.equal(
-    (researchEntry.match(/(?:225 fixed-text recordings from 75 users|4\.08-fold lower median distance)/g) ?? []).length,
-    2,
+    (
+      researchEntry.match(
+        /(?:225 fixed-text recordings from 75 users|4\.08-fold lower median distance)/g
+      ) ?? []
+    ).length,
+    2
   );
   assert.equal((researchEntry.match(/<li\b/g) ?? []).length, 2);
   assert.match(html, /Lowe(?:'|&#x27;|&#39;)s RDC/);
@@ -60,7 +78,10 @@ test("the home page presents the current resume and concise research profile", a
   assert.doesNotMatch(html, /Clearly Clean Products|Blue Line Wireless/);
   assert.doesNotMatch(html, /tel:/i);
   assert.doesNotMatch(html, /(?:phone|telephone)\s*:/i);
-  assert.doesNotMatch(html, /(?:\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}/);
+  assert.doesNotMatch(
+    html,
+    /(?:\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}/
+  );
   assert.doesNotMatch(html, /BlueSky|bsky\.app/);
 
   const dockStart = html.indexOf("dock-transition");
@@ -69,7 +90,11 @@ test("the home page presents the current resume and concise research profile", a
   const pageContent = html.slice(bodyStart, dockStart);
   const dockContent = html.slice(dockStart);
   for (const label of ["GitHub", "X", "LinkedIn"]) {
-    assert.equal((dockContent.match(new RegExp(`aria-label="${label}"`, "g")) ?? []).length, 1);
+    assert.equal(
+      (dockContent.match(new RegExp(`aria-label="${label}"`, "g")) ?? [])
+        .length,
+      1
+    );
     assert.doesNotMatch(pageContent, new RegExp(`aria-label="${label}"`));
   }
   const githubIndex = dockContent.indexOf('aria-label="GitHub"');
@@ -82,11 +107,28 @@ test("the home page presents the current resume and concise research profile", a
     "https://x.com/_Wais_a",
     "https://www.linkedin.com/in/wais-almakaleh",
   ]) {
-    assert.equal((dockContent.match(new RegExp(`href="${url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`, "g")) ?? []).length, 1);
-    assert.doesNotMatch(pageContent, new RegExp(url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+    assert.equal(
+      (
+        dockContent.match(
+          new RegExp(
+            `href="${url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`,
+            "g"
+          )
+        ) ?? []
+      ).length,
+      1
+    );
+    assert.doesNotMatch(
+      pageContent,
+      new RegExp(url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    );
   }
-  assert.doesNotMatch(pageContent, /aria-label="Switch to (?:light|dark) mode"/);
-  const themePlaceholder = /<div\b[^>]*\sclass=(["'])(?=[^"']*\brounded-full\b)(?=[^"']*\brelative\b)[^"']*\1[^>]*>\s*<\/div>/g;
+  assert.doesNotMatch(
+    pageContent,
+    /aria-label="Switch to (?:light|dark) mode"/
+  );
+  const themePlaceholder =
+    /<div\b[^>]*\sclass=(["'])(?=[^"']*\brounded-full\b)(?=[^"']*\brelative\b)[^"']*\1[^>]*>\s*<\/div>/g;
   assert.equal((dockContent.match(themePlaceholder) ?? []).length, 1);
   assert.equal((pageContent.match(themePlaceholder) ?? []).length, 0);
 });
