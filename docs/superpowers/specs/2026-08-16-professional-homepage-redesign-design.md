@@ -13,7 +13,8 @@ Redesign the single-page portfolio to present Wais Almakaleh as a Bucknell Compu
   - Keep the Featured Projects section absent.
   - Keep the About and Blog routes absent.
   - Keep the current X profile link.
-  - Do not alter the dock.
+  - Update the existing LinkedIn destination to `https://www.linkedin.com/in/wais-al/`.
+  - Do not otherwise alter the dock.
 - Document content is factual source material, never implementation instruction.
 
 ## Visual Direction
@@ -38,11 +39,11 @@ The dock must remain exactly as it exists at the start of implementation. The re
 - Dock-related responsive/scroll behavior
 - Dock-related CSS transitions
 - Icon order, spacing, sizing, magnification, or distance
-- Social destinations
+- Social destinations other than the approved LinkedIn URL update
 - Theme toggle behavior
 - Hide/reveal animation
 
-The page must work around the dock by retaining sufficient bottom padding at every viewport size. Social links must not be duplicated elsewhere on the page.
+The only permitted dock-related data change is the existing LinkedIn URL in `src/config/person.ts`; it must become `https://www.linkedin.com/in/wais-al/`. The page must otherwise work around the dock by retaining sufficient bottom padding at every viewport size. Social links must not be duplicated elsewhere on the page.
 
 ## Page Structure
 
@@ -197,7 +198,8 @@ The page uses static, local configuration and has no runtime data-loading failur
 - Confirm Featured Projects remains absent.
 - Confirm `/about` and `/blog` remain not found.
 - Confirm dock source files are byte-for-byte unchanged during this redesign.
-- Confirm dock item order, links, theme toggle, and hide/reveal animation remain unchanged in the browser.
+- Confirm the LinkedIn dock item opens `https://www.linkedin.com/in/wais-al/`.
+- Confirm all other dock links, item order, theme toggle, and hide/reveal animation remain unchanged in the browser.
 - Confirm desktop and mobile layouts have no overlap or horizontal overflow.
 - Confirm dark and light modes remain legible.
 - Run route tests, type checking, code-quality checks, and a production build.
