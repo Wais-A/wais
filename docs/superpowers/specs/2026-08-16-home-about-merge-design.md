@@ -26,7 +26,9 @@ The About page's separate bio/contact card will not be copied because the home i
 ## Removals
 
 - Remove the complete Featured Projects section from the home page.
-- Remove the About destination from the dock/navigation.
+- Remove the About and Home destinations from the dock/navigation because a page-navigation icon is redundant on a single-page site.
+- Remove the now-unused page-navigation divider from the dock.
+- Replace the BlueSky dock link with an X icon linking to `https://x.com/_Wais_a`.
 - Delete the `/about` route rather than redirecting it, so the removed page returns the standard not-found response.
 
 ## Data and Components
@@ -41,7 +43,8 @@ The existing responsive layouts from the About page will be retained. The merged
 
 - Confirm `/` contains the introduction and all four About sections.
 - Confirm Featured Projects is absent.
-- Confirm the dock has no About item.
+- Confirm the dock has no About or Home item and no leading divider.
+- Confirm the X icon opens `https://x.com/_Wais_a` and no BlueSky link remains.
 - Confirm `/about` returns the standard not-found page.
 - Run static checks and a production build.
 - Inspect the result at desktop and mobile viewport sizes, including dark mode and the dock interaction.
