@@ -1,5 +1,3 @@
-import type { Project } from "./content";
-
 /**
  * Icon Component Props Type
  *
@@ -48,7 +46,6 @@ export interface Navigation {
  *  theme - Theme configuration
  *     defaultMode - Default theme mode ("light" | "dark")
  *     transitionDuration - Duration for theme transitions in milliseconds
- *  projects - Array of featured projects
  */
 /**
  * SEO metadata configuration
@@ -78,7 +75,6 @@ export interface SeoMeta {
  *
  *  meta - Site-wide metadata including SEO configurations
  *  theme - Theme configuration including mode and transitions
- *  projects - Array of featured projects
  */
 export interface SiteConfig {
   meta: SeoMeta;
@@ -86,5 +82,4 @@ export interface SiteConfig {
     defaultMode: "light" | "dark";
     transitionDuration: number;
   };
-  projects: Project[];
 }

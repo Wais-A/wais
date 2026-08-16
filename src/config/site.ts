@@ -10,35 +10,24 @@ export const siteConfig: SiteConfig = {
     ogImage: "/images/og-image.png",
     lang: "en",
     locale: "en-US",
-    // Enhanced SEO metadata
     keywords: [
       person.role,
-      "developer",
-      "software engineer",
-      "web development",
+      "computer science",
+      "software engineering",
+      "IT systems",
+      "human-computer interaction",
       ...person.skills.languages,
-      ...person.skills.frameworks,
+      ...person.skills.webData,
     ],
-    authors: [
-      {
-        name: person.name,
-        url: person.github,
-      },
-    ],
-    // Optional social media handles
-    twitterHandle: person.bluesky, // Using Bluesky as Twitter/X alternative
-    // Support for multiple languages (can be expanded later)
-    alternateLocales: {
-      "en-US": "/",
-    },
-    // Search engine verification (add your verification codes when ready)
+    authors: [{ name: person.name, url: person.github }],
+    twitterHandle: "@_Wais_a",
+    alternateLocales: { "en-US": "/" },
     verification: {
       google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
     },
   },
   theme: {
     defaultMode: themeConfig.colors.background,
-    transitionDuration: 50, // milliseconds for theme transition
+    transitionDuration: 50,
   },
-  projects: person.projects,
 };
