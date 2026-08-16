@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
 import { ThemeToggle } from "@/components/custom-ui/theme-toggle";
@@ -40,11 +40,11 @@ export function NavDock() {
   let iconDistance = 35;
   const direction: "top" | "middle" | "bottom" = "middle";
 
-  if (isSmall) {
+  if (showDock && isSmall) {
     iconSize = 35;
     iconMagnification = 35;
     iconDistance = 50;
-  } else if (isMedium) {
+  } else if (showDock && isMedium) {
     iconSize = 35;
     iconMagnification = 40;
     iconDistance = 60;
@@ -81,8 +81,6 @@ export function NavDock() {
           "fixed bottom-5 max-sm:bottom-2 sm:bottom-[max(1.25rem,env(safe-area-inset-bottom))] left-0 right-0 z-50 flex items-center justify-center py-4 shadow-md",
           "webkit-overflow-touch webkit-tap-transparent",
           "bg-background/30 backdrop-blur-md",
-          // Smooth transform transition (slide in/out)
-          "transition-transform duration-300",
           positionClass
         )}
         iconDistance={iconDistance}
@@ -90,26 +88,6 @@ export function NavDock() {
         iconSize={iconSize}
         direction={direction}
       >
-        {/* Main Navigation Links */}
-        {navigation.navbar.map((item) => (
-          <DockIcon key={item.label} className="dock-icon-transition">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  href={item.url}
-                  aria-label={item.label}
-                  className={buttonStyle}
-                >
-                  <item.icon />
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent>{item.label}</TooltipContent>
-            </Tooltip>
-          </DockIcon>
-        ))}
-
-        <div className="mx-2 h-8 w-px bg-muted" />
-
         {/* Social Media Links */}
         {navigation.social.map((item) => (
           <DockIcon key={item.label}>

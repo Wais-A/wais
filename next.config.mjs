@@ -1,40 +1,14 @@
-import createMDX from "@next/mdx";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable MDX file extensions
-  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
-
-  // Configure allowed image domains and patterns
-  images: {
-    remotePatterns: [
-      // Allow Picsum Photos
-      {
-        protocol: "https",
-        hostname: "picsum.photos",
-        port: "",
-        pathname: "/**", // Allow all paths under picsum.photos
-      },
-      // Allow Unsplash Images
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-        port: "",
-        pathname: "/**", // Allow all paths under images.unsplash.com
-      },
-    ],
+  turbopack: {
+    root: projectRoot,
   },
+
 };
 
-// Configure MDX options
-const withMDX = createMDX({
-  // Define options for MDX processing
-  options: {
-    remarkPlugins: [], // Add remark plugins here if needed
-    rehypePlugins: [], // Add rehype plugins here if needed
-    providerImportSource: "@mdx-js/react",
-  },
-});
-
-// Export the combined configuration
-export default withMDX(nextConfig);
+export default nextConfig;

@@ -1,5 +1,5 @@
-import { siteConfig } from "@/config/site";
 import type { Metadata, Viewport } from "next";
+import { siteConfig } from "@/config/site";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_BASE_URL ||

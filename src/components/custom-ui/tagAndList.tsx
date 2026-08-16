@@ -1,6 +1,6 @@
+import type React from "react";
 import Card from "@/components/custom-ui/card";
 import type { Skills } from "@/types/person";
-import type React from "react";
 
 export interface TagsProps {
   items: Record<string, string[]> | string | string[] | Skills;
@@ -138,11 +138,8 @@ export const List = <T extends ListItem>({
               !renderItem && (
                 <div className="mt-4">
                   <ul className="space-y-2">
-                    {item.achievements.map((achievement, i) => (
-                      <li
-                        key={`${achievement.substring(0, 10)}-${i}`}
-                        className="flex items-start"
-                      >
+                    {item.achievements.map((achievement) => (
+                      <li key={achievement} className="flex items-start">
                         <span className="text-primary mr-3 mt-0.5">•</span>
                         <span className="flex-1">{achievement}</span>
                       </li>

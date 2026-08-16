@@ -1,5 +1,7 @@
 "use client";
 
+import { useTheme } from "next-themes";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Icons } from "@/components/custom-ui/icons";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -10,8 +12,6 @@ import {
 } from "@/components/ui/tooltip";
 import { themeConfig } from "@/config/theme";
 import { cn } from "@/lib/utils";
-import { useTheme } from "next-themes";
-import { useCallback, useEffect, useRef, useState } from "react";
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false);

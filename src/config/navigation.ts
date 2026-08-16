@@ -3,11 +3,7 @@ import { person } from "@/config/person";
 import type { Navigation } from "@/types";
 
 export const navigation: Navigation = {
-  navbar: [
-    { url: "/", icon: Icons.home, label: "Home" },
-    { url: "/blog", icon: Icons.blog, label: "Blog" },
-    { url: "/about", icon: Icons.about, label: "About" },
-  ],
+  navbar: [],
   social: [
     {
       label: "GitHub",
@@ -15,9 +11,9 @@ export const navigation: Navigation = {
       icon: Icons.github,
     },
     {
-      label: "BlueSky",
-      url: person.bluesky,
-      icon: Icons.blueSky,
+      label: "X",
+      url: person.x,
+      icon: Icons.x,
     },
     {
       label: "LinkedIn",

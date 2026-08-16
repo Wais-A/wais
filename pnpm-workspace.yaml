@@ -1,0 +1,6 @@
+nodeLinker: hoisted
+
+allowBuilds:
+  "@biomejs/biome": true
+  "@vercel/speed-insights": true
+  sharp: true

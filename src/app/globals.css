@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../../tailwind.config.mts";
 
 /* ------------------------------
    Base & Theme Configuration
@@ -118,14 +117,22 @@
     -webkit-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
-    @apply bg-background text-foreground no-scrollbar;
+    @apply bg-background text-foreground;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     min-height: -webkit-fill-available;
     height: 100%;
   }
 
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
   body {
-    transition: background-color var(--theme-transition-duration) ease, color
-      var(--theme-transition-duration) ease;
+    transition:
+      background-color var(--theme-transition-duration) ease,
+      color var(--theme-transition-duration) ease;
   }
 
   /* Typography scale */
@@ -153,59 +160,6 @@
 }
 
 /* ------------------------------
-   Prose & Code Block Customization
------------------------------- */
-@layer components {
-  /* Basic prose code styles */
-  .prose pre {
-    max-width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-  }
-
-  .prose code {
-    @apply whitespace-normal break-words;
-  }
-
-  /* Override Tailwind Typography for better wrapping */
-  .prose pre code {
-    white-space: pre-wrap !important;
-    word-break: break-word !important;
-    overflow-wrap: break-word !important;
-  }
-
-  /* Make inline code wrap properly */
-  .prose :not(pre) > code {
-    @apply whitespace-normal break-words;
-    padding: 0.1em 0.4em;
-    border-radius: 0.25rem;
-    overflow-wrap: break-word !important;
-  }
-}
-
-/* Mobile code block styles outside of layer to avoid circular deps */
-@media (max-width: 640px) {
-  .prose pre {
-    position: relative;
-  }
-
-  .prose pre::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 15px;
-    background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.3));
-    pointer-events: none;
-  }
-
-  .prose pre code {
-    font-size: 0.8rem;
-  }
-}
-
-/* ------------------------------
    Utility Classes
 ------------------------------ */
 @layer utilities {
@@ -223,17 +177,11 @@
       animation: none !important;
     }
 
-    transition: background-color var(--theme-transition-duration) ease, color
-      var(--theme-transition-duration) ease;
+    transition:
+      background-color var(--theme-transition-duration) ease,
+      color var(--theme-transition-duration) ease;
   }
 
-  .overflow-wrap-anywhere {
-    overflow-wrap: anywhere;
-  }
-
-  .word-break-all {
-    word-break: break-all;
-  }
   .hide-scrollbar {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
@@ -248,15 +196,23 @@
    Component Transitions
 ------------------------------ */
 .dock-transition {
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.2s ease,
+  transition:
+    translate 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.2s ease,
     height 0.2s ease;
 }
 
 .dock-icon-transition {
-  transition: width 0.2s ease, height 0.2s ease, margin 0.2s ease;
+  transition:
+    width 0.2s ease,
+    height 0.2s ease,
+    margin 0.2s ease;
 }
 
 button svg {
-  transition: transform var(--theme-transition-duration)
-    cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    transform var(--theme-transition-duration) cubic-bezier(0.4, 0, 0.2, 1),
+    translate var(--theme-transition-duration) cubic-bezier(0.4, 0, 0.2, 1),
+    scale var(--theme-transition-duration) cubic-bezier(0.4, 0, 0.2, 1),
+    rotate var(--theme-transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
 }
