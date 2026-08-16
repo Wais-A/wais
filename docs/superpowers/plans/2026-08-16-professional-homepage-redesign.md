@@ -14,7 +14,7 @@
 - Render Undergraduate Researcher with exactly two concise achievement details and no standalone research showcase.
 - Display “Computer Science & Engineering Student”, Lewisburg, PA, and `wa003@bucknell.edu`.
 - Display the direct profile paragraph: “I’m a Computer Science & Engineering student at Bucknell University with experience in software development, IT systems, and undergraduate research.”
-- Do not display an oversized slogan or the “03 roles” decorative count.
+- Do not display a visible “Profile” label, an oversized slogan, or the “03 roles” decorative count.
 - Describe the research as faculty-mentored keystroke-dynamics work using a new six-feature approach with promising initial results and future-study potential; omit participant counts and numerical comparison results.
 - Do not display the résumé phone number.
 - Preserve the existing grid background, glass styling, typography foundation, and dark/light theme tokens.
@@ -667,17 +667,9 @@ export default function Home() {
         <ProfileRail />
 
         <div className="min-w-0">
-          <section aria-labelledby="profile-heading">
-            <h2
-              id="profile-heading"
-              className="font-medium text-primary text-xs uppercase tracking-[0.17em]"
-            >
-              Profile
-            </h2>
-            <p className="mt-3 max-w-2xl text-pretty text-muted-foreground leading-7">
-              {person.summary}
-            </p>
-          </section>
+          <p className="max-w-2xl text-pretty text-muted-foreground leading-7">
+            {person.summary}
+          </p>
 
           <TechnicalExperience />
           <EducationSkills />
@@ -812,22 +804,14 @@ Set the Bucknell education description to:
 description: "BS in Computer Science & Engineering",
 ```
 
-- [ ] **Step 4: Remove the slogan while preserving the Profile heading**
+- [ ] **Step 4: Remove the visible Profile label and slogan**
 
-Replace the Profile section body in `src/app/page.tsx` with:
+Replace the introductory section in `src/app/page.tsx` with the direct paragraph alone:
 
 ```tsx
-<section aria-labelledby="profile-heading">
-  <h2
-    id="profile-heading"
-    className="font-medium text-primary text-xs uppercase tracking-[0.17em]"
-  >
-    Profile
-  </h2>
-  <p className="mt-3 max-w-2xl text-pretty text-muted-foreground leading-7">
-    {person.summary}
-  </p>
-</section>
+<p className="max-w-2xl text-pretty text-muted-foreground leading-7">
+  {person.summary}
+</p>
 ```
 
 - [ ] **Step 5: Remove the decorative Technical Experience count**
@@ -869,7 +853,7 @@ Expected: Biome formatting, TypeScript, and the non-mutating Biome check all exi
 
 Run: `SITE_URL=http://127.0.0.1:3000 node --test tests/site-structure.test.mjs`
 
-Expected: 2 tests pass. If the user's existing development process serves a stale bundle, record that environmental concern and rely on Task 5's fresh isolated production build for authoritative route evidence; do not restart or kill the user's port-3000 process.
+Expected: 2 tests pass. If the user's existing development process serves a stale bundle, record that environmental concern and rely on Task 7's fresh isolated production build for authoritative route evidence; do not restart or kill the user's port-3000 process.
 
 - [ ] **Step 8: Verify the protected dock hashes**
 
@@ -899,7 +883,99 @@ git commit -m "fix: correct homepage profile content"
 
 ---
 
-### Task 5: Production and browser verification
+### Task 6: Remove the redundant Profile label
+
+**Files:**
+- Modify: `tests/site-structure.test.mjs`
+- Modify: `src/app/page.tsx`
+
+**Interfaces:**
+- Consumes: The approved `person.summary` copy and existing homepage composition
+- Produces: An introduction that presents the approved paragraph directly, followed by the existing Technical Experience heading
+
+- [ ] **Step 1: Update the route contract before changing the page**
+
+In `tests/site-structure.test.mjs`, change the expected `h2` text list to:
+
+```js
+assert.deepEqual(sectionHeadings, [
+  "Technical Experience",
+  "Education & Technical Skills",
+  "Additional Experience",
+]);
+```
+
+Add an explicit visible-label regression assertion:
+
+```js
+assert.doesNotMatch(html, /<h[1-6]\b[^>]*>\s*Profile\s*<\/h[1-6]>/i);
+```
+
+Preserve the existing assertion for the exact approved introductory paragraph.
+
+- [ ] **Step 2: Run the updated route contract and verify RED**
+
+Run: `SITE_URL=http://127.0.0.1:3000 node --test tests/site-structure.test.mjs`
+
+Expected: FAIL because the current rendered page still includes `Profile` as its first `h2`. A connection failure alone is not valid RED evidence.
+
+- [ ] **Step 3: Render the introductory paragraph without a section label**
+
+In `src/app/page.tsx`, replace the entire `section` containing `profile-heading` with:
+
+```tsx
+<p className="max-w-2xl text-pretty text-muted-foreground leading-7">
+  {person.summary}
+</p>
+```
+
+Do not change the approved paragraph text, profile rail, subsequent section spacing, or dock code.
+
+- [ ] **Step 4: Format the two touched files and run static checks**
+
+Run:
+
+```bash
+pnpm exec biome check --write tests/site-structure.test.mjs src/app/page.tsx
+pnpm types
+pnpm exec biome check tests/site-structure.test.mjs src/app/page.tsx
+```
+
+Expected: Biome formatting, TypeScript, and the non-mutating Biome check all exit 0.
+
+- [ ] **Step 5: Run the route contract and verify GREEN**
+
+Run: `SITE_URL=http://127.0.0.1:3000 node --test tests/site-structure.test.mjs`
+
+Expected: 2 tests pass. If the user's existing development process serves a stale bundle, record the environmental concern and rely on Task 7's fresh isolated production build; do not restart or kill port 3000.
+
+- [ ] **Step 6: Recheck the protected dock hashes**
+
+Run:
+
+```bash
+shasum -a 256 \
+  src/components/navigation/nav-dock.tsx \
+  src/components/ui/dock.tsx \
+  src/config/navigation.ts \
+  src/lib/responsive.ts \
+  src/app/globals.css
+```
+
+Expected: All five hashes exactly match the Dock Baseline.
+
+- [ ] **Step 7: Commit the focused removal**
+
+```bash
+git add tests/site-structure.test.mjs src/app/page.tsx
+git commit -m "fix: remove redundant profile label"
+```
+
+---
+
+Task 5 was an evidence-only verification attempt superseded by the user's request to remove the Profile label. Its scratch reports remain in the SDD workspace, but it is no longer an active implementation-plan task.
+
+### Task 7: Production and browser verification
 
 **Files:**
 - Verify only; no planned source changes
@@ -940,7 +1016,7 @@ At 1280×720, verify:
 - Profile rail and content column are visibly distinct and spacious.
 - The profile rail remains above the dock when sticky.
 - All three technical roles, education, skills, and additional experience are readable.
-- The Profile section contains only the plain section heading and approved direct paragraph; no oversized slogan appears.
+- The approved direct introductory paragraph appears without a visible “Profile” label or oversized slogan.
 - Technical Experience has no decorative role count.
 - No Featured Projects or duplicate social links appear.
 - No Next.js error overlay appears.

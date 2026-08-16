@@ -63,7 +63,7 @@ The profile rail contains:
 
 The main content column contains, in order:
 
-1. Profile statement, without an oversized slogan or marketing-style headline
+1. Introductory profile statement, without a visible section label, oversized slogan, or marketing-style headline
 2. Technical Experience
 3. Education and Technical Skills
 4. Additional Experience
@@ -93,7 +93,7 @@ Collapse to one reading column:
 - Positioning statement: “Bucknell University student with experience in software development, IT systems, and undergraduate research.”
 - Profile statement: “I’m a Computer Science & Engineering student at Bucknell University with experience in software development, IT systems, and undergraduate research.”
 
-Do not add the résumé phone number to the public page. Do not place a large slogan above the profile statement.
+Do not add the résumé phone number to the public page. Do not place a visible “Profile” heading or large slogan above the profile statement.
 
 ### Technical Experience
 
@@ -192,7 +192,7 @@ The page uses static, local configuration and has no runtime data-loading failur
 - Confirm the route-level content test fails against the old résumé data before implementation and passes afterward.
 - Confirm `/` shows the approved identity, all three technical roles, all three education entries, résumé skills, and two additional-experience rows.
 - Confirm research has exactly two concise details and no standalone research showcase.
-- Confirm the profile uses the direct approved paragraph and has no oversized slogan.
+- Confirm the page uses the direct approved paragraph with no visible “Profile” label or oversized slogan.
 - Confirm Physics and the prior numerical research details are absent from visible copy.
 - Confirm Technical Experience has no “03 roles” or other decorative count label.
 - Confirm Featured Projects remains absent.
