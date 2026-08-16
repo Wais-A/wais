@@ -4,7 +4,7 @@ import { person } from "@/config/person";
 
 export function ProfileRail() {
   return (
-    <aside className="self-start lg:sticky lg:top-4">
+    <aside className="self-start lg:sticky lg:top-24">
       <div className="rounded-2xl border bg-card/30 p-6 backdrop-blur-md sm:p-8 lg:p-6">
         <div
           aria-hidden="true"

@@ -41,7 +41,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
         <Providers>
-          <div className="w-full bg-background dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2] relative overflow-y-auto min-h-dvh lg:py-20 ">
+          <div className="w-full bg-background dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2] relative min-h-dvh lg:py-20 ">
             <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-background [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
             <div className="relative z-10 max-w-6xl mx-auto px-4">
               <main style={{ paddingBottom: "80px" }}>
