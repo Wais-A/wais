@@ -736,7 +736,170 @@ git commit -m "feat: redesign professional homepage"
 
 ---
 
-### Task 4: Production and browser verification
+### Task 4: Apply the approved profile-copy and LinkedIn corrections
+
+**Files:**
+- Modify: `tests/site-structure.test.mjs`
+- Modify: `src/config/person.ts`
+- Modify: `src/app/page.tsx`
+- Modify: `src/components/pages/home/technical-experience.tsx`
+
+**Interfaces:**
+- Consumes: The existing typed `person` object, profile-rail composition, Technical Experience component, and dock navigation derived from `person.linkedin`
+- Produces: Corrected visible identity and research copy, direct profile presentation, a plain Technical Experience heading, and the approved LinkedIn destination
+
+- [ ] **Step 1: Update the rendered-route contract before changing implementation**
+
+In `tests/site-structure.test.mjs`, replace the old degree/title and research assertions with the exact approved expectations:
+
+```js
+for (const content of [
+  "Computer Science &amp; Engineering Student",
+  "I’m a Computer Science &amp; Engineering student at Bucknell University with experience in software development, IT systems, and undergraduate research.",
+  "BS in Computer Science &amp; Engineering",
+  "Conducted faculty-mentored research in keystroke dynamics, developing a new feature-based approach to characterize individual typing behavior.",
+  "Built six-feature profiles using speed, acceleration, and jerk; initial results were promising and identified directions for further study.",
+]) {
+  assert.match(
+    html,
+    new RegExp(content.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+  );
+}
+
+assert.doesNotMatch(
+  html,
+  /Physics|225 fixed-text|4\.08-fold|Technical work with a human focus|03 roles/
+);
+```
+
+Preserve the existing two-list-item research assertion. In the dock URL array, replace the prior LinkedIn value with:
+
+```js
+"https://www.linkedin.com/in/wais-al/",
+```
+
+- [ ] **Step 2: Run the updated route contract and verify RED**
+
+Run: `SITE_URL=http://127.0.0.1:3000 node --test tests/site-structure.test.mjs`
+
+Expected: FAIL on at least the corrected title, degree, research copy, profile presentation, role-count absence, or LinkedIn destination because the running page still renders the prior implementation. A connection failure alone is not valid RED evidence.
+
+- [ ] **Step 3: Update the profile model with the exact approved values**
+
+In `src/config/person.ts`, set these fields and entries exactly:
+
+```ts
+role: "Computer Science & Engineering Student",
+linkedin: "https://www.linkedin.com/in/wais-al/",
+bio: "Bucknell University student with experience in software development, IT systems, and undergraduate research.",
+summary:
+  "I’m a Computer Science & Engineering student at Bucknell University with experience in software development, IT systems, and undergraduate research.",
+focus: ["Software development", "IT systems", "Undergraduate research"],
+```
+
+Use these two Undergraduate Researcher achievements:
+
+```ts
+achievements: [
+  "Conducted faculty-mentored research in keystroke dynamics, developing a new feature-based approach to characterize individual typing behavior.",
+  "Built six-feature profiles using speed, acceleration, and jerk; initial results were promising and identified directions for further study.",
+],
+```
+
+Set the Bucknell education description to:
+
+```ts
+description: "BS in Computer Science & Engineering",
+```
+
+- [ ] **Step 4: Remove the slogan while preserving the Profile heading**
+
+Replace the Profile section body in `src/app/page.tsx` with:
+
+```tsx
+<section aria-labelledby="profile-heading">
+  <h2
+    id="profile-heading"
+    className="font-medium text-primary text-xs uppercase tracking-[0.17em]"
+  >
+    Profile
+  </h2>
+  <p className="mt-3 max-w-2xl text-pretty text-muted-foreground leading-7">
+    {person.summary}
+  </p>
+</section>
+```
+
+- [ ] **Step 5: Remove the decorative Technical Experience count**
+
+Replace the heading wrapper in `src/components/pages/home/technical-experience.tsx` with:
+
+```tsx
+<h2
+  id="technical-experience"
+  className="m-0 border-border border-b pb-4 text-base font-semibold uppercase tracking-[0.14em]"
+>
+  Technical Experience
+</h2>
+```
+
+Do not change the timeline spacing, role entries, or any dock source file.
+
+- [ ] **Step 6: Format the four touched files and run static checks**
+
+Run:
+
+```bash
+pnpm exec biome check --write \
+  tests/site-structure.test.mjs \
+  src/config/person.ts \
+  src/app/page.tsx \
+  src/components/pages/home/technical-experience.tsx
+pnpm types
+pnpm exec biome check \
+  tests/site-structure.test.mjs \
+  src/config/person.ts \
+  src/app/page.tsx \
+  src/components/pages/home/technical-experience.tsx
+```
+
+Expected: Biome formatting, TypeScript, and the non-mutating Biome check all exit 0.
+
+- [ ] **Step 7: Run the route contract and verify GREEN**
+
+Run: `SITE_URL=http://127.0.0.1:3000 node --test tests/site-structure.test.mjs`
+
+Expected: 2 tests pass. If the user's existing development process serves a stale bundle, record that environmental concern and rely on Task 5's fresh isolated production build for authoritative route evidence; do not restart or kill the user's port-3000 process.
+
+- [ ] **Step 8: Verify the protected dock hashes**
+
+Run:
+
+```bash
+shasum -a 256 \
+  src/components/navigation/nav-dock.tsx \
+  src/components/ui/dock.tsx \
+  src/config/navigation.ts \
+  src/lib/responsive.ts \
+  src/app/globals.css
+```
+
+Expected: All five hashes exactly match the Dock Baseline. The LinkedIn destination changes only through `person.linkedin`.
+
+- [ ] **Step 9: Commit the correction**
+
+```bash
+git add \
+  tests/site-structure.test.mjs \
+  src/config/person.ts \
+  src/app/page.tsx \
+  src/components/pages/home/technical-experience.tsx
+git commit -m "fix: correct homepage profile content"
+```
+
+---
+
+### Task 5: Production and browser verification
 
 **Files:**
 - Verify only; no planned source changes
@@ -749,7 +912,7 @@ git commit -m "feat: redesign professional homepage"
 
 Send Ctrl-C to the persistent port-3100 development-server session from Task 1 and wait for it to exit.
 
-Expected: Port 3100 is free before Next.js writes a production `.next` build.
+Expected: Port 3100 is free before Next.js writes a production `.next` build. Do not stop or restart the user's port-3000 process.
 
 - [ ] **Step 2: Run the production build**
 
