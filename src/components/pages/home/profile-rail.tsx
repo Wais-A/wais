@@ -6,15 +6,7 @@ export function ProfileRail() {
   return (
     <aside className="self-start lg:sticky lg:top-24">
       <div className="rounded-2xl border bg-card/30 p-6 backdrop-blur-md sm:p-8 lg:p-6">
-        <div
-          aria-hidden="true"
-          className="flex size-12 items-center justify-center rounded-xl border bg-background/50 font-semibold text-sm text-foreground lg:size-9 lg:rounded-lg lg:text-xs"
-        >
-          {person.first[0]}
-          {person.last[0]}
-        </div>
-
-        <h1 className="mt-7 text-4xl font-semibold tracking-tight text-foreground lg:mt-3 lg:mb-0 lg:text-3xl lg:leading-8">
+        <h1 className="text-4xl font-semibold tracking-tight text-foreground lg:mb-0 lg:text-3xl lg:leading-8">
           <TextAnimate
             as="span"
             animation="blurInUp"
